@@ -8,7 +8,7 @@ Here a quick list😄:<br>
 
 There only one Userscript called "Focus on YCS search field" though..<br>
 <del>BUT SOON THERE WILL BE MORE!! I am new at this okay--</del><br>
-But either way..[^1] I am **NOW** using "Userscript" although.. y'know.. doesn't use ppl userscript..<br>
+But ATLEAST[^1] I am **NOW** using "Userscript" although.. y'know.. doesn't use ppl userscript..<br>
 Just make my own now😎<br>
 I use [Tempermonkey](https://microsoftedge.microsoft.com/addons/detail/tampermonkey/iikmkjmpaadaobahmlepeloendndfphd) at first.. but now.. [**ViolentMonkey**](https://microsoftedge.microsoft.com/addons/detail/violentmonkey/eeagobfjdenkkddmbclomhiblgggliao)!!<br>
 TBH [ViolentMonkey](https://microsoftedge.microsoft.com/addons/detail/violentmonkey/eeagobfjdenkkddmbclomhiblgggliao) sucks, and [Tempermonkey](https://microsoftedge.microsoft.com/addons/detail/tampermonkey/iikmkjmpaadaobahmlepeloendndfphd) better :)<br>
@@ -23,6 +23,6 @@ Okay that's the Intro..<br>
 
 [^1]: Btw FYI I literally hate any "Userscript Manager"😂  
 It is because I hate Userscript––It's just to complicated.. and never work for me- ~~(before)~~
-[^2]: **V**iolent**M**onkey
-[^3]: **T**emper**M**onkey
+[^2]: [**V**iolent**M**onkey](https://microsoftedge.microsoft.com/addons/detail/violentmonkey/eeagobfjdenkkddmbclomhiblgggliao)
+[^3]: [**T**emper**M**onkey](https://microsoftedge.microsoft.com/addons/detail/tampermonkey/iikmkjmpaadaobahmlepeloendndfphd)
 [^*]: *Work in progress*
