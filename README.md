@@ -3,8 +3,8 @@ HI!<br>
 Here a quick list😄:<br>
 - Logs
 - UserScripts Page
-- ~~(WIP)*~~<br>
-**Work in progress*
+- ~~(WIP)*~~[^*]
+
 
 There only one Userscript called "Focus on YCS search field" though..<br>
 <del>BUT SOON THERE WILL BE MORE!! I am new at this okay--</del><br>
@@ -21,6 +21,8 @@ Okay that's the Intro..<br>
 **BYE!!**
 
 
-[^1]: Btw FYI I literally hate any "Userscript Manager"😂 It's just to complicated.. and never work for me-- (before)
+[^1]: Btw FYI I literally hate any "Userscript Manager"😂  
+It is because I hate Userscript––It's just to complicated.. and never work for me- ~~(before)~~
 [^2]: **V**iolent**M**onkey
 [^3]: **T**emper**M**onkey
+[^*]: *Work in progress*
