@@ -7,5 +7,5 @@ Here a quick list😄:<br>
 **Work in progress*
 
 There only one Userscript called "Focus on YCS search field" though..<br>
-~~BUT SOON THERE WILL BE MORE!! I am new at this okay--~~
+~~BUT SOON THERE WILL BE MORE!! I am new at this okay--~~<br>
 Okay that the description for this one:D
