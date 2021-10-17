@@ -1,0 +1,126 @@
+ Log change/comment/etc
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+        [Created on 6PM 12 okt 2021]
+This script was created on 10/11/2021 {DD/MM/YYYY}
+
+
+
+______________________________________________________________________________
+ ----Previous script from version 1
+function doc_keyUp(event) {
+      if (event.altKey && event.which == 83) {
+       // call your function to do the thing
+              document.getElementById("ycs-input-search").focus();
+      }
+};
+//register the handler
+document.addEventListener('keyup', doc_keyUp, false);
+
+	[12 okt 2021 NOTE]
+Already tried to make 2 if condition with 2 hotkey🤣 (literally don't work of course😂)
+Credit: https://stackoverflow.com/a/9992103/15715476 || untuk ngasih tau cara nyari tau "element id" nya itu active/onfocus atau ga:)
+dan : https://www.w3schools.com/howto/howto_js_toggle_hide_show.asp || krna aku dapet inspirasi dari stu:DD
+ BARU KESADAR PAS LYAT YG ITU (•‿•＼)
+===============
+
+______________________________________________________________________________
+> Edit description metadata to be shorter + add note to add optional info about description on 10:08PM (slsa)12/okt/2021 [2.3.2]
+> Also add more comment for more understanding in future (sameday) 10:16PM [2.3.5]
+> And.. add NameSpace metadata with valid link (to my "about" github:P) (sameday) 11:06PM [2.3.6]
+===============
+
+______________________________________________________________________________
+----Previous script from 2.3
+function doc_keyUp(event) { //The hotkey/function is somekind of.. toggle🙃:P
+      if (event.altKey && event.which == 83) { //<-- "83" is S(capital, because of keyboard layout)
+        // call your function to do the thing
+          if (document.activeElement.id == "ycs-input-search") {
+              document.getElementById("ycs-input-search").blur(); //<-- Unfocus YCS search field if focused and if shortcut pressed
+          }
+          else {
+        document.getElementById("ycs-input-search").focus(); //<-- Set focus to YCS search field if not focused with the same shortcut
+          }
+      }
+};
+//register the handler
+document.addEventListener('keyup', doc_keyUp, false);
+
+	[13 okt 2021 NOTE] (2.3.6)(3.0)(3.1)
+Change the script to only run after the page load and the element exist
+And.. change it back again..
+
+----Previous script from 3.0
+(window).load(function(){
+    var YCS_SF = document.getElementById("ycs-input-search");
+
+  //If it isn't "undefined" and it isn't "null", then it exists.
+if(typeof(YCS_SF) != 'undefined' && YCS_SF != null){
+//
+    function doc_keyUp(event) { //The hotkey/function is somekind of.. toggle🙃:P
+        if (event.altKey && event.which == 83) { //<-- "83" is S(capital, because of keyboard layout)
+            // call your function to do the thing
+            if (document.activeElement.id == "ycs-input-search") {
+                document.getElementById("ycs-input-search").blur(); //<-- Unfocus YCS search field if focused and if shortcut pressed
+            }
+            else {
+                document.getElementById("ycs-input-search").focus(); //<-- Set focus to YCS search field if not focused with the same shortcut
+
+                // register the handler
+                document.addEventListener('keyup', doc_keyUp, false);
+            }
+        }
+    };
+}
+else{
+    var RpC=confirm("YCS Extension doesn't load correctly!\nDo you want to refresh the page?\n *Please check if extension enabled first😄");
+    if (RpC==true)
+    {
+        RpC="You pressed OK!";
+        location.reload();
+    }
+    else
+    {
+        RpC="You pressed Cancel!";
+    }
+}
+})
+====================================================================================================================================
+
+______________________________________________________________________________
+> Fixed some bugs on 01:52PM 13/okt/2021
+it's because the match metadata L🤣 I AM AN IDIOT
+well just switch to violentmonkey too, because dude.. THIS IS REALLY NICE ON THE CODING.. INTERFACE.. EASY TO USE..
+FUCK, well atleast it work
+*sadly no color and syntax scan to check if it work correctly:\
+
+> Changing few thing(u don't need to know) (sameday) 02:31PM
+============================================================
+
+______________________________________________________________________________
+----Previous script from 3.2
+function doc_keyUp(event) { //The hotkey/function is somekind of.. toggle🙃:P
+      if (event.altKey && event.which == 83) { //<-- "83" is S(capital, because of keyboard layout)
+        // call your function to do the thing
+            if (document.activeElement.id == "ycs-input-search") {
+              document.getElementById("ycs-input-search").blur(); //<-- Unfocus YCS search field if focused and if shortcut pressed
+            }
+            else {
+              document.getElementById("ycs-input-search").focus();//<-- Set focus to YCS search field if not focused with the same shortcut
+              document.getElementById("ycs-input-search").select();//<-- "Select all" text in the field if 'available'😄, add "//" before the command to disable it!
+
+
+            }
+      }
+};
+//register the handler
+document.addEventListener('keyup', doc_keyUp, false);
+
+||03:50PM 17/okt/2021 (3.3)
+Add "select all text" command to select all text when field focused
+Note: add "//" before the command to disable it.
+============================================================
+
+______________________________________________________________________________
+Add another log here please😄
