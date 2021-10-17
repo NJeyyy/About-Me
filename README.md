@@ -3,7 +3,7 @@ HI!<br>
 Here a quick list😄:<br>
 - Logs
 - UserScripts Page
-- (WIP)*<br>
+- ~~(WIP)*~~<br>
 **Work in progress*
 
 There only one Userscript called "Focus on YCS search field" though..<br>
