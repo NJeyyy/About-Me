@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Skip Ads Shortcut
-// @version        0.1
+// @version        0.1.5
 // @namespace      YT_scripts
 // @homepageURL    
 // @author         NJ1n9
