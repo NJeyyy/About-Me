@@ -6,7 +6,8 @@
 <br>
 Yep..<br>
 That is the only thing here for now(:<br>
-WELL.. ATLEAST IT'S 2 NOW OKAY! [^3] <br>
+WELL.. ATLEAST IT'S 2 NOW OKAY![^3] <br>
+
 
 [^1]: Just add custom shortcut for it
 [^2]: Skip ads with shortcut. just that XD 
