@@ -4,6 +4,7 @@
 // @namespace      YT_scripts
 // @homepageURL    https://github.com/NJeyyy/About-Me/tree/Userscripts/YT%20Scripts
 // @supportURL     https://github.com/NJeyyy/About-Me/blob/e939879175cdfb16dfa88733d50a80eed583bb64/YT%20Scripts/Skip%20Ads%20shortcut.log
+// @updateURL      https://github.com/NJeyyy/About-Me/blob/6e989e5cee261f8e9b2a77ceb01d6a34b7f6edd4/YT%20Scripts/Skip%20Ads%20shortcut.js
 // @author         NJ1n9
 // @description    Skip Ads with shortcut!!
 // @include        https://www.youtube.com/watch?v=*
