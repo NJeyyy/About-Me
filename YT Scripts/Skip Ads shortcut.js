@@ -2,11 +2,13 @@
 // @name           Skip Ads Shortcut
 // @version        0.1.5
 // @namespace      YT_scripts
-// @homepageURL    
+// @homepageURL    https://github.com/NJeyyy/About-Me/tree/Userscripts/YT%20Scripts
+// @supportURL     https://github.com/NJeyyy/About-Me/blob/e939879175cdfb16dfa88733d50a80eed583bb64/YT%20Scripts/Skip%20Ads%20shortcut.log
 // @author         NJ1n9
 // @description    Skip Ads with shortcut!!
 // @include        https://www.youtube.com/watch?v=*
-// @icon           -
+// @icon           https://ricardoreadingmouse.com.au/wp-content/uploads/2018/04/youtube.png
+// @grant          none
 // ==/UserScript==
 
 
