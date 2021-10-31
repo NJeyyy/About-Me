@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Skip Ads Shortcut
-// @version        0.2.3
+// @version        0.2.3.2
 // @namespace      YT_scripts
 // @homepageURL    https://github.com/NJeyyy/About-Me/tree/Userscripts/YT%20Scripts
 // @supportURL     https://github.com/NJeyyy/About-Me/blob/d3aac1eb0eeae69729e142cbb8a1f29d1fd057af/YT%20Scripts/Skip%20Ads%20shortcut.js
