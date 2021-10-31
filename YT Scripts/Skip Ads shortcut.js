@@ -3,8 +3,8 @@
 // @version        0.2.3
 // @namespace      YT_scripts
 // @homepageURL    https://github.com/NJeyyy/About-Me/tree/Userscripts/YT%20Scripts
-// @supportURL     https://gist.github.com/NJeyyy/213bd45043a8cb6c36776fee78bf3110.js
-// If U wanted to update, go to the homepage. go to raw page of this script. put the url of that page to update metablock on setting. update. clear it. done :D
+// @supportURL     https://github.com/NJeyyy/About-Me/blob/d3aac1eb0eeae69729e142cbb8a1f29d1fd057af/YT%20Scripts/Skip%20Ads%20shortcut.js
+// If U wanted to update, go to the Support page. go to raw page of this script. put the url of that page to update metablock on setting. update. clear it. done :D
 // @author         NJ1n9
 // @description    Skip Ads with shortcut!!
 // @include        https://www.youtube.com/watch?v=*
