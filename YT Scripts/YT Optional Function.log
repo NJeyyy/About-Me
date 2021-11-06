@@ -19,5 +19,23 @@ Creating script, and add script to skip ads by shortcut (Ctrl + Shift + ` )
 ======================================
 
 ======================================
+`11:21 AM 06/Nov/2021 [Version 1.5.4]
+> Add script to make theme change on desired time, not limited like previous one
+> Add simple toggle text to disable a script function too!
+_-----------------------pREVIOUS Script-------------------____________________
+  setInterval(function() {
+    // your code goes here...
+    var THE_TAIM = new Date().getHours()
+    
+      if (THE_TAIM == 18) {
+       document.getElementsByClassName("yt-simple-endpoint style-scope ytd-compact-link-renderer")[15].click(); //<-- Dark Theme!
+      }
+      if (THE_TAIM == 7) {
+       document.getElementsByClassName("yt-simple-endpoint style-scope ytd-compact-link-renderer")[16].click(); //<-- Light Theme!
+      }
+}, 120 * 60000); // 60 * 1000 milsec || N * 60000 for minutes
+======================================
+
+======================================
 Add more log here!
 ======================================
