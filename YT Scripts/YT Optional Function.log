@@ -37,5 +37,13 @@ _-----------------------pREVIOUS Script-------------------____________________
 ======================================
 
 ======================================
+`Actually from 06/Nov/2021 to 03:41 PM 10/Nov/2021 [Version 1.6]
+> Since the change theme based time doesn't work properly, I am trying to fixing it.. (gonna make announcement after it fixed!)
+    ~ Add several Function to seperate some action and make it look clear, although it still.. y'know.. in-progress
+> Add "sleep(ms)" function to wait for awhile before doing a task!
+> Adding one credit from Stack Overflow
+======================================
+
+======================================
 Add more log here!
 ======================================
