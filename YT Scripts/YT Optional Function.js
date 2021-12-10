@@ -88,7 +88,10 @@ function check () {
 
 //=================== Change YouTube Website theme based on time ========================================
 /**/
-Theme_BasedTime()
+window.onload = async function() {
+  await sleep(5000)
+  Theme_BasedTime()
+}
 
 function Theme_BasedTime() {
 
