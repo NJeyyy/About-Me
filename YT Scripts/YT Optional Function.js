@@ -69,7 +69,7 @@ function check () {
     
     if (HK1) {
       var ActiveElem = document.activeElement
-      if (!(ActiveElem instanceof HTMLTextAreaElement || ActiveElem instanceof HTMLInputElement)) {
+      if (!(ActiveElem instanceof HTMLTextAreaElement || ActiveElem instanceof HTMLInputElement || ActiveElem.isContentEditable == true)) {
         // Your commands after the shortcut here
         if (Skipads.length == 1) { //Just to make sure the button exist:P
           Skipads[0].click();
