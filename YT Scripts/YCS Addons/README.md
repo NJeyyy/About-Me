@@ -8,9 +8,11 @@ I add some function <s>(although it's only have 2 rn, STFU)</s>, but it's a star
 
 This have 2 function rn:
 - Focus on YCS Search Field[^1]
+- When blurred with shortcut, will go to top of page[^2]
 - Edit the "type" attribute to add clear field input
 <br>
 <br>
 
 [^1]: This thing created shortcut. That focus on search field everytime I press the hotkey ("Alt"+"S" for now)  
 And also select All text (if available), when the field is on-focus. You could disable some function.. to do that; add "//" at the first collumn <s>(or before the command)</s> on the line of command <s>(/function)</s> you wanted to disable.  
+[^2]: Can be disabled
