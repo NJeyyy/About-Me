@@ -13,8 +13,7 @@
 // @author       NJ1n9
 // @match        https://www.youtube.com/*
 // @icon         https://cdn-icons-png.flaticon.com/128/1383/1383327.png
-// @grant        GM.setValue
-// @grant        GM.getValue
+// @grant        None
 // ==/UserScript==
 
 // since I cannot add multiple link:\
@@ -25,7 +24,8 @@
 //=========================================================================================================
 //=================================================================================================================
 
-document.body.onload = async function() {
+YCSADDS()
+async function YCSADDS() {
   var URLRequirements = window.location.href
   var UsedURL = new RegExp("https://www.youtube.com/watch*")
   
