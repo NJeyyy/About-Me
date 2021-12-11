@@ -143,4 +143,13 @@ Note: There's not a lot of differents.. but this change a lot of stuff:)
 ============================================================
 
 ______________________________________________________________________________
+||09:37 AM {actually, it's been a long time updated. It just not logged because of lazyness lol} 11/Des12/2021 (3.6.7)
+- Create the JS script file in github too so can track change more easily (the script condition is on v3.6.7 when created sadly)
+- Add feature: when search element blurred with shortcut, it gonna go to top of page to go back view the video [Can be disabled]
+- Add an onload command so it will only run after body element loaded and only on video page
+	~ Also add delay 3 seconds, so it have more times
+- Add sleep(ms) function for delay
+============================================================
+
+______________________________________________________________________________
 Add another log here please😄
