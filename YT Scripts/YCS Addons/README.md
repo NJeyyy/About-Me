@@ -1,4 +1,4 @@
-This is my first userscript, but I combine it with the new ne so it's not that new now..<br>
+This is my first userscript, but I combine it with the new one so it's not that new now..<br>
 it's named...⬇⬇⬇  
 ## YCS ADDONS
 ![YCS - logo](https://lh3.googleusercontent.com/yTBf-HXTR-FATN5bad0R2XFwBGpdbxzN_dRKoALQHS3qaY7rd1cizbvp9vZ_X3uKdE2d_31iDGRXehNTAOQBXrim=w128-h128-e365-rj-sc0x00ffffff) ![Userscript - Icon](https://cdn-icons-png.flaticon.com/128/1383/1383327.png)<br>
