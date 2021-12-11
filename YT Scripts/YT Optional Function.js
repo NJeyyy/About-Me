@@ -2,7 +2,7 @@
 
 // ==UserScript==
 // @name           YT Optional Function
-// @version        1.7.5
+// @version        1.7.5a
 // @namespace      YT_scripts
 // @homepageURL    https://github.com/NJeyyy/About-Me/tree/Userscripts/YT%20Scripts
 // @supportURL     https://github.com/NJeyyy/About-Me/blob/Userscripts/YT%20Scripts/YT%20Optional%20Function.log
@@ -44,7 +44,6 @@ function sleep(ms) {
 //  START THE FEATURES
 window.onload = function() { // <-- What's gonna runs when script executed.
   Startonlyonvideopage() // START ONLY ON VIDEO PAGE
-  Theme_BasedTime() // Change YouTube Website theme based on time
   var THEMETIMERL = setInterval(Theme_BasedTime(), 60 * 60000) // Change YouTube Website theme based on time (make it runs on time of interval)
   
   //Force Comments to load
