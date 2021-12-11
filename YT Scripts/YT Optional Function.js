@@ -2,7 +2,7 @@
 
 // ==UserScript==
 // @name           YT Optional Function
-// @version        1.7
+// @version        1.7.5
 // @namespace      YT_scripts
 // @homepageURL    https://github.com/NJeyyy/About-Me/tree/Userscripts/YT%20Scripts
 // @supportURL     https://github.com/NJeyyy/About-Me/blob/Userscripts/YT%20Scripts/YT%20Optional%20Function.log
@@ -37,23 +37,37 @@ function sleep(ms) {
 }
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\\
 //Add more special function here!!
-//=================== Skip Ads with shortcut (`/~) ========================================
-/**/
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\\
 
-Startonlyonweb()
 
-async function Startonlyonweb() {
+//~ ``  ~ ``  ~ ``  ~ ``  ~ ``  ~ ``  ~ ``  ~ ``  ~ ``  ~ ``  ~ ``  ~ ``  ~ ~ ~\\
+//  START THE FEATURES
+window.onload = function() { // <-- What's gonna runs when script executed.
+  Startonlyonvideopage() // START ONLY ON VIDEO PAGE
+  Theme_BasedTime() // Change YouTube Website theme based on time
+  var THEMETIMERL = setInterval(Theme_BasedTime(), 60 * 60000) // Change YouTube Website theme based on time (make it runs on time of interval)
+  
+  //Force Comments to load
+  window.dispatchEvent(new Event("scroll"));
+}
+
+
+// START ONLY ON VIDEO PAGE
+async function Startonlyonvideopage() {
   await sleep(5000)
   var URLRequirements = window.location.href
   var UsedURL = new RegExp("https://www.youtube.com/watch*")
   
   if (URLRequirements.match(UsedURL)) {
-    check()
+    check() // Skip Ads with shortcut (`/~)
   }
   else {
-    console.log("Not on Video page.")
+    console.log("Skip Ads shortcut is not working here =w=")
   }
 }
+//~ ``  ~ ``  ~ ``  ~ ``  ~ ``  ~ ``  ~ ``  ~ ``  ~ ``  ~ ``  ~ ``  ~ ``  ~ ~ ~\\
+//=================== Skip Ads with shortcut (`/~) ========================================
+/**/
 
 function check () {
   document.onkeyup = function(Event) {
@@ -88,42 +102,57 @@ function check () {
 
 //=================== Change YouTube Website theme based on time ========================================
 /**/
-window.onload = async function() {
-  await sleep(5000)
-  Theme_BasedTime()
-}
 
-function Theme_BasedTime() {
+async function Theme_BasedTime() {
 
   // we need a function that makes hours and minutes a two digit number
-  Object.prototype.twoDigits = function () {
+  /**
+  Object.prototype.HOURMINDGIT = function () {
     return ('0' + this).slice(-2);
+  }*/ //Because of some bugs happened and make the site broken.. I change how I did this.
+  function CURRENT_HOURS() {
+    let The_Hours = now.getHours()
+    return ('0' + The_Hours).slice(-2)
+  }
+  function CURRENT_MINUTES() {
+    let The_Minutes = now.getMinutes()
+    return ('0' + The_Minutes).slice(-2)
   }
   
   // get current date and time
   var now = new Date()
   
   // compile the current hour and minutes in the format HH:MM
-  var timeOfDay = now.getHours().twoDigits() + ':' + now.getMinutes().twoDigits();
+  var timeOfDay = CURRENT_HOURS() + ':' + CURRENT_MINUTES()
   
   // <-- Use "||" because it's more to "or" than "and" and also because it's PM to AM combined.. not AM to PM:P
   if (timeOfDay >= '18:00' || timeOfDay <= '06:44') {  //<-- NIGHT TIME [Dark Theme]
-    Element_HTML.setAttribute("dark", "true") // Add "dark" attributes to change it to Dark Theme
-    console.log("Dark Theme applied.") // <-- Show sign of applied Theme on browser console
+    GM.setValue("CurrentTheme", "Dark")
+    console.log("Dark Theme")
   }
   else if (timeOfDay >= '06:45' && timeOfDay <= '17:59') {  //<-- DAY TIME [Light Theme]
-    Element_HTML.removeAttribute("dark") // Delete "dark" attributes to change it to Light Theme
-    console.log("Light Theme applied.") // <-- Show sign of applied Theme on browser console
+    GM.setValue("CurrentTheme", "Light")
+    console.log("Light Theme")
   }
   
-  else {
-    console.log("Somthing rong!") //If something go wrong I will knew it! :D
+
+  
+  var CurrentTheme_time = await GM.getValue("CurrentTheme", "Light") // <-- Get The stored variables
+  var Element_HTML = document.getElementsByTagName("html")[0] // <-- Get the HTML element.
+  if (CurrentTheme_time == "Dark") {
+    if (!(Element_HTML.attributes.getNamedItem("dark"))) { // <-- Check if the dark attributes exist in the html element
+      Element_HTML.setAttribute("dark", "true") // Add "dark" attributes to change it to Dark Theme
+      document.getElementsByClassName("ycs-app")[0].innerHTML.reload
+    }
+    console.log("Dark Theme applied.") // <-- Show sign of applied Theme on browser console
+  }
+  else if (CurrentTheme_time == "Light") {
+    if (Element_HTML.attributes.getNamedItem("dark")) { // <-- Check if the dark attributes exist in the html element.
+      Element_HTML.removeAttribute("dark") // Delete "dark" attributes to change it to Light Theme
+    }
+      console.log("Light Theme applied.") // <-- Show sign of applied Theme on browser console
   }
 }
-
-
-Theme_by_time = setInterval(Theme_BasedTime, 60 * 60000); // 60 * 1000 milsec || N * 60000 for minutes 
-// 60 = 1 Hours
 
 ///
 //```````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````\\
