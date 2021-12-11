@@ -52,5 +52,15 @@ _-----------------------pREVIOUS Script-------------------____________________
 ======================================
 
 ======================================
+`09:17 AM 11/Des12/2021 [Version 1.7.5] (Fix bugs and re-formatting)
+> Fix bugs when "Change YouTube Website theme based on time" scripts run it will broke the site
+    ~ Change the Object.prototype to function because of malfunction
+    ~ Add reload an element commands so it's also changed the theme
+> Re-design the code position and format
+> Add a restored variables
+> Add a force comments code (because why not)
+======================================
+
+======================================
 Add more log here!
 ======================================
