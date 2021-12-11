@@ -1,12 +1,12 @@
 HI!<br>
 ### Welcome to "Userscripts" part!!<br>
-Here a quick list😄:<br>
+Here's a quick list😄:<br>
 - Logs
 - UserScripts Page
 - ~~(WIP)*~~[^*]
 
 
-There only one Userscript called "Focus on YCS search field" though..<br>
+There only 2 Userscript for **YT optional feature** and **YCS Extension** though..<br>
 <del>BUT SOON THERE WILL BE MORE!! I am new at this okay--</del><br>
 But ATLEAST[^1] I am **NOW** using "Userscript" although.. y'know.. doesn't use ppl userscript..<br>
 Just make my own now😎<br>
