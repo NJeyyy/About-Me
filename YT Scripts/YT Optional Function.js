@@ -2,7 +2,7 @@
 
 // ==UserScript==
 // @name           YT Optional Function
-// @version        1.7.5a
+// @version        1.7.5ad
 // @namespace      YT_scripts
 // @homepageURL    https://github.com/NJeyyy/About-Me/tree/Userscripts/YT%20Scripts
 // @supportURL     https://github.com/NJeyyy/About-Me/blob/Userscripts/YT%20Scripts/YT%20Optional%20Function.log
@@ -131,17 +131,30 @@ async function Theme_BasedTime() {
   // compile the current hour and minutes in the format HH:MM
   var timeOfDay = CURRENT_HOURS() + ':' + CURRENT_MINUTES()
   
+// VARIABLES for the settings
+  // --The times settings--
+  var time_DAY1 = '7:00'
+  var time_DAY2 = '17:29'
+  var time_NIGHT1 = '17:30'
+  var time_NIGHT2 = '6:59'
+  // --The selected theme settings--
+  var theme_SELECTIONONE = "Dark"
+  var theme_SELECTIONTWO = "Light"
+  
   // <-- Use "||" because it's more to "or" than "and" and also because it's PM to AM combined.. not AM to PM:P
-  if (timeOfDay >= '18:00' || timeOfDay <= '06:44') {  //<-- NIGHT TIME [Dark Theme]
-    GM.setValue("CurrentTheme", "Dark")
-    console.log("Dark Theme")
+  if (timeOfDay >= time_NIGHT1 || timeOfDay <= time_NIGHT2) {  //<-- NIGHT TIME [Dark Theme]
+    GM.setValue("CurrentTheme", theme_SELECTIONONE)
+    console.log(theme_SELECTIONONE, "Theme")
   }
-  else if (timeOfDay >= '06:45' && timeOfDay <= '17:59') {  //<-- DAY TIME [Light Theme]
-    GM.setValue("CurrentTheme", "Light")
-    console.log("Light Theme")
+  else if (timeOfDay >= time_DAY1 && timeOfDay <= time_DAY2) {  //<-- DAY TIME [Light Theme]
+    GM.setValue("CurrentTheme", theme_SELECTIONTWO)
+    console.log(theme_SELECTIONTWO, "Theme")
   }
   
-
+  
+  
+  
+// Code to Change theme based on the "CurrentTheme_time" variable
   
   var CurrentTheme_time = await GM.getValue("CurrentTheme", "Light") // <-- Get The stored variables
   var Element_HTML = document.getElementsByTagName("html")[0] // <-- Get the HTML element.
