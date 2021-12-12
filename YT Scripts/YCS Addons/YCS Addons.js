@@ -32,11 +32,10 @@ document.addEventListener('onhashchange', YCSADDS, true);
 // Start on tab reload/load
 document.addEventListener('load', YCSADDS, true);
 //---------------------------------------------------------------------------------------
-async function YCSADDS() {
+function YCSADDS() {
   var URLRequirements = window.location.href
   var UsedURL = new RegExp("https://www.youtube.com/watch*")
-  
-  await sleep(3000)
+
   if (URLRequirements.match(UsedURL)) {
     
     function doc_keyUp(event) { //The hotkey/function is somekind of.. toggle🙃:P
