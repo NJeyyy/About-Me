@@ -27,10 +27,10 @@ function sleep(ms) {
 }
 //=================================================================================================================
 // Start whenever page changed the URL
-document.addEventListener('onhashchange', YCSADDS, true);
+window.addEventListener('onhashchange', YCSADDS, true);
 
 // Start on tab reload/load
-document.addEventListener('load', YCSADDS, true);
+window.addEventListener('load', YCSADDS, true);
 //---------------------------------------------------------------------------------------
 function YCSADDS() {
   var URLRequirements = window.location.href
