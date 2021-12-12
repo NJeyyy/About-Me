@@ -42,13 +42,20 @@ function sleep(ms) {
 
 //~ ``  ~ ``  ~ ``  ~ ``  ~ ``  ~ ``  ~ ``  ~ ``  ~ ``  ~ ``  ~ ``  ~ ``  ~ ~ ~\\
 //  START THE FEATURES
-window.onload = function() { // <-- What's gonna runs when script executed.
+// Start whenever page changed the URL
+window.addEventListener('onhashchange', () => {
+  window.dispatchEvent(new Event("scroll")); //Force Comments to load
+  Startonlyonvideopage() // START ONLY ON VIDEO PAGE
+}, true);
+
+// Start on tab reload/load
+window.addEventListener('onload', () => { // <-- What's gonna runs when script executed.
   Startonlyonvideopage() // START ONLY ON VIDEO PAGE
   var THEMETIMERL = setInterval(Theme_BasedTime(), 60 * 60000) // Change YouTube Website theme based on time (make it runs on time of interval)
   
   //Force Comments to load
   window.dispatchEvent(new Event("scroll"));
-}
+}, true);
 
 
 // START ONLY ON VIDEO PAGE
