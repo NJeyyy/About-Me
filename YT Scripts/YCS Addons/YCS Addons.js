@@ -4,7 +4,7 @@
 // @homepageURL  https://github.com/NJeyyy/About-Me/tree/Userscripts/YT%20Scripts/YCS%20Addons
 // @supportURL   https://github.com/NJeyyy/About-Me/blob/Userscripts/YT%20Scripts/YCS%20Addons/Logs.log
 //Note> I know you may be confuse.. the "SupportURL" literally brought you to change log pageXD not support page, but don't worry there are also some help there (probably)
-// @version      3.6.7
+// @version      3.6.7d
 // @description  Various function for the YCS Extension!
 /** List of function included here and the quick description**
  * description(focused Shortcut)   Since the developer (of YCS Extension) SUCKS, and didn't want to add this "SIMPLE" feature.. I will just add it myself😎
@@ -22,9 +22,20 @@
 //Hotkey script action        : "http://www.w3schools.com/jsref/event_key_keycode.asp"
 //"Select all Text" Command   : "https://gist.github.com/gibson042/c9b3406bc54f55726ec4#file-focus_search-user-js"
 //=========================================================================================================
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
 //=================================================================================================================
+// Start whenever page changed the URL
+window.onhashchange = () => {
+  YCSADDS()
+}
 
-YCSADDS()
+// Start on tab reload/load
+window.onload = () => {
+  YCSADDS()
+}
+//---------------------------------------------------------------------------------------
 async function YCSADDS() {
   var URLRequirements = window.location.href
   var UsedURL = new RegExp("https://www.youtube.com/watch*")
@@ -63,10 +74,6 @@ async function YCSADDS() {
   else {
     console.log("It's not on video page. So it doesn't started.")
   }
-}
-
-function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 //==============================================================================
