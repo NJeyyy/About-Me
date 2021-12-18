@@ -35,7 +35,7 @@ function YCSADDS() {
   var UsedURL = new RegExp("https://www.youtube.com/watch*")
 
   if (URLRequirements.match(UsedURL)) {
-    
+
     var YIS = document.getElementById('ycs-input-search')
     
     function SearchValueCLEAR() {
