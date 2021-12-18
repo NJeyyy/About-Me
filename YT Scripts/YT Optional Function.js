@@ -42,19 +42,11 @@ function sleep(ms) {
 
 //~ ``  ~ ``  ~ ``  ~ ``  ~ ``  ~ ``  ~ ``  ~ ``  ~ ``  ~ ``  ~ ``  ~ ``  ~ ~ ~\\
 //  START THE FEATURES
-// Start whenever page changed the URL
-window.addEventListener('onhashchange', () => {
+// Start whenever page changed the URL/load(/reload)
+window.addEventListener('loadeddata', () => {
+  var THEMETIMERL = setInterval(Theme_BasedTime(), 60 * 60000) // Change YouTube Website theme based on time (make it runs on time of interval)
   window.dispatchEvent(new Event("scroll")); //Force Comments to load
   Startonlyonvideopage() // START ONLY ON VIDEO PAGE
-}, true);
-
-// Start on tab reload/load
-window.addEventListener('onload', () => { // <-- What's gonna runs when script executed.
-  Startonlyonvideopage() // START ONLY ON VIDEO PAGE
-  var THEMETIMERL = setInterval(Theme_BasedTime(), 60 * 60000) // Change YouTube Website theme based on time (make it runs on time of interval)
-  
-  //Force Comments to load
-  window.dispatchEvent(new Event("scroll"));
 }, true);
 
 
@@ -65,7 +57,7 @@ async function Startonlyonvideopage() {
   var UsedURL = new RegExp("https://www.youtube.com/watch*")
   
   if (URLRequirements.match(UsedURL)) {
-    check() // Skip Ads with shortcut (`/~)
+    window.addEventListener('keyup', YCS_Shortcut, false); // Skip Ads with shortcut (`/~)
   }
   else {
     console.log("Skip Ads shortcut is not working here =w=")
@@ -75,8 +67,7 @@ async function Startonlyonvideopage() {
 //=================== Skip Ads with shortcut (`/~) ========================================
 /**/
 
-function check () {
-  document.onkeyup = function(Event) {
+function YCS_Shortcut (Event) {
     evt = Event || window.event;
     
     //VARIABLES//
@@ -99,7 +90,6 @@ function check () {
         }
       }
     }
-  };
 }
     
 
@@ -111,6 +101,9 @@ function check () {
 
 async function Theme_BasedTime() {
 
+  // get current date and time
+  var now = new Date()
+  
   // we need a function that makes hours and minutes a two digit number
   /**
   Object.prototype.HOURMINDGIT = function () {
@@ -125,8 +118,7 @@ async function Theme_BasedTime() {
     return ('0' + The_Minutes).slice(-2)
   }
   
-  // get current date and time
-  var now = new Date()
+
   
   // compile the current hour and minutes in the format HH:MM
   var timeOfDay = CURRENT_HOURS() + ':' + CURRENT_MINUTES()
@@ -140,6 +132,7 @@ async function Theme_BasedTime() {
   // --The selected theme settings--
   var theme_SELECTIONONE = "Dark"
   var theme_SELECTIONTWO = "Light"
+  /* "Dark" for dark theme and "Light" for light theme. Be careful on the capital! It's important. */
   
   // <-- Use "||" because it's more to "or" than "and" and also because it's PM to AM combined.. not AM to PM:P
   if (timeOfDay >= time_NIGHT1 || timeOfDay <= time_NIGHT2) {  //<-- NIGHT TIME [Dark Theme]
