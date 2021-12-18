@@ -14,6 +14,7 @@
 // @match        https://www.youtube.com/*
 // @icon         https://cdn-icons-png.flaticon.com/128/1383/1383327.png
 // @grant        None
+// @noframes
 // ==/UserScript==
 
 // since I cannot add multiple link:\
@@ -26,17 +27,22 @@ function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 //=================================================================================================================
-// Start whenever page changed the URL
-window.addEventListener('onhashchange', YCSADDS, true);
-
-// Start on tab reload/load
-window.addEventListener('load', YCSADDS, true);
+// Start whenever page changed the URL/loaded
+window.addEventListener('loadeddata', YCSADDS);
 //---------------------------------------------------------------------------------------
 function YCSADDS() {
   var URLRequirements = window.location.href
   var UsedURL = new RegExp("https://www.youtube.com/watch*")
 
   if (URLRequirements.match(UsedURL)) {
+    
+    var YIS = document.getElementById('ycs-input-search')
+    
+    function SearchValueCLEAR() {
+      if (YIS.value.length == "0") {
+        YIS.blur()
+      }
+    }
     
     function doc_keyUp(event) { //The hotkey/function is somekind of.. toggle🙃:P
         var Hotkey1 = event.which == 83;
@@ -47,7 +53,7 @@ function YCSADDS() {
     // unicodekey code of hotkey can be found here -> https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_event_key_keycode2
     // Add another HotkeyN for more collumn
     // Add more hotkey function by adding "&&" and event.(varname)😊
-        var YIS = document.getElementById('ycs-input-search')
+        
         YIS.setAttribute("type", "search")
           if (Hotkey2 && Hotkey1) { //<-- "83" is S(capital, because of keyboard layout)
             // call your function to do the thing
@@ -61,9 +67,10 @@ function YCSADDS() {
     
                 }
           }
-    };
+    }
     //register the handler
-    document.addEventListener('keyup', doc_keyUp, false);
+    YIS.addEventListener('keyup', doc_keyUp, false);
+    YIS.addEventListener('search', SearchValueCLEAR);
     console.log("The Script is running.")
   }
   else {
