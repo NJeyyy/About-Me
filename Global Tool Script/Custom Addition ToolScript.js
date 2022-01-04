@@ -5,7 +5,7 @@
 // @grant         none
 // @version       1
 // @author        NJ1n9
-// @description   
+// @description   Some ToolScript that combined.
 // @icon          https://cdn.iconscout.com/icon/free/png-256/code-336-830581.png
 // @noframes
 // ==/UserScript==
@@ -73,13 +73,14 @@ function evil(fn) {
 Custom_Addition_ToolScript()
 function Custom_Addition_ToolScript() {
   // ToolScript1-- SLEEP(miliseconds) Function
-  let ToolScript1 = 'function sleep(ms) {\n' + '  return new Promise(resolve => setTimeout(resolve, ms));\n' + '};\n';
+  let ToolScript1 = "function sleep(ms) {\n" + "  return new Promise(resolve => setTimeout(resolve, ms));\n" + "};\n";
   // ToolScript2-- WaitFor a conditionFunction
-  let ToolScript2 = 'function waitFor(conditionFunction) {\n' + '\n' + '  const poll = resolve => {\n' + '    if(conditionFunction()) resolve();\n' + '    else setTimeout(_ => poll(resolve), 400);\n' + '  }\n' + '\n' + '  return new Promise(poll);\n' + '}\n';
+  let ToolScript2 = "function waitFor(conditionFunction) {\n" + "\n" + "  const poll = resolve => {\n" + "    if(conditionFunction()) resolve();\n" + "    else setTimeout(_ => poll(resolve), 400);\n" + "  }\n" + "\n" + "  return new Promise(poll);\n" + "}\n";
   // ToolScript3-- Alternate to Eval()
-  let ToolScript3 = 'function evil(fn) {\n' + '  return new Function('return ' + fn)();\n' + '}\n';
+  let ToolScript3 = "function evil(fn) {\n" + "  return new Function('return ' + fn)();\n" + "}\n";
   
-  let Scriptof_CustomAdditionToolScript = ToolScript1 + ToolScript2 + ToolScript3;
+  let ToolScriptSeparator = "\n--------------------------\n\n"
+  let Scriptof_CustomAdditionToolScript = ToolScript1 + ToolScriptSeparator + ToolScript2 + ToolScriptSeparator + ToolScript3;
   let Create_CustomAdditionToolScriptElem = document.createElement("script");
   Create_CustomAdditionToolScriptElem.setAttribute("id", "Custom-Addition-ToolScript")
   Create_CustomAdditionToolScriptElem.innerHTML = Scriptof_CustomAdditionToolScript;
