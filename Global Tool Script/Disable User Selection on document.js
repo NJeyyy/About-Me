@@ -39,6 +39,7 @@ function Userselection_disabled() {
   
   document.querySelectorAll("div.DisableUserSelection")[0].removeEventListener("click", Userselection_disabled)
   document.querySelectorAll("div.DisableUserSelection")[0].addEventListener("click", Userselection_enabled)
+  document.querySelectorAll("div.DisableUserSelection")[0].setAttribute("title", "You cannot selecting things\nSince this turned ON.")
 }
 
 
@@ -48,6 +49,7 @@ function Userselection_enabled() {
   document.querySelectorAll("style.DisableUserSelection")[0].remove();
   document.querySelectorAll("div.DisableUserSelection")[0].removeEventListener("click", Userselection_enabled)
   document.querySelectorAll("div.DisableUserSelection")[0].addEventListener("click", Userselection_disabled)
+  document.querySelectorAll("div.DisableUserSelection")[0].setAttribute("title", "You'll still be able to selecting things\nSince this turned OFF.")
 }
 
 
@@ -60,11 +62,13 @@ if (TOGGLEONOFF = "ON") {
   let divDsbld = document.querySelectorAll("div.DisableUserSelection")[0]
   divDsbld.setAttribute("ToggleStatus", "ON");
   divDsbld.addEventListener("click", Userselection_enabled);
-  divDsbld.classList.add("fa-check-circle");
+  divDsbld.classList.add("fa-times-circle");
+  divDsbld.setAttribute("title", "You cannot selecting things\nSince this turned ON.")
 }
 else if (TOGGLEONOFF = "OFF") {
   let divDsbld = document.querySelectorAll("div.DisableUserSelection")[0]
   divDsbld.setAttribute("ToggleStatus", "OFF");
   divDsbld.addEventListener("click", Userselection_disabled);
-  divDsbld.classList.add("fa-times-circle");
+  divDsbld.classList.add("fa-check-circle");
+  divDsbld.setAttribute("title", "You'll still be able to selecting things\nSince this turned OFF.")
 }
