@@ -62,5 +62,17 @@ _-----------------------pREVIOUS Script-------------------____________________
 ======================================
 
 ======================================
+`11:04 PM 04/Jan01/2022 [Version 2] (Changelog from Des13 until now)
+Note: Most of it is not from nowXD Thx for me on the past for the effort! sadly not on good mood to log it here.
+> Edit how it's gonna start on any URL changes or when it loaded
+> Use some "sessionStorage" for stored variable but saved for a certain of time
+> Delete some unnecessary function
+> Edit some error code (e.g the ToggleThemeBTN eventlistener, etc)
+> Add more optional option so you be able to control it more deeply
+> Add some code to make it be easily on control
+> ETC
+======================================
+
+======================================
 Add more log here!
 ======================================
