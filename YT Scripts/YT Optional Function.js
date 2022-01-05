@@ -26,20 +26,20 @@ Change YouTube Website theme based on time: Does what it say, It change when mat
  *  The simple tricks to change website theme: https://dev.to/lakshmananarumugam/the-simple-tricks-to-change-your-website-theme-based-on-day-and-night-23l0
  */
 
-//||~~~~~~~~~~~~SPECIAL PLACE~~~~~~~~~~~~~~~~~~~~~~~~~~~||\\
-// use "sleep(N)" to use this function, it is useful to wait for certain task. btw just FYI "N"mean the time you needed, it is in ms btw so-- 1 sec mean 1000 miliseconds
-/* I want to use it on my script too! But is doesn't work..
-To answer that question:
-Add this function to any script you need first, THEN you can use it.
-*/
-function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
-//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\\
-//Add more special function here!!
+//||~~~~~~~~~~~~USERSCRIPT REQUIREMENTS~~~~~~~~~~~~~~~~~~~~~~~~~~~||\\
+// Custom Addition ToolScript
+//    * SLEEP(miliseconds) Function
+//
+//[NOTE!! You can insert the code below here too since this is from "Custom Addition ToolScript"]
+// Above this line
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\\
 
-
+if (typeof sleep !== "function") { 
+    // Runs if the USERSCRIPT REQUIREMENTS(i.e the function requirement) doesn't exist.
+  let CEM = "Sleep(ms) function doesn't exist. This cannot be runs" + "\n" + "Please do:\n" + "  - See the the userscript top/bottom for function/userscript requirement\n" + "  - Go to: https://github.com/NJeyyy/About-Me/blob/b0989e1530d53f687b2b4d47cd452cb39d6fc846/Global%20Tool%20Script/README.md" + "\n    *See what userscript it require and install them." +"\n\nAlternate way: if it's 'Custom Addition ToolScript'.\n  *you could add some of listed function there to this userscript!"
+    console.error(CEM);
+}
+else {
 //~ ``  ~ ``  ~ ``  ~ ``  ~ ``  ~ ``  ~ ``  ~ ``  ~ ``  ~ ``  ~ ``  ~ ``  ~ ~ ~\\
 //  START THE FEATURES
 /* There are 2 variable:
@@ -448,3 +448,4 @@ function BLOCKAUTOPLAY() {
 }
 //*/
 //```````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````\\
+}
