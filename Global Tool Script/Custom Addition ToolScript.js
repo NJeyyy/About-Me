@@ -17,7 +17,7 @@
         Add this function to any script you need first, THEN you can use it.
  * 
  */
-/**
+/**/
 // ToolScript 1
 //===========SLEEP(miliseconds) Function================================================================\\  <-- Added on V1
 // Source: https://stackoverflow.com/a/39914235/15715476
@@ -70,6 +70,7 @@ function evil(fn) {
 
 
 //~~~~~~~~~~~Implement in to the "head" tag so it can be used globally~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\\
+/**
 Custom_Addition_ToolScript()
 function Custom_Addition_ToolScript() {
   // ToolScript1-- SLEEP(miliseconds) Function
@@ -86,4 +87,5 @@ function Custom_Addition_ToolScript() {
   Create_CustomAdditionToolScriptElem.innerHTML = Scriptof_CustomAdditionToolScript;
   document.head.appendChild(Create_CustomAdditionToolScriptElem)
 }
+//*/
 //###############################################################################################################\\
