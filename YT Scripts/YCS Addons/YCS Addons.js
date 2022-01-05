@@ -24,18 +24,6 @@
 //Hotkey script action        : "http://www.w3schools.com/jsref/event_key_keycode.asp"
 //"Select all Text" Command   : "https://gist.github.com/gibson042/c9b3406bc54f55726ec4#file-focus_search-user-js"
 
-// FOR ME ON THE FUTURE: 
-/**
- * THANK YOU FOR YOUR ATTENTION:D
- * Please implement changes of this script
- * To the github page in: https://github.com/NJeyyy/About-Me/blob/Userscripts/YT%20Scripts/YCS%20Addons/YCS%20Addons.js
- Right? I think it's in there tho (Srry if its wrong:<)
- * I am having a great time rn (kinda) and it is rare I got this moment so..
- * I don't want anything to ruin it.
- * 
- * Thank you for your understanding.
- *                                                                                                            -NJ1n9🤗(18/Desember/2021)-
-*/
 
 
 //||~~~~~~~~~~~~USERSCRIPT REQUIREMENTS~~~~~~~~~~~~~~~~~~~~~~~~~~~||\\
