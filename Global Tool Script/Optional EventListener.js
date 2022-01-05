@@ -149,28 +149,40 @@ function ContextMenuAction1() {
 }
 //Action 2: Check URL for dispatching the Event
 function ContextMenuAction2() {
-  function GetCheckHREFURL() {
-    let OKEHER = window.location.href
-    let OKEHEST = window.location.hostname
-    sessionStorage.setItem("Current_URL", OKEHER)
-    sessionStorage.setItem("Current_HostName", OKEHEST)
-    CheckURLHere()
-  }
-  async function CheckURLHere() {
-    if (window.location.href == sessionStorage.Current_URL) {
-      await sleep(5000)
-      CheckURLHere()
-    }
-    else if (!(window.location.href == sessionStorage.Current_URL)) {
-      await sleep(500)
-      window.dispatchEvent(new Event('locationchange'));
-      let consoleMessage = "\n\n" + "%c" + "CurrentURL:" + window.location.href + "\n\n" + "Previous URL:" + sessionStorage.Current_URL + "\n\n"
-      let consoleMessage_style = 'font-family: Lucida sans;' + " " + 'Color: #D2302C;' + " " + 'text-width: bold;' + " " + 'font-stretch: ultra-expanded;' + " " + 'font-weight: 800;' + " " + 'font-size: 12px;';
-      console.log(consoleMessage, consoleMessage_style)
+  let RUSUREqstnmrk2 = confirm("You sure wants to run the function.. AGAIN??")
+  if (RUSUREqstnmrk2 == true) {
+    let confirmation = confirm("Isn't that decision was a rash?\nAre you sure you're hand not slipped?")
+    if (confirmation == true) {
+      function GetCheckHREFURL() {
+        let OKEHER = window.location.href
+        let OKEHEST = window.location.hostname
+        sessionStorage.setItem("Current_URL", OKEHER)
+        sessionStorage.setItem("Current_HostName", OKEHEST)
+        CheckURLHere()
+      }
+      async function CheckURLHere() {
+        if (window.location.href == sessionStorage.Current_URL) {
+          await sleep(5000)
+          CheckURLHere()
+        }
+        else if (!(window.location.href == sessionStorage.Current_URL)) {
+          await sleep(500)
+          window.dispatchEvent(new Event('locationchange'));
+          let consoleMessage = "\n\n" + "%c" + "CurrentURL:" + window.location.href + "\n\n" + "Previous URL:" + sessionStorage.Current_URL + "\n\n"
+          let consoleMessage_style = 'font-family: Lucida sans;' + " " + 'Color: #D2302C;' + " " + 'text-width: bold;' + " " + 'font-stretch: ultra-expanded;' + " " + 'font-weight: 800;' + " " + 'font-size: 12px;';
+          console.log(consoleMessage, consoleMessage_style)
+          GetCheckHREFURL()
+        }
+      }
       GetCheckHREFURL()
     }
+    else {
+      alert("*chuckles AHAH! Knew that..!")
+    }
   }
-  GetCheckHREFURL()
+  else {
+    alert("Phew.. I am glad to hear that.")
+  }
 }
 
 
