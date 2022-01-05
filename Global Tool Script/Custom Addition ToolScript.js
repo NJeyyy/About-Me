@@ -2,22 +2,27 @@
 // @name            Custom Addition ToolScript
 // @namespace       GlobalFunction_CustomAdditionTLScript
 // @match           *://*/*
-// @grant           none
 // @version         1.5
 // @author          NJ1n9
+// @run-at          document-start
 // @description     Some ToolScript that combined.
 // @icon            https://cdn.iconscout.com/icon/free/png-256/code-336-830581.png
 // @noframes
-// @run-at          document-start
+// @grant           none
 // ==/UserScript==
+//Created on 04/01/2022, 22:04:26
 
 /** FAQ
- * > I want to use it on my script too! But is doesn't work..
+ * > I want to use it on my script too! How can I use it?
       ^ To answer that question:
-        Add this function to any script you need first, THEN you can use it.
+        You can use it by installing this userscript. Or by copying
+        some function listed below depends on your desire on every
+        script you use!
+        Note: If you install this. Script(/userscript) you use only
+        be able to use it once it loaded. So make sure on userscript it "@run-at"..
+        The one that not "document-start" or before that;D
  * 
  */
-/**
 // ToolScript 1
 //===========SLEEP(miliseconds) Function================================================================\\  <-- Added on V1
 // Source: https://stackoverflow.com/a/39914235/15715476
