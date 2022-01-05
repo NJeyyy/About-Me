@@ -19,7 +19,11 @@ That userscript	cannot be run without some of these this script, or they will tu
 	`I also make it to implement it to <head> So it can be used GLOBALLY`[^3]  
 	`Wether it's on userscript or in the console.`  
 	
-	
+	---
+For userscript Requirements: They can be found on top/bottom of script:D  
+btw if it's doesn't exist, it's gonna **warn** you! I make that happens so you will not thinks that it is broken!  
+<br>
+~ Enjoy :D
 	
 [^1]: Note: btw, it doesn't mean it **must** to always turned on. Just check on the userscript you use on this repositories  
 and see their requirements. Because actually some of these are individual script, and turns out to need other script  
