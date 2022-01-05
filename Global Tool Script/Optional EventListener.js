@@ -7,19 +7,20 @@
 // @author        NJ1n9
 // @description   Add custom EventListener
 // @icon          https://cdn.iconscout.com/icon/free/png-256/code-336-830581.png
+// @require          https://github.com/NJeyyy/About-Me/raw/6c0b5f907013e79133ae8eef7a8bf8fd7f38d43a/Global%20Tool%20Script/Custom%20Addition%20ToolScript%5BOnly%20the%20script%20list%5D.js
 // @noframes
 // ==/UserScript==
 // Created on 30/12/2021, 16:35:59
 
-//###################################################################################################\\
-// use "sleep(N)" to use this function, it is useful to wait for certain task. btw just FYI "N"mean the time you needed, it is in ms btw so-- 1 sec mean 1000 miliseconds
-/* I want to use it on my script too! But is doesn't work..
-To answer that question:
-Add this function to any script you need first, THEN you can use it.
-*/
-function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
+
+//||~~~~~~~~~~~~USERSCRIPT REQUIREMENTS~~~~~~~~~~~~~~~~~~~~~~~~~~~||\\
+// >Custom Addition ToolScript
+//[NOTE!! You can insert the code below here too since this is from "Custom Addition ToolScript"]
+// Above this line (Or just.. use @require)
+//=================================================================================================================
+
+
+
 //-----------------------------------------------------------------------------
 // Added on 30/12/2021, 16:35:59
 // Source on: https://dirask.com/posts/JavaScript-on-location-changed-event-on-url-changed-event-DKeyZj
@@ -100,7 +101,7 @@ async function CheckURLHere() {
   else if (!(window.location.href == sessionStorage.Current_URL)) {
     await sleep(500)
     window.dispatchEvent(new Event('locationchange'));
-    let consoleMessage = "\n\n" + "%c" + "CurrentURL:" + window.location.href + "\n\n" + "Previous URL:" + sessionStorage.Current_URL + "\n\n"
+    let consoleMessage = "\n\n" + "%c" + "CurrentURL: " + window.location.href + "\n\n" + "Previous URL: " + sessionStorage.Current_URL + "\n\n"
     let consoleMessage_style = 'font-family: Lucida sans;' + " " + 'Color: #D2302C;' + " " + 'text-width: bold;' + " " + 'font-stretch: ultra-expanded;' + " " + 'font-weight: 800;' + " " + 'font-size: 12px;';
     console.log(consoleMessage, consoleMessage_style)
     GetCheckHREFURL()
@@ -110,11 +111,12 @@ async function CheckURLHere() {
 //*/
 //-----------------------------------------------------------------------------
 ///*
-AddContextMenuTo4nElement()
+AddContextMenuTo4nElement();
 
 
 
 function CreateContextMenuElement() {
+  
   let CreateCTX_container = document.createElement("div");
   CreateCTX_container.setAttribute("id", "Optional-EventListener_CTXContainer");
   document.body.appendChild(CreateCTX_container);
@@ -132,14 +134,14 @@ function CreateContextMenuElement() {
   CreateCTX_item1.innerHTML = "Dispatch Event";
   CreateCTX_item1.setAttribute("class", "Optional-EventListener_CTXItem");
   CTX_container.appendChild(CreateCTX_item1);
-  document.getElementsByClassName("Optional-EventListener_CTXItem")[0].addEventListener("click", ContextMenuAction1)
+  document.getElementsByClassName("Optional-EventListener_CTXItem")[0].addEventListener("click", ContextMenuAction1);
   
   let CreateCTX_item2 = document.createElement("a");
   CreateCTX_item2.innerHTML = "Check URL and dispatch";
   CreateCTX_item2.setAttribute("class", "Optional-EventListener_CTXItem");
   CreateCTX_item2.setAttribute("title", "Not Recommended!");
   CTX_container.appendChild(CreateCTX_item2);
-  document.getElementsByClassName("Optional-EventListener_CTXItem")[1].addEventListener("click", ContextMenuAction2)
+  document.getElementsByClassName("Optional-EventListener_CTXItem")[1].addEventListener("click", ContextMenuAction2);
 }
 
 
@@ -149,59 +151,35 @@ function ContextMenuAction1() {
 }
 //Action 2: Check URL for dispatching the Event
 function ContextMenuAction2() {
-  let RUSUREqstnmrk2 = confirm("You sure wants to run the function.. AGAIN??")
+  let RUSUREqstnmrk2 = confirm("You sure wants to run the function.. AGAIN??");
   if (RUSUREqstnmrk2 == true) {
-    let confirmation = confirm("Isn't that decision was a rash?\nAre you sure you're hand not slipped?")
+    let confirmation = confirm("Isn't that decision was a rash?\nAre you sure you're hand not slipped?");
     if (confirmation == true) {
-      function GetCheckHREFURL() {
-        let OKEHER = window.location.href
-        let OKEHEST = window.location.hostname
-        sessionStorage.setItem("Current_URL", OKEHER)
-        sessionStorage.setItem("Current_HostName", OKEHEST)
-        CheckURLHere()
-      }
-      async function CheckURLHere() {
-        if (window.location.href == sessionStorage.Current_URL) {
-          await sleep(5000)
-          CheckURLHere()
-        }
-        else if (!(window.location.href == sessionStorage.Current_URL)) {
-          await sleep(500)
-          window.dispatchEvent(new Event('locationchange'));
-          let consoleMessage = "\n\n" + "%c" + "CurrentURL:" + window.location.href + "\n\n" + "Previous URL:" + sessionStorage.Current_URL + "\n\n"
-          let consoleMessage_style = 'font-family: Lucida sans;' + " " + 'Color: #D2302C;' + " " + 'text-width: bold;' + " " + 'font-stretch: ultra-expanded;' + " " + 'font-weight: 800;' + " " + 'font-size: 12px;';
-          console.log(consoleMessage, consoleMessage_style)
-          GetCheckHREFURL()
-        }
-      }
-      GetCheckHREFURL()
+      GetCheckHREFURL();
     }
     else {
-      alert("*chuckles AHAH! Knew that..!")
+      alert("*chuckles AHAH! Knew that..!");
     }
   }
   else {
-    alert("Phew.. I am glad to hear that.")
+    alert("Phew.. I am glad to hear that.");
   }
 }
 
-
-// Runs the script
-async function AddContextMenuTo4nElement() {
-  await sleep(5000)
-  let URLRequirements = window.location.href
+// Script-Mode on some website
+//--->YouTube<-----
+async function OPl_YouTubeMode() {
   
-  // Youtube page
-  if (URLRequirements.match("https://www.youtube.com/watch*")) {
+  await waitFor(_ => document.getElementsByClassName("ToggleTHEME_NJ1n9")[1]);
+  if (!(document.getElementById("Optional-EventListener_CTXContainer"))) {
     let UsedELEM = document.getElementsByClassName("ToggleTHEME_NJ1n9")[1]; // The used Element in this page to implement the contextmenu
-    let CTXElem_Container = document.getElementById("Optional-EventListener_CTXContainer"); // The container of ..
-    CreateContextMenuElement()
+    await CreateContextMenuElement();
     UsedELEM.addEventListener("contextmenu", function(e) {
       e.preventDefault();
       let CTX_container = document.getElementById("Optional-EventListener_CTXContainer");
       CTX_container.style.top = e.clientY + "px";
       CTX_container.style.left = e.clientX + "px";
-      if (!(CTX_container.getAttribute("Hidext") == "true")) {
+      if (CTX_container.getAttribute("Hidext") !== "true") {
         document.getElementById("Optional-EventListener_CTXContainer").setAttribute("Hidext", "true");
       }
     });
@@ -210,9 +188,26 @@ async function AddContextMenuTo4nElement() {
         document.getElementById("Optional-EventListener_CTXContainer").removeAttribute("Hidext");
       }
     });
+    let CTXElem_Container = document.getElementById("Optional-EventListener_CTXContainer"); // The container of ..
     CTXElem_Container.style.color = "#3D3D3D";
     CTXElem_Container.style.background = "red";
   }
 }
+//--------
+
+
+
+// Runs the script
+async function AddContextMenuTo4nElement() {
+  await sleep(5000);
+  let URLRequirements = window.location.href;
+  
+  // Youtube page
+  if (URLRequirements.match("https://www.youtube.com/*")) {
+    await OPl_YouTubeMode()
+    window.addEventListener("locationchange", OPl_YouTubeMode);
+  }
+}
+  
 
 //*/
