@@ -1,15 +1,15 @@
 // ==UserScript==
-// @name          Custom Addition ToolScript
-// @namespace     GlobalFunction_CustomAdditionTLScript
-// @match         *://*/*
-// @grant         none
-// @version       1
-// @author        NJ1n9
-// @description   Some ToolScript that combined.
-// @icon          https://cdn.iconscout.com/icon/free/png-256/code-336-830581.png
+// @name            Custom Addition ToolScript
+// @namespace       GlobalFunction_CustomAdditionTLScript
+// @match           *://*/*
+// @grant           none
+// @version         1.5
+// @author          NJ1n9
+// @description     Some ToolScript that combined.
+// @icon            https://cdn.iconscout.com/icon/free/png-256/code-336-830581.png
 // @noframes
+// @run-at          document-start
 // ==/UserScript==
-//Created on 04/01/2022, 22:04:26
 
 /** FAQ
  * > I want to use it on my script too! But is doesn't work..
@@ -17,7 +17,7 @@
         Add this function to any script you need first, THEN you can use it.
  * 
  */
-/**/
+/**
 // ToolScript 1
 //===========SLEEP(miliseconds) Function================================================================\\  <-- Added on V1
 // Source: https://stackoverflow.com/a/39914235/15715476
@@ -69,8 +69,8 @@ function evil(fn) {
 
 
 
-//~~~~~~~~~~~Implement in to the "head" tag so it can be used globally~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\\
-/**
+//~~~~~~~~~~~Implement in to the "head" tag so it can be used globally~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\\ <-- Added and fixed in v1.5
+/**/
 Custom_Addition_ToolScript()
 function Custom_Addition_ToolScript() {
   // ToolScript1-- SLEEP(miliseconds) Function
@@ -80,10 +80,11 @@ function Custom_Addition_ToolScript() {
   // ToolScript3-- Alternate to Eval()
   let ToolScript3 = "function evil(fn) {\n" + "  return new Function('return ' + fn)();\n" + "}\n";
   
-  let ToolScriptSeparator = "\n--------------------------\n\n"
+  let ToolScriptSeparator = "\n//----------------------------------\n\n"
   let Scriptof_CustomAdditionToolScript = ToolScript1 + ToolScriptSeparator + ToolScript2 + ToolScriptSeparator + ToolScript3;
   let Create_CustomAdditionToolScriptElem = document.createElement("script");
   Create_CustomAdditionToolScriptElem.setAttribute("id", "Custom-Addition-ToolScript")
+  Create_CustomAdditionToolScriptElem.setAttribute("type", "application/javascript")
   Create_CustomAdditionToolScriptElem.innerHTML = Scriptof_CustomAdditionToolScript;
   document.head.appendChild(Create_CustomAdditionToolScriptElem)
 }
