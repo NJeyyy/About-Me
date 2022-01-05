@@ -1,17 +1,24 @@
 // ==UserScript==
-// @name           MangaBuddy: Read recent Chapter or somethin'
-// @namespace      Violentmonkey Scripts
-// @match          https://mangabuddy.com/*
-// @grant          none
-// @version        3.0
-// @author         NJ1n9
-// @description    Recent or assign a chapter to read later on
-// @icon           https://mangabuddy.com/static/sites/mangabuddy/icons/apple-touch-icon.png
+// @name             MangaBuddy: Read recent Chapter or somethin'
+// @namespace        Violentmonkey Scripts
+// @match            https://mangabuddy.com/*
+// @grant            none
+// @version          3.0
+// @author           NJ1n9
+// @description      Recent or assign a chapter to read later on
+// @icon             https://mangabuddy.com/static/sites/mangabuddy/icons/apple-touch-icon.png
+// @require          https://github.com/NJeyyy/About-Me/raw/6c0b5f907013e79133ae8eef7a8bf8fd7f38d43a/Global%20Tool%20Script/Custom%20Addition%20ToolScript%5BOnly%20the%20script%20list%5D.js
 // ==/UserScript==
 
-function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
+//||~~~~~~~~~~~~USERSCRIPT REQUIREMENTS~~~~~~~~~~~~~~~~~~~~~~~~~~~||\\
+// >Custom Addition ToolScript
+// >FontIcon Script
+//[NOTE!! You can insert the code below here too since this is from "Custom Addition ToolScript"]
+// Above this line (Or just.. use @require)
+//=================================================================================================================
+
+
+
 RUNGIRLLRUNTQsz()
 async function RUNGIRLLRUNTQsz() {
   let LoadingOverlayCSS = document.createElement("style")
@@ -324,7 +331,7 @@ let create_CSSAssignBTNvalue = "@import url('https://fonts.googleapis.com/css2?f
   document.head.appendChild(create_CSSAssignBTNElem);
     
   // [Google Icons: Material Icon] is on individual script
-    
+  await waitFor(_ => document.getElementById("GoogleIcons_MaterialIcons"))
 
   let VIEWCHAPTER_elem = document.getElementById("viewer-page")
   var create_AssignBTNElem = document.createElement("div");
