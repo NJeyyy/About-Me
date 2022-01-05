@@ -1,15 +1,27 @@
 // ==UserScript==
-// @name            Disable User Selection on document
-// @namespace       GlobalFunction_DisableUserSelectionoverDocument
-// @match           *://*/*
-// @grant           none
-// @version         𝑰𝒏𝒇𝒊𝒏𝒊𝒕𝒚
-// @author          NJ1n9
-// @description     Add overlay-button to the page to disable user selection
-// @icon            https://cdn.iconscout.com/icon/free/png-256/code-336-830581.png
+// @name             Disable User Selection on document
+// @namespace        GlobalFunction_DisableUserSelectionoverDocument
+// @match            *://*/*
+// @grant            none
+// @version          𝑰𝒏𝒇𝒊𝒏𝒊𝒕𝒚
+// @author           NJ1n9
+// @description      Add overlay-button to the page to disable user selection
+// @icon             https://cdn.iconscout.com/icon/free/png-256/code-336-830581.png
+// @require          https://github.com/NJeyyy/About-Me/raw/6c0b5f907013e79133ae8eef7a8bf8fd7f38d43a/Global%20Tool%20Script/Custom%20Addition%20ToolScript%5BOnly%20the%20script%20list%5D.js
 // ==/UserScript==
 // Created on 31/12/2021, 19:30:27
 
+//||~~~~~~~~~~~~USERSCRIPT REQUIREMENTS~~~~~~~~~~~~~~~~~~~~~~~~~~~||\\
+// >Custom Addition ToolScript
+// >FontIcon Script
+// 
+//[NOTE!! You can insert the code below here too since this is from "Custom Addition ToolScript"]
+// Above this line (Or just.. use @require)
+//=================================================================================================================
+justforawait()
+
+async function justforawait() {
+await waitFor(_ => document.getElementById("FontAwesome5script"))
 let createCSS_ElementToggleBTN_DUS = document.createElement("style")
 createCSS_ElementToggleBTN_DUS.setAttribute("id", "CSS_DisableUserSelection");
 createCSS_ElementToggleBTN_DUS.innerHTML = 'div.DisableUserSelection {\n' + ' position: fixed;\n' + ' width: 30px;\n' + ' display: block;\n' + ' height: 30px;\n' + ' background: #f1f1f1;\n' + ' bottom: 10px;\n' + ' right: 10px;\n' + ' font-size: 30px;\n' + ' border-radius: 50%;\n' + ' user-select: none;' + ' opacity: 85%;' + '}\n' + '\n' + 'div.DisableUserSelection[ToggleStatus="ON"] {\n' + ' color: red;\n' + ' cursor: url(https://cdn.custom-cursor.com/db/cursor/32/Rock_Hand_cursor.png), auto;' + '}\n' + 'div.DisableUserSelection[ToggleStatus="ON"]:not(:hover) {\n' + ' opacity: 65%;\n' + '}\n' + '\n' + 'div.DisableUserSelection[ToggleStatus="OFF"] {\n' + ' color: green;\n' + ' cursor: alias;\n' + '}\n' + 'div.DisableUserSelection[ToggleStatus="OFF"]:not(:hover, :active) {\n' + ' opacity: 20%;\n' + '}\n';
@@ -71,4 +83,5 @@ else if (TOGGLEONOFF = "OFF") {
   divDsbld.addEventListener("click", Userselection_disabled);
   divDsbld.classList.add("fa-check-circle");
   divDsbld.setAttribute("title", "You'll still be able to selecting things\nSince this turned OFF.")
+}
 }
