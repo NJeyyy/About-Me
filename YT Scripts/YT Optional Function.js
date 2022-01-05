@@ -19,6 +19,7 @@ Change YouTube Website theme based on time: Does what it say, It change when mat
 // @grant          GM.setValue
 // @grant          GM.getValue
 // @noframes
+// @require        https://github.com/NJeyyy/About-Me/raw/6c0b5f907013e79133ae8eef7a8bf8fd7f38d43a/Global%20Tool%20Script/Custom%20Addition%20ToolScript%5BOnly%20the%20script%20list%5D.js
 // ==/UserScript==
 /**
  * CREDITS!
@@ -27,19 +28,16 @@ Change YouTube Website theme based on time: Does what it say, It change when mat
  */
 
 //||~~~~~~~~~~~~USERSCRIPT REQUIREMENTS~~~~~~~~~~~~~~~~~~~~~~~~~~~||\\
-// Custom Addition ToolScript
+// >Custom Addition ToolScript
 //    * SLEEP(miliseconds) Function
-//
+//    * WaitFor a conditionFunction
+// 
+// >FontIcon Script
+// >Optional EventListener
 //[NOTE!! You can insert the code below here too since this is from "Custom Addition ToolScript"]
-// Above this line
+// Above this line (Or just.. use @require)
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\\
 
-if (typeof sleep !== "function") { 
-    // Runs if the USERSCRIPT REQUIREMENTS(i.e the function requirement) doesn't exist.
-  let CEM = "Sleep(ms) function doesn't exist. This cannot be runs" + "\n" + "Please do:\n" + "  - See the the userscript top/bottom for function/userscript requirement\n" + "  - Go to: https://github.com/NJeyyy/About-Me/blob/b0989e1530d53f687b2b4d47cd452cb39d6fc846/Global%20Tool%20Script/README.md" + "\n    *See what userscript it require and install them." +"\n\nAlternate way: if it's 'Custom Addition ToolScript'.\n  *you could add some of listed function there to this userscript!"
-    console.error(CEM);
-}
-else {
 //~ ``  ~ ``  ~ ``  ~ ``  ~ ``  ~ ``  ~ ``  ~ ``  ~ ``  ~ ``  ~ ``  ~ ``  ~ ~ ~\\
 //  START THE FEATURES
 /* There are 2 variable:
@@ -337,7 +335,8 @@ async function ToggleTHEMEBTN() {
 var createThisDIV = document.createElement("div")
 createThisDIV.setAttribute("class", "ToggleTHEME_NJ1n9 fas")
 await document.getElementById("start").appendChild(createThisDIV)
-// fontawesome5 script will be on another userscript.
+// fontawesome5 script will be added by another userscript.
+await waitFor(_ => document.getElementById("FontAwesome5script")) // <-- AND WAIT!
 var createThisDIVCSS = document.createElement("style")
 createThisDIVCSS.setAttribute("class", "ToggleTHEME_NJ1n9")
 var ValueThisDIVCSS = 'div.ToggleTHEME_NJ1n9 {\n'
@@ -448,4 +447,3 @@ function BLOCKAUTOPLAY() {
 }
 //*/
 //```````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````\\
-}
