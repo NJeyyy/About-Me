@@ -1,19 +1,20 @@
 // ==UserScript==
-// @name         YCS optional function
-// @namespace    YCS_Addons
-// @homepageURL  https://github.com/NJeyyy/About-Me/tree/Userscripts/YT%20Scripts/YCS%20Addons
-// @supportURL   https://github.com/NJeyyy/About-Me/blob/Userscripts/YT%20Scripts/YCS%20Addons/Logs.log
+// @name             YCS optional function
+// @namespace        YCS_Addons
+// @homepageURL      https://github.com/NJeyyy/About-Me/tree/Userscripts/YT%20Scripts/YCS%20Addons
+// @supportURL       https://github.com/NJeyyy/About-Me/blob/Userscripts/YT%20Scripts/YCS%20Addons/Logs.log
 //Note> I know you may be confuse.. the "SupportURL" literally brought you to change log pageXD not support page, but don't worry there are also some help there (probably)
-// @version      4
-// @description  Various optional function for the YCS Extension!
+// @version          4
+// @description      Various optional function for the YCS Extension!
 /** List of function included here and the quick description**
  * description(focused Shortcut)   Since the developer (of YCS Extension) SUCKS, and didn't want to add this "SIMPLE" feature.. I will just add it myself😎
  * description(Add clear button)   I am to lazy pressing Ctrl + A always! or just use the clear button sometimes🙄 so why not🤓
  */
-// @author       NJ1n9
-// @match        https://www.youtube.com/*
-// @icon         https://cdn-icons-png.flaticon.com/128/1383/1383327.png
-// @grant        none
+// @author           NJ1n9
+// @match            https://www.youtube.com/*
+// @icon             https://cdn-icons-png.flaticon.com/128/1383/1383327.png
+// @require          https://github.com/NJeyyy/About-Me/raw/6c0b5f907013e79133ae8eef7a8bf8fd7f38d43a/Global%20Tool%20Script/Custom%20Addition%20ToolScript%5BOnly%20the%20script%20list%5D.js
+// @grant            none
 // @noframes
 // ==/UserScript==
 
@@ -37,10 +38,12 @@
 */
 
 
-//=========================================================================================================
-function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
+//||~~~~~~~~~~~~USERSCRIPT REQUIREMENTS~~~~~~~~~~~~~~~~~~~~~~~~~~~||\\
+// >Custom Addition ToolScript
+// >FontIcon Script
+// >Optional EventListener
+//[NOTE!! You can insert the code below here too since this is from "Custom Addition ToolScript"]
+// Above this line (Or just.. use @require)
 //=================================================================================================================
 
 // To clear comments when input field is empty
