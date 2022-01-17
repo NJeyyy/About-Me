@@ -10,9 +10,10 @@
 // ToolScript 1
 //===========SLEEP(miliseconds) Function================================================================\\  <-- Added on V1
 // Source: https://stackoverflow.com/a/39914235/15715476
-// use "sleep(N)" to use this function, it is useful to wait for certain task.
+// use "sleep(N)" to use this function, it is useful to wait for certain time.
 // btw just FYI "N"mean the time you needed, it is in ms btw so-- 1 sec mean 1000 miliseconds
 
+// use "sleep(N)" to use this function, it is useful to wait for certain time in ms.
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
@@ -35,6 +36,7 @@ function sleep(ms) {
 //*
 // Note: Yes. It must use "_ => " at the start. Cannot explain it since I don't know too rnXD
 
+// use waitFor(conditionFunction) to wait for a certain condition to met.
 function waitFor(conditionFunction) {
 
   const poll = resolve => {
@@ -50,6 +52,7 @@ function waitFor(conditionFunction) {
 // Source: https://stackoverflow.com/a/18082175/15715476
 // For Counting a string. Similar to Eval() I.. literally don't know what's the difference rn btw..
 
+// For Counting a string. Similar to Eval() I.. literally don't know what's the difference rn btw lol
 function evil(fn) {
   return new Function('return ' + fn)();
 }
