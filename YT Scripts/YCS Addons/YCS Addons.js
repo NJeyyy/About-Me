@@ -4,7 +4,7 @@
 // @homepageURL      https://github.com/NJeyyy/About-Me/tree/Userscripts/YT%20Scripts/YCS%20Addons
 // @supportURL       https://github.com/NJeyyy/About-Me/blob/Userscripts/YT%20Scripts/YCS%20Addons/Logs.log
 //Note> I know you may be confuse.. the "SupportURL" literally brought you to change log pageXD not support page, but don't worry there are also some help there (probably)
-// @version          4
+// @version          4ab
 // @description      Various optional function for the YCS Extension!
 /** List of function included here and the quick description**
  * description(focused Shortcut)   Since the developer (of YCS Extension) SUCKS, and didn't want to add this "SIMPLE" feature.. I will just add it myself😎
@@ -33,14 +33,47 @@
 //[NOTE!! You can insert the code below here too since this is from "Custom Addition ToolScript"]
 // Above this line (Or just.. use @require)
 //=================================================================================================================
+//STARTER
+sessionStorage.setItem("AlreadyRUN_YCSoptionalfunction", "false");
 
+YCSSTARTER()
+async function YCSSTARTER() {
+    await sleep(1500);
+    if (sessionStorage.getItem("AlreadyRUN_YCSoptionalfunction") == "true") {
+      window.removeEventListener('keyup', doc_keyUp, false);
+      window.removeEventListener('search', SearchValueCLEAR);
+      if (document.getElementById("YCS-optional-function-CONTAINER")) {
+        await document.getElementById("YCS-optional-function-CONTAINER").remove();
+      }
+      sessionStorage.setItem("AlreadyRUN_YCSoptionalfunction", "false");
+    }
+    await sleep(900);
+    if (window.location.href.match("/*://www.youtube.com/watch*")) {
+      await window.addEventListener('keyup', doc_keyUp, false);
+      await window.addEventListener('search', SearchValueCLEAR);
+      await sleep(1000);
+      if (!(document.getElementById("YCS-optional-function-CONTAINER"))) {
+          await AddmoreButtonFunctionality();
+      }
+      console.log("The Script is running.");
+      sessionStorage.setItem("AlreadyRUN_YCSoptionalfunction", "true");
+    }
+  else {
+    console.log("It's not on video page and the extension can't run here so it's not running:<")
+  }
+}
+
+// Start whenever page changed the URL
+window.addEventListener('locationchange', YCSSTARTER);
+
+//+=-==-=-===-==-=-=-==-=-=-==-=-=-=-=-==--=--==-=-=-=-=-=-=-==-=-=-=-=--=-===-=-==--==-=-=-==-=-=-=--=-=-==-=-=-
 // To clear comments when input field is empty
 function SearchValueCLEAR() {
   var YIS = document.getElementById('ycs-input-search');
   if (YIS.value.length == "0") {
-    YIS.blur();
     document.getElementById("ycs_btn_clear").click();
   }
+  YIS.blur();
 }
     
 
@@ -141,39 +174,7 @@ async function AddmoreButtonFunctionality() {
 }
 //*/
 //-------------------------------------------------------------------------------
-//STARTER
-sessionStorage.setItem("AlreadyRUN_YCSoptionalfunction", "false");
-
-YCSSTARTER()
-async function YCSSTARTER() {
-    await sleep(1500);
-    if (sessionStorage.getItem("AlreadyRUN_YCSoptionalfunction") == "true") {
-      window.removeEventListener('keyup', doc_keyUp, false);
-      window.removeEventListener('search', SearchValueCLEAR);
-      if (document.getElementById("YCS-optional-function-CONTAINER")) {
-        await document.getElementById("YCS-optional-function-CONTAINER").remove();
-      }
-      sessionStorage.setItem("AlreadyRUN_YCSoptionalfunction", "false");
-    }
-    await sleep(900);
-    if (window.location.href.match("/*://www.youtube.com/watch*")) {
-      await window.addEventListener('keyup', doc_keyUp, false);
-      await window.addEventListener('search', SearchValueCLEAR);
-      await sleep(1000);
-      if (!(document.getElementById("YCS-optional-function-CONTAINER"))) {
-          await AddmoreButtonFunctionality();
-      }
-      console.log("The Script is running.");
-      sessionStorage.setItem("AlreadyRUN_YCSoptionalfunction", "true");
-    }
-  else {
-    console.log("It's not on video page and the extension can't run here so it's not running:<")
-  }
-}
-
-// Start whenever page changed the URL
-window.addEventListener('locationchange', YCSSTARTER);
-
+//...
 //---------------------------------------------------------------------------------------
 
 //NOTE!! to disable thing, add "//" at every line of the command (before the command to be spesific) you want to disable:D
