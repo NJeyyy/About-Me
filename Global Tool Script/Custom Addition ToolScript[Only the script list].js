@@ -57,4 +57,18 @@ function evil(fn) {
   return new Function('return ' + fn)();
 }
 //```````````````````````````````````````````````````````````````````````````````````````````````````````````\\
+// ToolScript 4
+//===========Copy To Clipboard================================================================\\  <-- Added on V1.5
+// Source: https://stackoverflow.com/questions/400212/how-do-i-copy-to-the-clipboard-in-javascript
+// Copy Text. or things, to clipboard.
+
+function copyToClipboard(text) {
+   const elem = document.createElement('textarea');
+   elem.value = text;
+   document.body.appendChild(elem);
+   elem.select();
+   document.execCommand('copy');
+   document.body.removeChild(elem);
+}
+//```````````````````````````````````````````````````````````````````````````````````````````````````````````\\
 //*/
