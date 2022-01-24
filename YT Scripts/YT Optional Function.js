@@ -8,19 +8,24 @@
 // @supportURL     https://github.com/NJeyyy/About-Me/blob/Userscripts/YT%20Scripts/YT%20Optional%20Function.log
 // @author         NJ1n9
 // @description    Optional YouTube function in a script😏🎸🎶🎧
-/** Description for each function available here:
-Skip Ads Shortcut: Skip Ads with shortcut!! Instead of wait the button or click one it🥱😒
-Change YouTube Website theme based on time: Does what it say, It change when match the time there btw
- * [If you have more function added, add above from here:D
- * Thanks for your time adding information and helping other!]
- */
+// @require        https://github.com/NJeyyy/About-Me/raw/225e9b3930b628b668943ecc193deb3d5933f2cd/Global%20Tool%20Script/Custom%20Addition%20ToolScript%5BOnly%20the%20script%20list%5D.js
 // @match          https://www.youtube.com/*
 // @icon           https://ricardoreadingmouse.com.au/wp-content/uploads/2018/04/youtube.png
 // @grant          GM.setValue
 // @grant          GM.getValue
 // @noframes
-// @require        https://github.com/NJeyyy/About-Me/raw/6c0b5f907013e79133ae8eef7a8bf8fd7f38d43a/Global%20Tool%20Script/Custom%20Addition%20ToolScript%5BOnly%20the%20script%20list%5D.js
 // ==/UserScript==
+/** Description for each function available here:
+>Skip Ads Shortcut: Skip Ads with shortcut!! Instead of wait the button or click on it🥱😒
+>Change YouTube Website theme based on time: Does what it say, It change when match the time there btw
+|>Subtitle Settings: Restore YT Subtitle(/Caption) Settings
+>Toggle Theme Button: Toggle theme temporary by button! Y'KNOW INSTEAD TO CLICK MORE THAN ONE TIME ON THE PROFILE AND STUFF..
+and also this is temporary! so it is not saved:P
+||FootNote:
+ - List that used "|>" instead of ">" have note of => {*Note! It not tested, so be careful! I didn't rlly need it rn so.. yea:P not developing it maybe later!}
+ * [If you have more function added, add above from here:D
+ * Thanks for your time adding information and helping other!]
+ */
 /**
  * CREDITS!
  *  Run command in desired time(included minutes): https://stackoverflow.com/a/57998003/15715476
@@ -48,19 +53,23 @@ Change YouTube Website theme based on time: Does what it say, It change when mat
  * => AlreadyRUN_YTOptionalFunction3
  *  Temporary var
 */
-sessionStorage.removeItem("gotoCommentIT");
-sessionStorage.setItem("AlreadyRUN_YTOptionalFunction1", false)
-sessionStorage.setItem("AlreadyRUN_YTOptionalFunction2", false)
 
-start_YTOptionalFunction()
+sessionStorage.removeItem("gotoCommentIT");
+sessionStorage.setItem("AlreadyRUN_YTOptionalFunction1", false);
+sessionStorage.setItem("AlreadyRUN_YTOptionalFunction2", false);
+    
+start_YTOptionalFunction();
+
 async function start_YTOptionalFunction() {
+  await waitFor(function() {if (document.readyState === 'complete'){return true}else{return false}});
+  await sleep(500)
   var BlockVideo2Play;
   if (sessionStorage.getItem("EnterCommentKEY")) {
-    sessionStorage.removeItem("EnterCommentKEY")
+    sessionStorage.removeItem("EnterCommentKEY");
   }
   if (window.location.href.match("https://www.youtube.com/watch*")) {
-    let LoadingOverlayCSS = document.createElement("style")
-    LoadingOverlayCSS.setAttribute("class", "LoadingOverlayELEMENTS")  
+    let LoadingOverlayCSS = document.createElement("style");
+    LoadingOverlayCSS.setAttribute("class", "LoadingOverlayELEMENTS");
     LoadingOverlayCSS.innerHTML = 'div[name="LoadingOverlay"] {\n'
       + ' background-color: black;\n'
       + ' top: 0px;\n'
@@ -85,14 +94,14 @@ async function start_YTOptionalFunction() {
       + ' pointer-events: auto;\n'
       + '}\n'
     ;
-    document.head.appendChild(LoadingOverlayCSS)
-    let LoadingOverlayDIV = document.createElement("div")
-    LoadingOverlayDIV.setAttribute("class", "LoadingOverlayELEMENTS")
-    LoadingOverlayDIV.setAttribute("name", "LoadingOverlay")
-    LoadingOverlayDIV.innerHTML = '<img name="LoadingIcon" title="Right click here to remove this overlay!" src="https://i0.wp.com/mdhsociety.com/wp-content/uploads/2017/11/throbber.gif">'
-    document.body.appendChild(LoadingOverlayDIV)
-    document.getElementsByName('LoadingIcon')[0].setAttribute('draggable', false);
-    document.getElementsByName('LoadingIcon')[0].addEventListener("contextmenu", (event) => {
+    await document.head.appendChild(LoadingOverlayCSS);
+    let LoadingOverlayDIV = document.createElement("div");
+    LoadingOverlayDIV.setAttribute("class", "LoadingOverlayELEMENTS");
+    LoadingOverlayDIV.setAttribute("name", "LoadingOverlay");
+    LoadingOverlayDIV.innerHTML = '<img name="LoadingIcon" title="Right click here to remove this overlay!" src="https://i0.wp.com/mdhsociety.com/wp-content/uploads/2017/11/throbber.gif">';
+    await document.body.appendChild(LoadingOverlayDIV);
+    await document.getElementsByName('LoadingIcon')[0].setAttribute('draggable', false);
+    await document.getElementsByName('LoadingIcon')[0].addEventListener("contextmenu", (event) => {
       event.preventDefault();
       let CFM = confirm("Do you want to remove the ['𝘌𝘭𝘦𝘮𝘦𝘯𝘵.𝙻𝚘𝚊𝚍𝚒𝚗𝚐𝙾𝚟𝚎𝚛𝚕𝚊𝚢𝙴𝙻𝙴𝙼𝙴𝙽𝚃𝚂'].\nTo ignore the loading and just do whatever U want?")
       if (CFM == true) {
@@ -100,20 +109,22 @@ async function start_YTOptionalFunction() {
         document.getElementsByClassName("LoadingOverlayELEMENTS")[0].remove();
       }
     });
-    BlockVideo2Play = setInterval(BLOCKAUTOPLAY, 1000)
+    BlockVideo2Play = setInterval(BLOCKAUTOPLAY, 500);
   }
-  var THEMETIMERL = setInterval(Theme_BasedTime, 60 * 60000) // Change YouTube Website theme based on time (make it runs on time of interval)
-  await sleep(700)
-  await ToggleTHEMEBTN();
+	await LittleLoadingIcon(); //<--FUCK.(?)
+	
+  var THEMETIMERL = setInterval(Theme_BasedTime, 60 * 60000); // Change YouTube Website theme based on time (make it runs on time of interval)
+  await sleep(700);
   await Theme_BasedTime();
-  await Startonlyonvideopage() // START ONLY ON VIDEO PAGE
-  await sleep(500)
+  await ToggleTHEMEBTN();
+  await Startonlyonvideopage(); // START ONLY ON VIDEO PAGE
+  await sleep(500);
   if (window.location.href.match("https://www.youtube.com/watch*")) {
-    await sleep(900)
+    await sleep(900);
     // "true" to make it go to 0:00 Automatically
     // "[Insert any words to disable it(or just 'false')]" it's not gonna ask or automatically go to 0:00
     // "ask" It ask wether it wanna go to 0:00 or not
-    let GOTOZERO = "false" // ALL MUST LOWER CASE
+    let GOTOZERO = "false"; // ALL MUST LOWER CASE
     if (GOTOZERO == "ask") {
       let YESNO = confirm("Go to [0:00]? ")
       if (YESNO == true) {
@@ -122,14 +133,26 @@ async function start_YTOptionalFunction() {
     } else if (GOTOZERO == "true") {
       document.getElementById("movie_player").seekTo(0,true);
     }
-    if (document.getElementsByClassName("LoadingOverlayELEMENTS").length > 0) {
+  }
+  await sleep(200)
+	await waitFor(function(){if (document.visibilityState == 'visible' || document.webkitVisibilityState == "visible") {return true} else {return false}});
+	await sleep(500)
+  document.getElementsByClassName("LoadingOverlayELEMENTS")[1].remove();
+  document.getElementsByClassName("LoadingOverlayELEMENTS")[0].remove();
+  let BlockVideo2Play_Modes = await GM.getValue("VideoBlockingModes", "Auto");
+  if (BlockVideo2Play_Modes == "Auto") {
+    await clearInterval(BlockVideo2Play);
+  } else if (BlockVideo2Play_Modes == "Manual") {
+    await waitFor(_ => document.getElementById("Optional-EventListener_CTXContainer"));
+    let Create_BlockVideo2PlayPreventElem = document.createElement("div");
+    Create_BlockVideo2PlayPreventElem.setAttribute("id", "BlockVideo2PlayButton");
+    Create_BlockVideo2PlayPreventElem.innerHTML = "Clear BlockVideo2Play Interval";
+    document.getElementById("Optional-EventListener_CTXContainer").appendChild(Create_BlockVideo2PlayPreventElem);
+    document.getElementById("Optional-EventListener_CTXContainer").addEventListener("click", ()=>{clearInterval(BlockVideo2Play);document.getElementById("BlockVideo2PlayButton").remove();}, {once: true})
+  }
+  window.addEventListener("click", function(){document.getElementById("LutleLoadingSpinIcon").remove();}, {once: true});
       document.getElementsByClassName("LoadingOverlayELEMENTS")[1].remove();
       document.getElementsByClassName("LoadingOverlayELEMENTS")[0].remove();
-    }
-  }
-  if (BlockVideo2Play) {
-    clearInterval(BlockVideo2Play);
-  }
 }
 
 
@@ -137,8 +160,13 @@ async function start_YTOptionalFunction() {
 window.addEventListener('locationchange', async function() {
   // Put your code here
   await sleep(1500)
+  clearInterval(BlockVideo2Play);
+  document.getElementsByClassName("LoadingOverlayELEMENTS")[1].remove();
+  document.getElementsByClassName("LoadingOverlayELEMENTS")[0].remove();
   var BlockVideo2Play;
   if (sessionStorage.getItem("EnterCommentKEY")) {
+		await waitFor(function(){if (document.visibilityState == 'visible') {return true} else {return false}})
+		await sleep(500)
     sessionStorage.removeItem("EnterCommentKEY")
   }
   if (window.location.href.match("https://www.youtube.com/watch*")) {
@@ -168,14 +196,14 @@ window.addEventListener('locationchange', async function() {
       + ' pointer-events: auto;\n'
       + '}\n'
     ;
-    document.head.appendChild(LoadingOverlayCSS)
+    await document.head.appendChild(LoadingOverlayCSS)
     let LoadingOverlayDIV = document.createElement("div")
     LoadingOverlayDIV.setAttribute("class", "LoadingOverlayELEMENTS")
     LoadingOverlayDIV.setAttribute("name", "LoadingOverlay")
     LoadingOverlayDIV.innerHTML = '<img name="LoadingIcon" title="Right click here to remove this overlay!" src="https://i0.wp.com/mdhsociety.com/wp-content/uploads/2017/11/throbber.gif">'
-    document.body.appendChild(LoadingOverlayDIV)
-    document.getElementsByName('LoadingIcon')[0].setAttribute('draggable', false);
-    document.getElementsByName('LoadingIcon')[0].addEventListener("contextmenu", (event) => {
+    await document.body.appendChild(LoadingOverlayDIV)
+    await document.getElementsByName('LoadingIcon')[0].setAttribute('draggable', false);
+    await document.getElementsByName('LoadingIcon')[0].addEventListener("contextmenu", (event) => {
       event.preventDefault();
       let CFM = confirm("Do you want to remove the ['𝘌𝘭𝘦𝘮𝘦𝘯𝘵.𝙻𝚘𝚊𝚍𝚒𝚗𝚐𝙾𝚟𝚎𝚛𝚕𝚊𝚢𝙴𝙻𝙴𝙼𝙴𝙽𝚃𝚂'].\nTo ignore the loading and just do whatever U want?")
       if (CFM == true) {
@@ -183,7 +211,8 @@ window.addEventListener('locationchange', async function() {
         document.getElementsByClassName("LoadingOverlayELEMENTS")[0].remove();
       }
     });
-    BlockVideo2Play = setInterval(BLOCKAUTOPLAY, 1000);
+		await LittleLoadingIcon(); //<--FUCK.
+    BlockVideo2Play = setInterval(BLOCKAUTOPLAY, 500);
   }
   await sleep(500);
   await Startonlyonvideopage();
@@ -203,14 +232,25 @@ window.addEventListener('locationchange', async function() {
       document.getElementById("movie_player").seekTo(0,true);
     }
   }
-  if (BlockVideo2Play) {
-    clearInterval(BlockVideo2Play)
+	await sleep(1000)
+	await waitFor(function(){if (document.visibilityState == 'visible' || document.webkitVisibilityState == "visible") {return true} else {return false}});
+	await sleep(500)
+  document.getElementsByClassName("LoadingOverlayELEMENTS")[1].remove();
+  document.getElementsByClassName("LoadingOverlayELEMENTS")[0].remove();
+  let BlockVideo2Play_Modes = await GM.getValue("VideoBlockingModes_onlocationchange", "Auto");
+  if (BlockVideo2Play_Modes == "Auto") {
+    await clearInterval(BlockVideo2Play);
+  } else if (BlockVideo2Play_Modes == "Manual") {
+    await waitFor(_ => document.getElementById("Optional-EventListener_CTXContainer"));
+    let Create_BlockVideo2PlayPreventElem = document.createElement("div");
+    Create_BlockVideo2PlayPreventElem.setAttribute("id", "BlockVideo2PlayButton");
+    Create_BlockVideo2PlayPreventElem.innerHTML = "Clear BlockVideo2Play Interval";
+    document.getElementById("Optional-EventListener_CTXContainer").appendChild(Create_BlockVideo2PlayPreventElem);
+    document.getElementById("Optional-EventListener_CTXContainer").addEventListener("click", ()=>{clearInterval(BlockVideo2Play);}, {once: true})
   }
-  await sleep(600)
-  if (document.getElementsByClassName("LoadingOverlayELEMENTS").length > 0) {
-    document.getElementsByClassName("LoadingOverlayELEMENTS")[1].remove();
-    document.getElementsByClassName("LoadingOverlayELEMENTS")[0].remove();
-  }
+  window.addEventListener("click", function(){document.getElementById("LutleLoadingSpinIcon").remove();}, {once: true});
+  document.getElementsByClassName("LoadingOverlayELEMENTS")[1].remove();
+  document.getElementsByClassName("LoadingOverlayELEMENTS")[0].remove();
   console.log("YT Optional Function")
 });
 
@@ -218,19 +258,19 @@ window.addEventListener('locationchange', async function() {
 // START ONLY ON VIDEO PAGE
 async function Startonlyonvideopage() {
   await sleep(2500)
-  var URLRequirements = window.location.href
   var UsedURL = new RegExp("https://www.youtube.com/watch*")
+  var URLRequirements = await window.location.href
   
   if (sessionStorage.getItem("AlreadyRUN_YTOptionalFunction1") == "true") {
-    window.removeEventListener('keyup', YTAds_Shortcut, false);
-    window.removeEventListener("click", EnterCommentKEY)
-    window.removeEventListener("keyup", gotoCommentIT, false)
+    await window.removeEventListener('keyup', YTAds_Shortcut, false);
+    await window.removeEventListener("click", EnterCommentKEY)
+    await window.removeEventListener("keyup", gotoCommentIT, false)
     sessionStorage.setItem("AlreadyRUN_YTOptionalFunction1", false)
   }
   if (URLRequirements.match(UsedURL)) {
-    window.addEventListener('keyup', YTAds_Shortcut, false); // Skip Ads with shortcut (`/~)
-    window.addEventListener("keyup", EnterCommentKEYFunc); // Enter to submit comment
-    window.addEventListener("keyup", gotoCommentIT) // <-- alt + C to comment
+    await window.addEventListener('keyup', YTAds_Shortcut, false); // Skip Ads with shortcut (`/~)
+    await window.addEventListener("keyup", EnterCommentKEYFunc); // Enter to submit comment
+    await window.addEventListener("keyup", gotoCommentIT) // <-- alt + C to comment
     sessionStorage.setItem("AlreadyRUN_YTOptionalFunction1", true)
     window.dispatchEvent(new Event("scroll"));
     document.dispatchEvent(new Event("scroll"));
@@ -302,16 +342,17 @@ async function Theme_BasedTime() {
   // --The selected theme settings--
   /* "Dark" for dark theme and "Light" for light theme. Be careful on the capital! It's important. */
   var theme_SELECTIONONE = "Dark" // NIGHT TIME
-  var theme_SELECTIONTWO = "Dark" // DAY TIME
+  var theme_SELECTIONTWO = "Light" // DAY TIME
   
   // <-- Use "||" because it's more to "or" than "and" and also because it's PM to AM combined.. not AM to PM:P
+  var CurrentTheme;
   if (timeOfDay >= time_NIGHT1 || timeOfDay <= time_NIGHT2) {  //<-- NIGHT TIME [Dark Theme]
-    await GM.setValue("CurrentTheme", theme_SELECTIONONE)
+    var CurrentTheme = theme_SELECTIONONE;
     console.log(theme_SELECTIONONE, "Theme")
   }
   
   else if (timeOfDay >= time_DAY1 && timeOfDay <= time_DAY2) {  //<-- DAY TIME [Light Theme]
-    await GM.setValue("CurrentTheme", theme_SELECTIONTWO)
+    var CurrentTheme = theme_SELECTIONTWO;
     console.log(theme_SELECTIONTWO, "Theme")
   }
   
@@ -319,28 +360,29 @@ async function Theme_BasedTime() {
   
   
 // Code to Change theme based on the "CurrentTheme_time" variable
-  
-  var CurrentTheme_time = await GM.getValue("CurrentTheme") // <-- Get The stored variables
-  var Element_HTML = document.getElementsByTagName("html")[0] // <-- Get the HTML element.
+  var CurrentTheme_time = CurrentTheme;
+  var Element_HTML = document.getElementsByTagName("html")[0]; // <-- Get the HTML element.
   if (CurrentTheme_time == "Dark") {
     if (!(Element_HTML.getAttribute("dark") == "true")) { // <-- Check if the dark attributes exist in the html element
-      Element_HTML.setAttribute("dark", "true") // Add "dark" attributes to change it to Dark Theme
-      document.getElementsByClassName("ycs-app")[0].innerHTML.reload
-      console.log("Dark Theme applied.") // <-- Show sign of applied Theme on browser console
+      await Element_HTML.setAttribute("dark", "true"); // Add "dark" attributes to change it to Dark Theme
+      document.getElementsByClassName("ycs-app")[0].innerHTML.reload;
+      console.log("Dark Theme applied."); // <-- Show sign of applied Theme on browser console
       if (sessionStorage.getItem("AlreadyRUN_YTOptionalFunction2") == "true") {
-        CheckEditToggleThemeBTN()
+        await CheckEditToggleThemeBTN();
       }
     }
   }
   else if (CurrentTheme_time == "Light") {
     if (Element_HTML.getAttribute("dark") == "true") { // <-- Check if the dark attributes exist in the html element.
-      Element_HTML.removeAttribute("dark") // Delete "dark" attributes to change it to Light Theme
-      console.log("Light Theme applied.") // <-- Show sign of applied Theme on browser console
+      await Element_HTML.removeAttribute("dark"); // Delete "dark" attributes to change it to Light Theme
+      console.log("Light Theme applied."); // <-- Show sign of applied Theme on browser console
       if (sessionStorage.getItem("AlreadyRUN_YTOptionalFunction2") == "true") {
-        CheckEditToggleThemeBTN()
+        await CheckEditToggleThemeBTN();
       }
     }
   }
+  await sleep(500);
+  return;
 }
 
 //*/
@@ -354,16 +396,17 @@ if (!localStorage.getItem("yt-player-caption-display-settings")) {
 }
 //*/
 //```````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````\\
-//=================== Toggle Theme ========================================
+//=================== Toggle Theme Button ========================================
 /**/
 //ToggleTHEMEBTN();
 async function ToggleTHEMEBTN() {
-  await sleep(3500)
+  await sleep(500)
+  //await waitFor(_ => document.getElementById("start"));
 var createThisDIV = document.createElement("div")
 createThisDIV.setAttribute("class", "ToggleTHEME_NJ1n9 fas")
 await document.getElementById("start").appendChild(createThisDIV)
 // fontawesome5 script will be added by another userscript.
-await waitFor(_ => document.getElementById("FontAwesome5script")) // <-- AND WAIT!
+await waitFor(_ => document.getElementById("FontAwesome5script")); // <-- AND WAIT!
 var createThisDIVCSS = document.createElement("style")
 createThisDIVCSS.setAttribute("class", "ToggleTHEME_NJ1n9")
 var ValueThisDIVCSS = 'div.ToggleTHEME_NJ1n9 {\n'
@@ -407,10 +450,11 @@ var ValueThisDIVCSS = 'div.ToggleTHEME_NJ1n9 {\n'
 + '                -1px -1px 0 #333;\n'
 + '}\n'
 ;
-createThisDIVCSS.innerHTML = ValueThisDIVCSS
-await document.head.appendChild(createThisDIVCSS)
+createThisDIVCSS.innerHTML = ValueThisDIVCSS;
+await document.head.appendChild(createThisDIVCSS);
   
-CheckEditToggleThemeBTN()
+CheckEditToggleThemeBTN();
+return;
 }
 function CheckEditToggleThemeBTN() {
     function TOdark() {
@@ -456,6 +500,8 @@ else if (!(Element_HTML.getAttribute("dark") == "true")) { // When Current theme
 }
   
   sessionStorage.setItem("AlreadyRUN_YTOptionalFunction2", true)
+  console.log("Toggle Theme Button has been added.")
+  return;
 }
 //*/
 //```````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````\\
@@ -471,6 +517,7 @@ function BLOCKAUTOPLAY() {
   if (vids.length) { // this is basically to make sure there are videos on the page, but it is probably unnecessary
     document.querySelector("video.video-stream").pause(); // pause the vid. JUST THAT!
   }
+  return;
 }
 //*/
 //```````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````\\
@@ -480,7 +527,7 @@ function EnterCommentKEYFunc(E) {
   E.preventDefault();
   let ECKEYHk1 = E.which == 13 // <-- EnterKey
   let ECKEYHk2 = E.shiftKey
-  if (!(ECKEYHk2) && ECKEYHk1 && (document.activeElement == document.getElementsByClassName("yt-formatted-string")[9])) {
+  if (!(ECKEYHk2) && ECKEYHk1 && (document.activeElement == document.querySelector("#contenteditable-root.style-scope.yt-formatted-string")) {
     document.getElementsByClassName("ytd-commentbox")[35].click();
     sessionStorage.removeItem("EnterCommentKEY");
   }
@@ -499,5 +546,60 @@ async function gotoCommentIT(E) {
         window.scrollTo(0,0);
       }
   }
+}
+//```````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````\\
+//=================== Loading Icon on the header ========================================
+async function LittleLoadingIcon() {
+  await sleep(500)
+  await waitFor(_ => document.querySelector("#masthead #container #end"));
+	let LoadingIconSpinning = document.createElement("div");
+	LoadingIconSpinning.setAttribute("style", "position: relative;");
+	LoadingIconSpinning.setAttribute("id", "LutleLoadingSpinIcon")
+	LoadingIconSpinning.innerHTML = "\n"
+		+ '<div style="transform: scale(0.7);position: absolute;top: -17px;left: -57px;">\n'
+		+ '<div class="loadingio-spinner-eclipse-vt0i90fkm1a">\n'
+		+ '	<div class="ldio-38lnbzayuu6">\n'
+		+ '		<div></div>\n'
+		+ '</div></div>\n'
+		+ '	<style type="text/css">\n'
+		+	'  @keyframes ldio-38lnbzayuu6 {\n'
+		+	'   	0% { transform: rotate(0deg) }\n'
+		+	'     50% { transform: rotate(180deg) }\n'
+		+	'   	100% { transform: rotate(360deg) }\n'
+		+	'  }\n'
+		+ '  .ldio-38lnbzayuu6 div {\n'
+		+ '     position: absolute;\n'
+		+ '     animation: ldio-38lnbzayuu6 2.4499999999999997s linear infinite;\n'
+		+ '     width: 50px;\n'
+		+ '     height: 50px;\n'
+		+ '     top: 25px;\n'
+		+ '     left: 25px;\n'
+		+ '     border-radius: 50%;\n'
+		+ '     box-shadow: 0 3.8000000000000003px 0 0 #ff3333;\n'
+		+ '     transform-origin: 25px 26.9px;\n'
+		+ '  }\n'
+		+ '  .loadingio-spinner-eclipse-vt0i90fkm1a {\n'
+		+ '     width: 71px;\n'
+		+ '     height: 71px;\n'
+		+ '     display: inline-block;\n'
+		+ '     overflow: hidden;\n'
+		+ '     background: none;\n'
+		+ '  }\n'
+		+ '  .ldio-38lnbzayuu6 {\n'
+		+ '     width: 100%;\n'
+		+ '     height: 100%;\n'
+		+ '     position: relative;\n'
+		+ '     transform: translateZ(0) scale(0.71);\n'
+		+ '     backface-visibility: hidden;\n'
+		+ '     transform-origin: 0 0; /* see note above */\n'
+		+ '  }\n'
+		+ '  .ldio-38lnbzayuu6 div {\n'
+		+ '     box-sizing: content-box;\n'
+		+ '  }\n'
+		+ '/* generated by https://loading.io/ */\n'
+		+ '</style></div>\n'
+	;
+	await document.querySelector("#masthead #container #end").children[1].insertBefore(LoadingIconSpinning, document.querySelector("#masthead #container #end").children[1].childNodes[0]);
+  return;
 }
 //```````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````\\
