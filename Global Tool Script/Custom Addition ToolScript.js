@@ -131,7 +131,7 @@ async function Custom_Addition_ToolScript() {
   + "\n>WaitFor a conditionFunction\nThe Command: waitFor(conditionFunction)\n  To wait for a certain condition to met."
   + "\n>Alternate to Eval()\nThe Command: evil(fn)\n  For Counting a string. Similar to Eval() I.. literally don't know what's the difference rn btw.."
   + "\n>Copy To Clipboard\nThe Command: copyToClipboard(text)\n  Copy Text. or things, to clipboard."
-  + "\n>Select Element With ElementSelector (Individually / Grouping)\nThe Command(There's multiple):\n *SE(ElementSelector) [To select multiple]\n *ISE(ElementSelector) [Select Individually(Unable to pick tho SADD)]\nSelect Element by ElementSelector just like CSS. It's use \"document.querySelector\" (Individual Element) or \"document.querySelectorAll\" (Multiple Element). Depends on how you use it!"
+  + "\n>Select Element With ElementSelector (Individually / Grouping)\nThe Command(There's multiple):\n *SE(ElementSelector) [To select multiple]\n *ISE(ElementSelector) [Select Individually(Unable to pick tho SADD)]\nSelect Element by ElementSelector just like CSS.\nIt's use \"document.querySelector\" (Individual Element) or \"document.querySelectorAll\" (Multiple Element). Depending on how you use it!"
   + "\n"
   ;
   let Create_CustomAdditionToolScriptElem = document.createElement("script");
