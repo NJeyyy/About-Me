@@ -71,4 +71,23 @@ function copyToClipboard(text) {
    document.body.removeChild(elem);
 }
 //```````````````````````````````````````````````````````````````````````````````````````````````````````````\\
+// ToolScript 5
+//===========Select Element With ElementSelector (Individually / Grouping)================================================================\\  <-- Added on V1.5a
+// Source: Myself HAHA
+// Select Element by ElementSelector just like CSS. It's use "document.querySelector" (Individual Element) or "document.querySelectorAll" (Multiple Element).
+// Depends on how you use it!
+//Grouping Mode
+function SE(ElementSelector) {
+  if (document.querySelectorAll(ElementSelector).length === 0) {
+    return null;
+  }
+  return document.querySelectorAll(ElementSelector);
+}
+
+//Individually Mode
+function ISE(ElementSelector) {
+  return document.querySelector(ElementSelector);
+}
+
+//```````````````````````````````````````````````````````````````````````````````````````````````````````````\\
 //*/
