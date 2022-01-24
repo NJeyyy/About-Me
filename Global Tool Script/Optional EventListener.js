@@ -7,7 +7,7 @@
 // @author        NJ1n9
 // @description   Add custom EventListener
 // @icon          https://cdn.iconscout.com/icon/free/png-256/code-336-830581.png
-// @require          https://github.com/NJeyyy/About-Me/raw/6c0b5f907013e79133ae8eef7a8bf8fd7f38d43a/Global%20Tool%20Script/Custom%20Addition%20ToolScript%5BOnly%20the%20script%20list%5D.js
+// @require       https://github.com/NJeyyy/About-Me/raw/225e9b3930b628b668943ecc193deb3d5933f2cd/Global%20Tool%20Script/Custom%20Addition%20ToolScript%5BOnly%20the%20script%20list%5D.js
 // @noframes
 // ==/UserScript==
 // Created on 30/12/2021, 16:35:59
@@ -85,26 +85,29 @@ window.addEventListener('locationchange', function(){
 //*/
 //-----------------------------------------------------------------------------
 ///*
-GetCheckHREFURL()
+sessionStorage.removeItem("Current_URL");
+GetCheckHREFURL();
 function GetCheckHREFURL() {
-  let OKEHER = window.location.href
-  sessionStorage.setItem("Current_URL", OKEHER)
-  CheckURLHere()
+  let OKEHER = window.location.href;
+  sessionStorage.setItem("Current_URL", OKEHER);
+  CheckURLHere();
 }
 
 async function CheckURLHere() {
-  await sleep(10 * 1000)
+  await sleep(10 * 1000);
   if (window.location.href == sessionStorage.Current_URL) {
-    await sleep(5000)
-    CheckURLHere()
+    await sleep(5000);
+    CheckURLHere();
   }
   else if (!(window.location.href == sessionStorage.Current_URL)) {
-    await sleep(500)
+    await sleep(500);
     window.dispatchEvent(new Event('locationchange'));
-    let consoleMessage = "\n\n" + "%c" + "CurrentURL: " + window.location.href + "\n\n" + "Previous URL: " + sessionStorage.Current_URL + "\n\n"
+    console.clear();
+    await sleep(100)
+    let consoleMessage = "\n\n" + "%c" + "CurrentURL: " + window.location.href + "\n\n" + "Previous URL: " + sessionStorage.Current_URL + "\n\n";
     let consoleMessage_style = 'font-family: Lucida sans;' + " " + 'Color: #D2302C;' + " " + 'text-width: bold;' + " " + 'font-stretch: ultra-expanded;' + " " + 'font-weight: 800;' + " " + 'font-size: 12px;';
-    console.log(consoleMessage, consoleMessage_style)
-    GetCheckHREFURL()
+    console.log(consoleMessage, consoleMessage_style);
+    GetCheckHREFURL();
   }
 }
 
@@ -123,7 +126,7 @@ function CreateContextMenuElement() {
   let CTX_container = document.getElementById("Optional-EventListener_CTXContainer");
   
   
-  let CreateCTX_CSSVAL = '#Optional-EventListener_CTXContainer .Optional-EventListener_CTXItem {\n' + '  display: block;\n' + '  padding: 9px 15px;\n' + '  font-size: 13px;\n' + '  color: black;\n' + '  cursor: default;\n' + '  text-align: left;\n' + '}\n' + '#Optional-EventListener_CTXContainer .Optional-EventListener_CTXItem:hover {\n' + '  background: rgba(0,0,0, 2%);\n' + '  box-shadow: inset 0 0 25px rgba(0,0,0, 25%);\n' + '  /* offset-x | offset-y | blur-radius | spread-radius | color */\n' + '}\n' + '#Optional-EventListener_CTXContainer .Optional-EventListener_CTXItem:first-child {\n' + '  border-top-left-radius: 5%;\n' + '  border-top-right-radius: 5%;\n' + '}\n' + '#Optional-EventListener_CTXContainer .Optional-EventListener_CTXItem:last-child {\n' + '  border-bottom-left-radius: 5%;\n' + '  border-bottom-right-radius: 5%;\n' + '}\n' + '#Optional-EventListener_CTXContainer {\n' + '  user-select: none;\n' + '  background: #ECECEC;\n' + '  transform: scale(0);\n' + '  transform-origin: left top;\n' + '  transition: transform 500ms linear;\n' + '  width: 140px;\n' + '  position: fixed;\n' + '  border-radius: 5%;\n' + '  z-index: 99999;\n' + '  font-family: "lucida sans";\n' + '  display: fixed;\n' + '}\n' + '#Optional-EventListener_CTXContainer[Hidext] {\n' + '  transform: scale(1);\n' + '  transform-origin: left top;\n' + '  transition: transform 200ms linear;\n' + '}\n';
+  let CreateCTX_CSSVAL = '#Optional-EventListener_CTXContainer * {\n' + '  display: block;\n' + '  padding: 9px 15px;\n' + '  font-size: 13px;\n' + '  color: black;\n' + '  cursor: default;\n' + '  text-align: left;\n' + '}\n' + '#Optional-EventListener_CTXContainer *:hover {\n' + '  background: rgba(0,0,0, 2%);\n' + '  box-shadow: inset 0 0 25px rgba(0,0,0, 25%);\n' + '  /* offset-x | offset-y | blur-radius | spread-radius | color */\n' + '}\n' + '#Optional-EventListener_CTXContainer *:first-child {\n' + '  border-top-left-radius: 5%;\n' + '  border-top-right-radius: 5%;\n' + '}\n' + '#Optional-EventListener_CTXContainer *:last-child {\n' + '  border-bottom-left-radius: 5%;\n' + '  border-bottom-right-radius: 5%;\n' + '}\n' + '#Optional-EventListener_CTXContainer {\n' + '  user-select: none;\n' + '  background: #ECECEC;\n' + '  transform: scale(0);\n' + '  transform-origin: left top;\n' + '  transition: transform 500ms linear;\n' + '  width: 140px;\n' + '  position: fixed;\n' + '  border-radius: 5%;\n' + '  z-index: 99999;\n' + '  font-family: "lucida sans";\n' + '  display: fixed;\n' + '}\n' + '#Optional-EventListener_CTXContainer[Hidext] {\n' + '  transform: scale(1);\n' + '  transform-origin: left top;\n' + '  transition: transform 200ms linear;\n' + '}\n';
   let CreateCTX_CSS = document.createElement("style");
   CreateCTX_CSS.setAttribute("id", "Optional-EventListener_CTXCSS");
   CreateCTX_CSS.innerHTML = CreateCTX_CSSVAL;
@@ -204,7 +207,7 @@ async function AddContextMenuTo4nElement() {
   
   // Youtube page
   if (URLRequirements.match("https://www.youtube.com/*")) {
-    await OPl_YouTubeMode()
+    await OPl_YouTubeMode();
     window.addEventListener("locationchange", OPl_YouTubeMode);
   }
 }
