@@ -7,7 +7,7 @@
 // @author           NJ1n9
 // @description      Recent or assign a chapter to read later on
 // @icon             https://mangabuddy.com/static/sites/mangabuddy/icons/apple-touch-icon.png
-// @require          https://github.com/NJeyyy/About-Me/raw/6c0b5f907013e79133ae8eef7a8bf8fd7f38d43a/Global%20Tool%20Script/Custom%20Addition%20ToolScript%5BOnly%20the%20script%20list%5D.js
+// @require          https://github.com/NJeyyy/About-Me/raw/225e9b3930b628b668943ecc193deb3d5933f2cd/Global%20Tool%20Script/Custom%20Addition%20ToolScript%5BOnly%20the%20script%20list%5D.js
 // ==/UserScript==
 
 //||~~~~~~~~~~~~USERSCRIPT REQUIREMENTS~~~~~~~~~~~~~~~~~~~~~~~~~~~||\\
