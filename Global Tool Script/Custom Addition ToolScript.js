@@ -2,7 +2,7 @@
 // @name            Custom Addition ToolScript
 // @namespace       GlobalFunction_CustomAdditionTLScript
 // @match           *://*/*
-// @version         1.5
+// @version         1.5a
 // @author          NJ1n9
 // @description     Some ToolScript that combined.
 // @icon            https://cdn.iconscout.com/icon/free/png-256/code-336-830581.png
@@ -84,6 +84,25 @@ function copyToClipboard(text) {
    document.body.removeChild(elem);
 }
 //```````````````````````````````````````````````````````````````````````````````````````````````````````````\\
+// ToolScript 5
+//===========Select Element With ElementSelector (Individually / Grouping)================================================================\\  <-- Added on V1.5a
+// Source: Myself HAHA
+// Select Element by ElementSelector just like CSS. It's use "document.querySelector" (Individual Element) or "document.querySelectorAll" (Multiple Element).
+// Depends on how you use it!
+//Grouping Mode
+function SE(ElementSelector) {
+  if (document.querySelectorAll(ElementSelector).length === 0) {
+    return null;
+  }
+  return document.querySelectorAll(ElementSelector);
+}
+
+//Individually Mode
+function ISE(ElementSelector) {
+  return document.querySelector(ElementSelector);
+}
+
+//```````````````````````````````````````````````````````````````````````````````````````````````````````````\\
 //*/
 
 
@@ -101,10 +120,20 @@ async function Custom_Addition_ToolScript() {
   let ToolScript3 = "function evil(fn) {\n" + "  return new Function('return ' + fn)();\n" + "}\n";
   // ToolScript4-- Copy To Clipboard
   let ToolScript4 = 'function copyToClipboard(text) {\n' + '   const elem = document.createElement("textarea");\n' + '   elem.value = text;\n' + '   document.body.appendChild(elem);\n' + '   elem.select();\n' + '   document.execCommand("copy");\n' + '   document.body.removeChild(elem);\n' + '}\n';
+  // ToolScript5-- Select Element With ElementSelector (Individually / Grouping)
+  let ToolScript5 = "//Grouping Mode\n" + "function SE(ElementSelector) {\n" + "  if (document.querySelectorAll(ElementSelector).length === 0) {\n" + "    return null;\n" + "  }\n" + "  return document.querySelectorAll(ElementSelector);\n" + "}\n" + "\n" + "//Individually Mode\n" + "function ISE(ElementSelector) {\n" + "  return document.querySelector(ElementSelector);\n" + "}\n";
   
   let ToolScriptSeparator = "\n//----------------------------------\n\n"
-  let Scriptof_CustomAdditionToolScript = ToolScript1 + ToolScriptSeparator + ToolScript2 + ToolScriptSeparator + ToolScript3 + ToolScriptSeparator + ToolScript4;
-  let consolethng = "%c" + "Custom ToolScript is Added." + "\n\nHere's the list of added command:" + "\n>waitFor(conditionFunction)\n  To wait for a certain condition to met." + "\n>sleep(ms)\n  It is useful to wait for certain task." + "\n>evil(fn)\n  For Counting a string. Similar to Eval() I.. literally don't know what's the difference rn btw..";
+  let Scriptof_CustomAdditionToolScript = ToolScript1 + ToolScriptSeparator + ToolScript2 + ToolScriptSeparator + ToolScript3 + ToolScriptSeparator + ToolScript4 + ToolScriptSeparator + ToolScript5;
+  let consolethng = "%c" + "Custom ToolScript is Added."
+  + "\n\nHere's the list of added command: "
+  + "\n>SLEEP(miliseconds) Function\nThe Command: sleep(ms)\n  It is useful to wait for certain task."
+  + "\n>WaitFor a conditionFunction\nThe Command: waitFor(conditionFunction)\n  To wait for a certain condition to met."
+  + "\n>Alternate to Eval()\nThe Command: evil(fn)\n  For Counting a string. Similar to Eval() I.. literally don't know what's the difference rn btw.."
+  + "\n>Copy To Clipboard\nThe Command: copyToClipboard(text)\n  Copy Text. or things, to clipboard."
+  + "\n>Select Element With ElementSelector (Individually / Grouping)\nThe Command(There's multiple):\n *SE(ElementSelector) [To select multiple]\n *ISE(ElementSelector) [Select Individually(Unable to pick tho SADD)]\nSelect Element by ElementSelector just like CSS. It's use \"document.querySelector\" (Individual Element) or \"document.querySelectorAll\" (Multiple Element). Depends on how you use it!"
+  + "\n"
+  ;
   let Create_CustomAdditionToolScriptElem = document.createElement("script");
   Create_CustomAdditionToolScriptElem.setAttribute("id", "Custom-Addition-ToolScript")
   Create_CustomAdditionToolScriptElem.setAttribute("type", "application/javascript")
