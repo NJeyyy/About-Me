@@ -5,7 +5,7 @@
 // @grant           none
 // @version         1.0
 // @author          NJ1n9
-// @description     Do simple task quickly(sadly only work with 1 account for now..)
+// @description     Do simple task quickly.
 // @noframes
 // @icon            https://i2.wp.com/img.icons8.com/plasticine/2x/google-classroom.png
 // ==/UserScript==
