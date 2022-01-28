@@ -63,6 +63,8 @@ async function LoadThisScript() {
   } else if (document.location.href.match("https://onepunch-manga.com")) {
 		await OPM_MangaHomepage();
 	}
+	await AdditionalScript.sleep(2000);
+	await AdditionalScript.waitFor(_=> document.readyState == "complete");
 	RemoveAds_onHyperlinkClickEvent();
 	await AdditionalScript.sleep(5000);
 	return;
@@ -718,8 +720,6 @@ async function RemoveAds_onHyperlinkClickEvent() {
 			"Homepage_link": "",
 			"Expandbuttonthing_button": ""
 		}
-		console.countReset("Hyperlink Tag Name Group 1, AdsEvent removed:");
-		console.countReset("Hyperlink Tag Name Group 2, AdsEvent removed:");
 		var RemoveAdsEventElemgroup1 = AdditionalScript.SE("ul.su-posts.su-posts-list-loop li a");
 		for (let CountedElem1 = 0; CountedElem1 < RemoveAdsEventElemgroup1.length; CountedElem1++) {
 			let UsedElem = AdditionalScript.SE("ul.su-posts.su-posts-list-loop li a")[CountedElem1];
