@@ -63,10 +63,12 @@ async function LoadThisScript() {
   } else if (document.location.href.match("https://onepunch-manga.com")) {
 		await OPM_MangaHomepage();
 	}
+	RemoveAds_onHyperlinkClickEvent();
+	await AdditionalScript.sleep(5000);
 	return;
 }
 
-//===================================================================================================
+//=======================================================================================
 async function ViewMangaChapterSection() {
   // Add Hotkey to Navigate chapter.
   let UseHotkey = true; // true if you want to add the hotkey, false if you dont wanna
@@ -117,7 +119,100 @@ async function ViewMangaChapterSection() {
 	AdditionalScript.ISE(".back-to-top").remove();
 }
 
-//-----------------------------------------------------------------------------------==||||||
+//_______________________________________________
+async function OPM_MangaHomepage() {
+	//Get Last/Recent/Assigned Chapter
+	let LastRecentAssign_Chapter = LocalVariable_json.LastRecentAssign_ChapterOption;
+	if (LastRecentAssign_Chapter) {
+		//Info about the AssignedChapter and the Recent one.
+		var RecentChapterCompiledInfo = localStorage.getItem("OPMmanga_RecentChapter") || null;
+		var AssignedChapterCompiledInfo = localStorage.getItem("OPMmanga_AssignedChapter") || null;
+		
+		//Create Element Container, Title(+Separator)
+		var LRAChapterInfo_Container = document.createElement("div");
+		LRAChapterInfo_Container.setAttribute("id", "LastRecentAssign_WidgetContainer");
+		LRAChapterInfo_Container.setAttribute("style", "user-select: none;");
+		AdditionalScript.ISE("div#secondary.col-md-3.sidebar.widget-area aside#custom_html-3").appendChild(LRAChapterInfo_Container);
+		let LRAChapterInfo_ContainerTitle = document.createElement("h4");
+		LRAChapterInfo_ContainerTitle.setAttribute("style", 'text-transform: uppercase;margin: 0px 10px;margin-top: 5px;font-size: 18px;font-weight: bold;text-align: center;');
+		LRAChapterInfo_ContainerTitle.innerHTML = "Saved Chapter";
+		LRAChapterInfo_Container.appendChild(LRAChapterInfo_ContainerTitle);
+		let LRAChapterInfo_ContainerTitleSeparator = document.createElement("hr");
+		LRAChapterInfo_ContainerTitleSeparator.setAttribute("style", "width: 100%;height: 3px;background: #EEE;margin: 10px 0px;");
+		LRAChapterInfo_Container.appendChild(LRAChapterInfo_ContainerTitleSeparator);
+		
+		
+		//create/modify stuff for Element for the Recent/Assigned Chapter (if exist)
+		if (RecentChapterCompiledInfo || AssignedChapterCompiledInfo) {
+			if (RecentChapterCompiledInfo) { //Recently
+				let RecentreadChapterELEM = document.createElement("div");
+				RecentreadChapterELEM.setAttribute("id", "RecentChapterInfo");
+				RecentreadChapterELEM.setAttribute("style", "border-bottom: solid 2px #ccc;margin-bottom: 10px;padding-bottom: 10px;");
+				RecentreadChapterELEM.innerHTML = '<h5 style="margin: 0;margin-bottom: -15px;">Recently read Chapter:</h5>\n<br>\n';
+				LRAChapterInfo_Container.appendChild(RecentreadChapterELEM);
+				
+				let RecentChapterDisperseInfo = JSON.parse(RecentChapterCompiledInfo);
+				let Get_ChaptertitleElem = 'a[href="' + RecentChapterDisperseInfo.URL + '"]';
+				let Get_Chaptertitle = await AdditionalScript.ISE(Get_ChaptertitleElem).textContent;
+				
+				let ELEM_a1 = document.createElement("a");
+				ELEM_a1.setAttribute("href", RecentChapterDisperseInfo.URL);
+				ELEM_a1.innerHTML = Get_Chaptertitle;
+				ELEM_a1.setAttribute("title", RecentChapterDisperseInfo.LastDate)
+				RecentreadChapterELEM.appendChild(ELEM_a1);
+			} else {
+				let RecentreadChapterELEM = document.createElement("div");
+				RecentreadChapterELEM.setAttribute("id", "RecentChapterInfo");
+				RecentreadChapterELEM.setAttribute("style", "border-bottom: solid 2px #ccc;margin-bottom: 10px;padding-bottom: 10px;");
+				RecentreadChapterELEM.innerHTML = '<h5 style="margin: 0;margin-bottom: -15px;">Recently read Chapter:</h5>\n<br>\n';
+				LRAChapterInfo_Container.appendChild(RecentreadChapterELEM);
+				let ELEM_text = document.createElement("label");
+				ELEM_text.setAttribute("style", "font-weight: 500;font-family: 'Lato';color: red;font-size: 10px;");
+				ELEM_text.innerHTML = "It seems you didn't have recently read chapter right now..";
+				RecentreadChapterELEM.appendChild(ELEM_text);
+			}
+			if (AssignedChapterCompiledInfo) { //Assigned
+				let AssignedChapterELEM = document.createElement("div");
+				AssignedChapterELEM.setAttribute("id", "AssignedChapterInfo");
+				AssignedChapterELEM.setAttribute("style", "margin-bottom: 10px;");
+				AssignedChapterELEM.innerHTML = '<h5 style="margin: 0;margin-bottom: -15px;">Assigned Chapter:</h5>\n<br>\n'
+				LRAChapterInfo_Container.appendChild(AssignedChapterELEM);
+				
+				let AssignedChapterDisperseInfo = JSON.parse(AssignedChapterCompiledInfo);
+				let Get_ChaptertitleElem = 'a[href="' + AssignedChapterDisperseInfo.URL + '"]';
+				let Get_Chaptertitle = AdditionalScript.ISE(Get_ChaptertitleElem).textContent;
+				
+				let ELEM_a1 = document.createElement("a");
+				ELEM_a1.setAttribute("href", AssignedChapterDisperseInfo.URL);
+				ELEM_a1.innerHTML = Get_Chaptertitle;
+				ELEM_a1.setAttribute("title", AssignedChapterDisperseInfo.LastDate)
+				AssignedChapterELEM.appendChild(ELEM_a1);
+			} else {
+				let AssignedChapterELEM = document.createElement("div");
+				AssignedChapterELEM.setAttribute("id", "AssignedChapterInfo");
+				AssignedChapterELEM.setAttribute("style", "margin-bottom: 10px;");
+				AssignedChapterELEM.innerHTML = '<h5 style="margin: 0;margin-bottom: -15px;">Assigned Chapter:</h5>\n<br>\n'
+				LRAChapterInfo_Container.appendChild(AssignedChapterELEM);
+				
+				let ELEM_text = document.createElement("label");
+				ELEM_text.setAttribute("style", "font-weight: 500;font-family: 'Lato';color: red;font-size: 10px;");
+				ELEM_text.innerHTML = "You not yet assign any chapter.";
+				AssignedChapterELEM.appendChild(ELEM_text);
+			}
+		} else if (!RecentChapterCompiledInfo && !AssignedChapterCompiledInfo) {
+			let LastRecentAssignChapterInfo = "You didn't have recent nor last assigned read chapter.";
+			let LastRecentAssignChapterInfoELEM = document.createElement("label");
+			LastRecentAssignChapterInfoELEM.setAttribute("style", "font-weight: 500;font-family: 'Lato';color: red;font-size: 13px;");
+			LastRecentAssignChapterInfoELEM.innerHTML = LastRecentAssignChapterInfo;
+			LRAChapterInfo_Container.appendChild(LastRecentAssignChapterInfoELEM);
+		}
+	}
+	
+	
+	console.log("The script is completed.");
+}
+
+//------------------------------------------------------------------==||||||
 //Hotkey Function Collection
 async function AddHotkey_NavigateChapter(E) {
   var OPM_TextStyleTheme = "font-size: 15px; color: yellow; background: #E18309; font-family: Impact;"
@@ -184,7 +279,7 @@ function AddHotkey_GotoHomepage(e) {
 		return null;
 	}
 }
-//_________________________________________________________
+//_______________________________________________
 //Others
 
 //Add Toolbox to make my read-manga experience more convenient!
@@ -613,95 +708,42 @@ async function Store_ChapterRecentlyRead() {
 	localStorage.setItem("OPMmanga_RecentChapter", JSON.stringify(CompiletheInfo_lastreadChapter));
 	console.log("This chapter has been stored as recently read chapter!")
 }
-//===================================================================================================
-async function OPM_MangaHomepage() {
-	//Get Last/Recent/Assigned Chapter
-	let LastRecentAssign_Chapter = LocalVariable_json.LastRecentAssign_ChapterOption;
-	if (LastRecentAssign_Chapter) {
-		//Info about the AssignedChapter and the Recent one.
-		var RecentChapterCompiledInfo = localStorage.getItem("OPMmanga_RecentChapter") || null;
-		var AssignedChapterCompiledInfo = localStorage.getItem("OPMmanga_AssignedChapter") || null;
-		
-		//Create Element Container, Title(+Separator)
-		var LRAChapterInfo_Container = document.createElement("div");
-		LRAChapterInfo_Container.setAttribute("id", "LastRecentAssign_WidgetContainer");
-		LRAChapterInfo_Container.setAttribute("style", "user-select: none;");
-		AdditionalScript.ISE("div#secondary.col-md-3.sidebar.widget-area aside#custom_html-3").appendChild(LRAChapterInfo_Container);
-		let LRAChapterInfo_ContainerTitle = document.createElement("h4");
-		LRAChapterInfo_ContainerTitle.setAttribute("style", 'text-transform: uppercase;margin: 0px 10px;margin-top: 5px;font-size: 18px;font-weight: bold;text-align: center;');
-		LRAChapterInfo_ContainerTitle.innerHTML = "Saved Chapter";
-		LRAChapterInfo_Container.appendChild(LRAChapterInfo_ContainerTitle);
-		let LRAChapterInfo_ContainerTitleSeparator = document.createElement("hr");
-		LRAChapterInfo_ContainerTitleSeparator.setAttribute("style", "width: 100%;height: 3px;background: #EEE;margin: 10px 0px;");
-		LRAChapterInfo_Container.appendChild(LRAChapterInfo_ContainerTitleSeparator);
-		
-		
-		//create/modify stuff for Element for the Recent/Assigned Chapter (if exist)
-		if (RecentChapterCompiledInfo || AssignedChapterCompiledInfo) {
-			if (RecentChapterCompiledInfo) { //Recently
-				let RecentreadChapterELEM = document.createElement("div");
-				RecentreadChapterELEM.setAttribute("id", "RecentChapterInfo");
-				RecentreadChapterELEM.setAttribute("style", "border-bottom: solid 2px #ccc;margin-bottom: 10px;padding-bottom: 10px;");
-				RecentreadChapterELEM.innerHTML = '<h5 style="margin: 0;margin-bottom: -15px;">Recently read Chapter:</h5>\n<br>\n';
-				LRAChapterInfo_Container.appendChild(RecentreadChapterELEM);
-				
-				let RecentChapterDisperseInfo = JSON.parse(RecentChapterCompiledInfo);
-				let Get_ChaptertitleElem = 'a[href="' + RecentChapterDisperseInfo.URL + '"]';
-				let Get_Chaptertitle = await AdditionalScript.ISE(Get_ChaptertitleElem).textContent;
-				
-				let ELEM_a1 = document.createElement("a");
-				ELEM_a1.setAttribute("href", RecentChapterDisperseInfo.URL);
-				ELEM_a1.innerHTML = Get_Chaptertitle;
-				ELEM_a1.setAttribute("title", RecentChapterDisperseInfo.LastDate)
-				RecentreadChapterELEM.appendChild(ELEM_a1);
-			} else {
-				let RecentreadChapterELEM = document.createElement("div");
-				RecentreadChapterELEM.setAttribute("id", "RecentChapterInfo");
-				RecentreadChapterELEM.setAttribute("style", "border-bottom: solid 2px #ccc;margin-bottom: 10px;padding-bottom: 10px;");
-				RecentreadChapterELEM.innerHTML = '<h5 style="margin: 0;margin-bottom: -15px;">Recently read Chapter:</h5>\n<br>\n';
-				LRAChapterInfo_Container.appendChild(RecentreadChapterELEM);
-				let ELEM_text = document.createElement("label");
-				ELEM_text.setAttribute("style", "font-weight: 500;font-family: 'Lato';color: red;font-size: 10px;");
-				ELEM_text.innerHTML = "It seems you didn't have recently read chapter right now..";
-				RecentreadChapterELEM.appendChild(ELEM_text);
-			}
-			if (AssignedChapterCompiledInfo) { //Assigned
-				let AssignedChapterELEM = document.createElement("div");
-				AssignedChapterELEM.setAttribute("id", "AssignedChapterInfo");
-				AssignedChapterELEM.setAttribute("style", "margin-bottom: 10px;");
-				AssignedChapterELEM.innerHTML = '<h5 style="margin: 0;margin-bottom: -15px;">Assigned Chapter:</h5>\n<br>\n'
-				LRAChapterInfo_Container.appendChild(AssignedChapterELEM);
-				
-				let AssignedChapterDisperseInfo = JSON.parse(AssignedChapterCompiledInfo);
-				let Get_ChaptertitleElem = 'a[href="' + AssignedChapterDisperseInfo.URL + '"]';
-				let Get_Chaptertitle = AdditionalScript.ISE(Get_ChaptertitleElem).textContent;
-				
-				let ELEM_a1 = document.createElement("a");
-				ELEM_a1.setAttribute("href", AssignedChapterDisperseInfo.URL);
-				ELEM_a1.innerHTML = Get_Chaptertitle;
-				ELEM_a1.setAttribute("title", AssignedChapterDisperseInfo.LastDate)
-				AssignedChapterELEM.appendChild(ELEM_a1);
-			} else {
-				let AssignedChapterELEM = document.createElement("div");
-				AssignedChapterELEM.setAttribute("id", "AssignedChapterInfo");
-				AssignedChapterELEM.setAttribute("style", "margin-bottom: 10px;");
-				AssignedChapterELEM.innerHTML = '<h5 style="margin: 0;margin-bottom: -15px;">Assigned Chapter:</h5>\n<br>\n'
-				LRAChapterInfo_Container.appendChild(AssignedChapterELEM);
-				
-				let ELEM_text = document.createElement("label");
-				ELEM_text.setAttribute("style", "font-weight: 500;font-family: 'Lato';color: red;font-size: 10px;");
-				ELEM_text.innerHTML = "You not yet assign any chapter.";
-				AssignedChapterELEM.appendChild(ELEM_text);
-			}
-		} else if (!RecentChapterCompiledInfo && !AssignedChapterCompiledInfo) {
-			let LastRecentAssignChapterInfo = "You didn't have recent nor last assigned read chapter.";
-			let LastRecentAssignChapterInfoELEM = document.createElement("label");
-			LastRecentAssignChapterInfoELEM.setAttribute("style", "font-weight: 500;font-family: 'Lato';color: red;font-size: 13px;");
-			LastRecentAssignChapterInfoELEM.innerHTML = LastRecentAssignChapterInfo;
-			LRAChapterInfo_Container.appendChild(LastRecentAssignChapterInfoELEM);
+
+//Remove ClickEvent on Hyperlink Element(TagName: a) that opens ads in current tab and opens the link in newtab.
+async function RemoveAds_onHyperlinkClickEvent() {
+	if (document.location.href.match(/onepunch-manga.com(?!\/manga)/g)) {
+		var ClickEventAdsRemoved_Info = {
+			"Hyperlink_GotoChapterGROUP1_Counter": 0,
+			"Hyperlink_GotoChapterGROUP2_Counter": 0,
+			"Homepage_link": "",
+			"Expandbuttonthing_button": ""
 		}
+		console.countReset("Hyperlink Tag Name Group 1, AdsEvent removed:");
+		console.countReset("Hyperlink Tag Name Group 2, AdsEvent removed:");
+		var RemoveAdsEventElemgroup1 = AdditionalScript.SE("ul.su-posts.su-posts-list-loop li a");
+		for (let CountedElem1 = 0; CountedElem1 < RemoveAdsEventElemgroup1.length; CountedElem1++) {
+			let UsedElem = AdditionalScript.SE("ul.su-posts.su-posts-list-loop li a")[CountedElem1];
+			UsedElem.replaceWith(UsedElem.cloneNode(true));
+			ClickEventAdsRemoved_Info.Hyperlink_GotoChapterGROUP1_Counter++;
+		}
+		var RemoveAdsEventElemgroup2 = AdditionalScript.SE(".list-group.list-group-flush a");
+		for (let CountedElem2 = 0; CountedElem2 < RemoveAdsEventElemgroup2.length; CountedElem2++) {
+			let UsedElem = AdditionalScript.SE(".list-group.list-group-flush a")[CountedElem2];
+			UsedElem.replaceWith(UsedElem.cloneNode(true));
+			ClickEventAdsRemoved_Info.Hyperlink_GotoChapterGROUP2_Counter++;
+		}
+		let Homepage_link = AdditionalScript.ISE("#menu-item-37 a");
+		let Expandbuttonthing_button = AdditionalScript.ISE(".su-expand-link.su-expand-link-more a");
+		Homepage_link.replaceWith(Homepage_link.cloneNode(true));
+		Expandbuttonthing_button.replaceWith(Expandbuttonthing_button.cloneNode(true));
+		ClickEventAdsRemoved_Info.Homepage_link = "Element now is cleaned from nasty eventlistener.";
+		ClickEventAdsRemoved_Info.Expandbuttonthing_button = "Element now is cleaned from nasty eventlistener.";
+		await AdditionalScript.sleep(3000);
+		console.log(ClickEventAdsRemoved_Info);
+	} else if (document.location.href.match("onepunch-manga.com/manga/*")) {
+		let UsedElem = AdditionalScript.ISE("#menu-item-37 a");
+		UsedElem.replaceWith(UsedElem.cloneNode(true));
+		console.log("Homepage button now is cleaned from nasty eventlistener, Yeah that's the only thing to clean. \(I THINK\)")
 	}
-	
-	
-	console.log("The script is completed.");
 }
+//=======================================================================================
