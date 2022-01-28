@@ -612,7 +612,7 @@ async function Store_ChapterRecentlyRead() {
 //===================================================================================================
 async function OPM_MangaHomepage() {
 	//Get Last/Recent/Assigned Chapter
-	let LastRecentAssign_Chapter = LocalVariable_json.LastRecentAssign_ChapterOption = false;
+	let LastRecentAssign_Chapter = LocalVariable_json.LastRecentAssign_ChapterOption;
 	if (LastRecentAssign_Chapter) {
 		//Info about the AssignedChapter and the Recent one.
 		var RecentChapterCompiledInfo = localStorage.getItem("OPMmanga_RecentChapter") || null;
