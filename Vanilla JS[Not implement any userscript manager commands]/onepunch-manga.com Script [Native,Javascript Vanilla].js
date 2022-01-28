@@ -44,7 +44,7 @@ if (sessionStorage.getItem("NJ1n9_LocalVariable_json")) {
 } else {
 	var LocalVariable_json = {
 		"LastRecentAssign_ChapterOption": true,
-		"ToolButton_mangaReadMode_CurrentSTATE": true,
+		"ToolButton_mangaReadMode_CurrentSTATE": false,
 		"Hotkey_NextChapter": 68,
 		"Hotkey_PrevChapter": 65
 	}
@@ -386,7 +386,9 @@ async function ADDELEM_ToolBox() {
 				ReadMangaMode_DisableClick.style.height = AdditionalScript.ISE("main#main").offsetHeight + "px";
 				ReadMangaMode_DisableClick.style.top = (AdditionalScript.ISE(".site-header").offsetHeight + 100) + "px";
 				AdditionalScript.ISE(".Toolbutton[name='ReadmangaMode_Button']").setAttribute("toolbuttonstatus", "enabled");
+				var LocalVariable_json = JSON.parse(sessionStorage.getItem("NJ1n9_LocalVariable_json"));
 				LocalVariable_json.ToolButton_mangaReadMode_CurrentSTATE = true;
+				sessionStorage.setItem("NJ1n9_LocalVariable_json", JSON.stringify(LocalVariable_json));
 				setTimeout(function(){
 					ReadMangaMode_DisableClick.style.width = AdditionalScript.ISE("main#main").offsetWidth + "px";
 					ReadMangaMode_DisableClick.style.height = AdditionalScript.ISE("main#main").offsetHeight + "px";
@@ -395,7 +397,9 @@ async function ADDELEM_ToolBox() {
 			} else if (AdditionalScript.ISE(".Toolbutton[name='ReadmangaMode_Button']").getAttribute("toolbuttonstatus") == "enabled") { // if enabled disabling it.
 				document.getElementById("ReadMangaMode_noclick").remove();
 				AdditionalScript.ISE(".Toolbutton[name='ReadmangaMode_Button']").setAttribute("toolbuttonstatus", "disabled");
+				var LocalVariable_json = JSON.parse(sessionStorage.getItem("NJ1n9_LocalVariable_json"));
 				LocalVariable_json.ToolButton_mangaReadMode_CurrentSTATE = false;
+				sessionStorage.setItem("NJ1n9_LocalVariable_json", JSON.stringify(LocalVariable_json));
 			}
 		});
 		console.log("mangaReadMode_Button has been added.");
