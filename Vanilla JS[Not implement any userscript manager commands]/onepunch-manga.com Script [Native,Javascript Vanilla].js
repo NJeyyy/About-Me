@@ -53,20 +53,57 @@ if (sessionStorage.getItem("NJ1n9_LocalVariable_json")) {
 
 raw_LoadThisScript();
 async function raw_LoadThisScript() {
+	let LoadingOverlayCSS = document.createElement("style");
+	LoadingOverlayCSS.setAttribute("class", "LoadingOverlayELEMENTS");
+	LoadingOverlayCSS.innerHTML = "\n"
+		+ 'div[name="LoadingOverlay"] {\n'
+		+ ' background-color: black;\n'
+		+ ' top: 0px;\n'
+		+ ' left: 0px;\n'
+		+ ' width: 100vw;\n'
+		+ ' height: 100vh;\n'
+		+ ' z-index: 99999;\n'
+		+ ' opacity: 80%;\n'
+		+ ' position: fixed;\n'
+		+ ' cursor: url(https://i.ibb.co/qgPfw89/m5p-FZPd-RESIZED.png), auto;\n'
+		+ ' user-select: none;\n'
+		+ ' pointer-events: none;\n'
+		+ '}\n'
+		+ 'img[name="LoadingIcon"] {\n'
+		+ ' filter: invert(86%) sepia(1%) saturate(1660%) hue-rotate(115deg) brightness(107%) contrast(113%);\n'
+		+ ' height: auto;\n'
+		+ ' width: 10vw;\n'
+		+ ' position: absolute;\n'
+		+ ' top: 50vh;\n'
+		+ ' left: 50vw;\n'
+		+ ' transform: translate(-50%,-50%);\n'
+		+ ' pointer-events: auto;\n'
+		+ '}\n'
+	;
+	await document.head.appendChild(LoadingOverlayCSS);
+	let LoadingOverlayDIV = document.createElement("div");
+	LoadingOverlayDIV.setAttribute("class", "LoadingOverlayELEMENTS");
+	LoadingOverlayDIV.setAttribute("name", "LoadingOverlay");
+	LoadingOverlayDIV.innerHTML = '<img name="LoadingIcon" title="Right click here to remove this overlay!" src="https://i0.wp.com/mdhsociety.com/wp-content/uploads/2017/11/throbber.gif">';
+	await document.body.appendChild(LoadingOverlayDIV);
+	document.getElementsByName('LoadingIcon')[0].setAttribute('draggable', false);
+	
 	await LoadThisScript();
-	sessionStorage.setItem("NJ1n9_LocalVariable_json", JSON.stringify(LocalVariable_json));
+	
+	document.getElementsByClassName("LoadingOverlayELEMENTS")[1].remove();
+	document.getElementsByClassName("LoadingOverlayELEMENTS")[0].remove();
 }
 async function LoadThisScript() {
   await AdditionalScript.sleep(500);
   if (document.location.href.match("https://onepunch-manga.com/manga/*")) {
     await ViewMangaChapterSection();
-  } else if (document.location.href.match("https://onepunch-manga.com")) {
+  } else if (document.location.href.match(/onepunch-manga.com(?!\/manga)/g)) {
 		await OPM_MangaHomepage();
 	}
 	await AdditionalScript.sleep(2000);
 	await AdditionalScript.waitFor(_=> document.readyState == "complete");
-	RemoveAds_onHyperlinkClickEvent();
-	await AdditionalScript.sleep(5000);
+	await RemoveAds_onHyperlinkClickEvent();
+	await AdditionalScript.sleep(500);
 	return;
 }
 
@@ -717,8 +754,7 @@ async function RemoveAds_onHyperlinkClickEvent() {
 		var ClickEventAdsRemoved_Info = {
 			"Hyperlink_GotoChapterGROUP1_Counter": 0,
 			"Hyperlink_GotoChapterGROUP2_Counter": 0,
-			"Homepage_link": "",
-			"Expandbuttonthing_button": ""
+			"OtherElements": ""
 		}
 		var RemoveAdsEventElemgroup1 = AdditionalScript.SE("ul.su-posts.su-posts-list-loop li a");
 		for (let CountedElem1 = 0; CountedElem1 < RemoveAdsEventElemgroup1.length; CountedElem1++) {
@@ -732,18 +768,41 @@ async function RemoveAds_onHyperlinkClickEvent() {
 			UsedElem.replaceWith(UsedElem.cloneNode(true));
 			ClickEventAdsRemoved_Info.Hyperlink_GotoChapterGROUP2_Counter++;
 		}
-		let Homepage_link = AdditionalScript.ISE("#menu-item-37 a");
-		let Expandbuttonthing_button = AdditionalScript.ISE(".su-expand-link.su-expand-link-more a");
+		let Homepage_btn = AdditionalScript.ISE("#menu-item-37 a");
+		let Homepage_link = AdditionalScript.ISE(".home-link");
 		Homepage_link.replaceWith(Homepage_link.cloneNode(true));
+		Homepage_btn.replaceWith(Homepage_btn.cloneNode(true));
+		let Expandbuttonthing_button = AdditionalScript.ISE(".su-expand-link.su-expand-link-more a");
 		Expandbuttonthing_button.replaceWith(Expandbuttonthing_button.cloneNode(true));
-		ClickEventAdsRemoved_Info.Homepage_link = "Element now is cleaned from nasty eventlistener.";
-		ClickEventAdsRemoved_Info.Expandbuttonthing_button = "Element now is cleaned from nasty eventlistener.";
+		let idkTextHyper = AdditionalScript.ISE(".small-text.manga-text a");
+		idkTextHyper.replaceWith(idkTextHyper.cloneNode(true));
+		let DonationButton1 = AdditionalScript.SE(".kofi-button")[0];
+		let DonationButton2 = AdditionalScript.SE(".kofi-button")[1];
+		DonationButton1.replaceWith(DonationButton1.cloneNode(true));
+		DonationButton2.replaceWith(DonationButton2.cloneNode(true));
+		ClickEventAdsRemoved_Info.OtherElements = "Both homepage button, both Donation button, and the Questionable hyperlink at the bottom is now cleaned from nasty eventlistener.\nThere\'s more actually.. But I think that\'s the only thing that is necessary";
 		await AdditionalScript.sleep(3000);
 		console.log(ClickEventAdsRemoved_Info);
 	} else if (document.location.href.match("onepunch-manga.com/manga/*")) {
-		let UsedElem = AdditionalScript.ISE("#menu-item-37 a");
-		UsedElem.replaceWith(UsedElem.cloneNode(true));
-		console.log("Homepage button now is cleaned from nasty eventlistener, Yeah that's the only thing to clean. \(I THINK\)")
+		let Homepage_btn = AdditionalScript.ISE("#menu-item-37 a");
+		let Homepage_link = AdditionalScript.ISE(".home-link");
+		Homepage_link.replaceWith(Homepage_link.cloneNode(true));
+		Homepage_btn.replaceWith(Homepage_btn.cloneNode(true));
+		let PrevBTN1 = AdditionalScript.SE(".prev-post a")[0];
+		let PrevBTN2 = AdditionalScript.SE(".prev-post a")[1];
+		let NextBTN1 = AdditionalScript.SE(".next-post a")[0];
+		let NextBTN2 = AdditionalScript.SE(".next-post a")[1];
+		PrevBTN1.replaceWith(PrevBTN1.cloneNode(true));
+		PrevBTN2.replaceWith(PrevBTN2.cloneNode(true));
+		NextBTN1.replaceWith(NextBTN1.cloneNode(true));
+		NextBTN2.replaceWith(NextBTN2.cloneNode(true));
+		let DonationButton1 = AdditionalScript.SE(".kofi-button")[0];
+		let DonationButton2 = AdditionalScript.SE(".kofi-button")[1];
+		DonationButton1.replaceWith(DonationButton1.cloneNode(true));
+		DonationButton2.replaceWith(DonationButton2.cloneNode(true));
+		let idkTextHyper = AdditionalScript.ISE(".small-text.manga-text a");
+		idkTextHyper.replaceWith(idkTextHyper.cloneNode(true));
+		console.log("Both homepage button, All ChapterNavigator Button, both Donation button, and the Questionable hyperlink at the bottom is now cleaned from nasty eventlistener.\nThere\'s more actually.. But I think that\'s the only thing that is necessary");
 	}
 }
 //=======================================================================================
