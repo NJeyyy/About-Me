@@ -27,7 +27,7 @@
   width: 21px;
   height: 100%;
   background: #ffba51;
-  left: -21px;
+  left: -20px;
   top: 0;
   position: absolute;
   z-index: 5000;
@@ -44,7 +44,7 @@
   width: 21px;
   height: 100%;
   background: #ffba51;
-  right: -21px;
+  right: -20px;
   top: 0;
   position: absolute;
   z-index: 5000;
