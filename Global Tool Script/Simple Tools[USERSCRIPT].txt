@@ -14,6 +14,7 @@
   background: bisque;
   padding: 4px;
   border-radius: 5px;
+  box-sizing: content-box !important;
 /* offset-x | offset-y | blur-radius | spread-radius | color */
   transition: bottom 200ms ease-out;
 }
