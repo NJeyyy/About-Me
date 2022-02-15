@@ -54,9 +54,10 @@
   border-bottom-right-radius: 5px;
 }
 
-/*#SimTool-Overlay[SlideOverlay="false"]:active {
+#SimTool-Overlay[SlideOverlay="false"]:active {
   filter: brightness(90%);
-}*/
+  opacity: 53%;
+}
 
 #SimTool-Overlay[SlideOverlay="false"][SlideSide="left"] {
   opacity: 40%;
