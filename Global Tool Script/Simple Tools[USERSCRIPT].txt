@@ -19,13 +19,13 @@
 }
 #SimTool-Overlay[SlideSide="right"] {
   right: 10px;
-  padding-right: 10px;
+  padding-left: 10px;
 /*border-left: solid #ffba51 21px;*/
   box-shadow: 4px 5px 7px 1px rgba(0,0,0, 45%);
   transition: right 300ms ease-out;
 }
 #SimTool-Overlay[SlideSide="right"] div#SimTool-Overlay-Grip {
-  width: 21px;
+  width: 20px;
   height: 100%;
   background: #ffba51;
   left: -16px;
@@ -37,13 +37,13 @@
 }
 #SimTool-Overlay[SlideSide="left"] {
   left: 10px;
-  padding-left: 10px;
+  padding-right: 10px;
 /*border-right: solid #ffba51 21px;*/
   box-shadow: -4px 5px 7px 1px rgba(0,0,0, 45%);
   transition: left 300ms ease-out;
 }
 #SimTool-Overlay[SlideSide="left"] div#SimTool-Overlay-Grip {
-  width: 21px;
+  width: 20px;
   height: 100%;
   background: #ffba51;
   right: -20px;
