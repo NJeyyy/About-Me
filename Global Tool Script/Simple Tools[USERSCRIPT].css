@@ -1,0 +1,75 @@
+#SimTool-Overlay [Team="SimTool-Overlay"] {
+  padding-left: 3px;
+  padding-right: 5px;
+}
+
+#SimTool-Overlay {
+  height: 30px;
+  max-height: 50px;
+  max-width: 200px;
+  z-index: 5000;
+  display: block;
+  position: fixed;
+  user-select: none;
+  background: bisque;
+  padding: 4px;
+  border-radius: 5px;
+/* offset-x | offset-y | blur-radius | spread-radius | color */
+  transition: bottom 200ms ease-out;
+}
+#SimTool-Overlay[SlideSide="right"] {
+  right: 10px;
+/*border-left: solid #ffba51 21px;*/
+  box-shadow: 4px 5px 7px 1px rgba(0,0,0, 45%);
+  transition: right 300ms ease-out;
+}
+#SimTool-Overlay[SlideSide="right"] div#SimTool-Overlay-Grip {
+  width: 21px;
+  height: 100%;
+  background: #ffba51;
+  right: -21px;
+  top: 0;
+  position: absolute;
+  z-index: 5000;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+#SimTool-Overlay[SlideSide="left"] {
+  left: 10px;
+/*border-right: solid #ffba51 21px;*/
+  box-shadow: -4px 5px 7px 1px rgba(0,0,0, 45%);
+  transition: left 300ms ease-out;
+}
+#SimTool-Overlay[SlideSide="left"] div#SimTool-Overlay-Grip {
+  width: 21px;
+  height: 100%;
+  background: #ffba51;
+  left: -21px;
+  top: 0;
+  position: absolute;
+  z-index: 5000;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+#SimTool-Overlay[SlideOverlay="false"]:active {
+  filter: brightness(90%);
+}
+
+#SimTool-Overlay[SlideOverlay="false"][SlideSide="left"] {
+  opacity: 40%;
+  transform: translateX(-95%);
+  transition: transform 400ms ease-out, opacity 350ms ease-out;
+}
+
+#SimTool-Overlay[SlideOverlay="false"][SlideSide="right"] {
+  opacity: 40%;
+  transform: translateX(85%);
+  transition: transform 400ms ease-out, opacity 350ms ease-out;
+}
+
+#SimTool-Overlay[SlideOverlay="true"] {
+  opacity: 100%;
+  transform: translateX(0);
+  transition: transform 700ms ease-in, opacity 600ms ease-in;
+}
