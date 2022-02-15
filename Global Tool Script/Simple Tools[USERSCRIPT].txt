@@ -25,10 +25,10 @@
   transition: right 300ms ease-out;
 }
 #SimTool-Overlay[SlideSide="right"] div#SimTool-Overlay-Grip {
-  width: 20px;
+  width: 27px;
   height: 100%;
   background: #ffba51;
-  left: -16px;
+  left: -24px;
   top: 0;
   position: absolute;
   z-index: 5000;
@@ -43,10 +43,10 @@
   transition: left 300ms ease-out;
 }
 #SimTool-Overlay[SlideSide="left"] div#SimTool-Overlay-Grip {
-  width: 20px;
+  width: 17px;
   height: 100%;
   background: #ffba51;
-  right: -20px;
+  right: -13px;
   top: 0;
   position: absolute;
   z-index: 5000;
@@ -60,7 +60,7 @@
 
 #SimTool-Overlay[SlideOverlay="false"][SlideSide="left"] {
   opacity: 40%;
-  transform: translateX(-95%);
+  transform: translateX(-115%);
   transition: transform 400ms ease-out, opacity 350ms ease-out;
 }
 
