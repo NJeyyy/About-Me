@@ -10,7 +10,7 @@ function GlobalToolscript_inf(command) {
     } else if (Code_list) {
       console.log("Code List:\n >function KodeNuklir(Code, Pages, Site, Command)\n >pickTextColorBasedOnBgColorSimple(bgColor, lightColor, darkColor)\n >escapeRegex(string)\n >sleep(ms)\n >waitFor(conditionFunction)\n >evil(fn)\n >copyToClipboard(text)\n >^SE(ElementSelector)    ^ISE(ElementSelector)\n");
     } else if (command.match(/Code_source/i)) {
-      console.log("GlobalToolscript source: [IN PROCESS]")
+      console.log("GlobalToolscript source: https://github.com/NJeyyy/About-Me/blob/3fc986ad01ffe01775bddff1b18d25895f486662/ToolScript_Global.txt")
     } else {
       console.error("ERROR, The command is not available!");
     }
