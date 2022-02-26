@@ -10,7 +10,7 @@ function GlobalToolscript_inf(command) {
     } else if (command.match(/Code_list/i)) {
       console.log("Code List:\n >function KodeNuklir(Code, Pages, Site, Command) -- try KodeNuklir(null, null, null, \"help\") for more information about the parameter\n >pickTextColorBasedOnBgColorSimple(bgColor, lightColor, darkColor)\n >escapeRegex(string)\n >sleep(ms)\n >waitFor(conditionFunction)\n >evil(fn)\n >copyToClipboard(text)\n >^SE(ElementSelector)    ^ISE(ElementSelector)\n");
     } else if (command.match(/Code_source/i)) {
-      console.log("GlobalToolscript source: https://github.com/NJeyyy/About-Me/blob/3fc986ad01ffe01775bddff1b18d25895f486662/ToolScript_Global.txt")
+      console.log("GlobalToolscript source: https://github.com/NJeyyy/About-Me/blob/3fc986ad01ffe01775bddff1b18d25895f486662/ToolScript_Global.txt");
     } else {
       console.error("ERROR, The command is not available!");
     }
@@ -25,13 +25,16 @@ function GlobalToolscript_inf(command) {
 function KodeNuklir(Code, Pages, Site, Command) {
   if (Command) {
     if (Command.match(/help/i)) {
-      console.log("Available command:\n -Open: Open it in new tab.\n -SiteList: Show site list that is supported.\n -CodeExplanation: It is what it said\n*YEP THAT\'S IT FOR NOW..\n**Also, FYI the cases doesn\'t matter but the text is matter!");
+      console.log("Available command:\n -Open: Open it in new tab.\n -SiteList: Show site list that is supported.\n -CodeExplanation: It is what it said\n -ParameterExplanation\n*YEP THAT\'S IT FOR NOW..\n**Also, FYI the cases doesn\'t matter but the text is matter!");
       return;
     } else if (Command.match(/SiteList/i)) {
       console.log("Site List:\n  >nhentai\n");
       return;
     } else if (Command.match(/CodeExplanation/i)) {
       console.log("CODE NUCLEAR EXPLANED\n    Soo.. the code I\m talking about is not an actual \"NUCLEAR\". But! A code for anime/comics/porn vid that is encrypted and shared online. There's several site for it but I only find few of it.. SADLY. Nuclear code can be found like this \"ABs-324\" or only 6 number. It depends on the site that is using it.");
+      return;
+    } else if (Command.match(/ParameterExplanation/i)) {
+      console.log("^Code(required): The nuclear code, ITS OBVIOUS WDYM. Also THIS must BE DEFINED this was the purpose of this function..\n^Pages(Optional): It is optional, Just describe which page are you in if this was a comic and IF available\n^Site: Not must be defined, but better be but yet not really that important if your default is nhentai.net, but if it\'t not then it is required, yes it is the site you\'re using the code for\n^Command: Just some extras for this, enter \"help\" in this parameter for the code list and more information!");
       return;
     }
   }
@@ -48,6 +51,9 @@ function KodeNuklir(Code, Pages, Site, Command) {
   }
   if (Command.match(/Open/i)) {
     window.open(URLz,'_blank');
+  }
+  if (Command) {
+    console.error("Looks like you're insert a command that\'s not exist.")
   }
   return URLz;
 }
