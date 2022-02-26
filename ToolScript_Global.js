@@ -25,7 +25,7 @@ function GlobalToolscript_inf(command) {
 function KodeNuklir(Code, Pages, Site, Command) {
   if (Command) {
     if (Command.match(/help/i)) {
-      console.log("Available command:\n -Open: Open it in new tab.\n -SiteList: Show site list that is supported.\n -CodeExplanation: It is what it said\n -ParameterExplanation\n*YEP THAT\'S IT FOR NOW..\n**Also, FYI the cases doesn\'t matter but the text is matter!");
+      console.log("Available command:\n -Open: Open it in new tab.\n -SiteList: Show list of site that is supported.\n -CodeExplanation: It is what it said\n -ParameterExplanation\n*YEP THAT\'S IT FOR NOW..\n**Also, FYI the cases doesn\'t matter but the text is matter!");
       return;
     } else if (Command.match(/SiteList/i)) {
       console.log("Site List:\n  >nhentai\n");
@@ -39,7 +39,7 @@ function KodeNuklir(Code, Pages, Site, Command) {
     }
   }
   
-  var URLz;
+  var URLz = null;
   if (!Site) {
     URLz = "https://nhentai.net/g/";
   } else if (Site.match(/nhentai/i)) {
@@ -55,7 +55,11 @@ function KodeNuklir(Code, Pages, Site, Command) {
   if (Command) {
     console.error("Looks like you're insert a command that\'s not exist.")
   }
-  return URLz;
+  if (Code) {
+    return URLz;
+  } else {
+    console.error("Looks like you didn't put the code huh?");
+  }
 }
 
 
