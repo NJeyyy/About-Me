@@ -8,7 +8,7 @@ function GlobalToolscript_inf(command) {
       console.log("Command list:\n >help -- Show Command list\n >Code_list -- Show code list of GlobalToolscript\n >Code_source -- Show URL/Link of the code source(blob) cannot be turned into raw, sadly. If you want to that, better just copy permalink from the source first");
       return;
     } else if (command.match(/Code_list/i)) {
-      console.log("Code List:\n >function KodeNuklir(Code, Pages, Site, Command) -- try KodeNuklir(null, null, null, "help") for more information about the parameter\n >pickTextColorBasedOnBgColorSimple(bgColor, lightColor, darkColor)\n >escapeRegex(string)\n >sleep(ms)\n >waitFor(conditionFunction)\n >evil(fn)\n >copyToClipboard(text)\n >^SE(ElementSelector)    ^ISE(ElementSelector)\n");
+      console.log("Code List:\n >function KodeNuklir(Code, Pages, Site, Command) -- try KodeNuklir(null, null, null, \"help\") for more information about the parameter\n >pickTextColorBasedOnBgColorSimple(bgColor, lightColor, darkColor)\n >escapeRegex(string)\n >sleep(ms)\n >waitFor(conditionFunction)\n >evil(fn)\n >copyToClipboard(text)\n >^SE(ElementSelector)    ^ISE(ElementSelector)\n");
     } else if (command.match(/Code_source/i)) {
       console.log("GlobalToolscript source: https://github.com/NJeyyy/About-Me/blob/3fc986ad01ffe01775bddff1b18d25895f486662/ToolScript_Global.txt")
     } else {
