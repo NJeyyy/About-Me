@@ -1,0 +1,150 @@
+//Created on Saturday, 26 Feb 2022 [07:55PM] | Perum Mega Sentul Jl. Bougenville IX Kota Bogor, Indonesia
+// CODE LANGUAGE IS IN JS aka JAVASCRIPT, but the file is .txt because I use this in userscript @resource and just so I could got the code by extracting it easily
+
+//######################################################################################################################################
+function GlobalToolscript_inf(command) {
+  if (command) {
+    if (command.match(/help/i)) {
+      console.log("Command list:\n >help -- Show Command list\n >Code_list -- Show code list of GlobalToolscript\n >Code_source -- Show URL/Link of the code source(blob)");
+      return;
+    } else if (Code_list) {
+      console.log("Code List:\n >function KodeNuklir(Code, Pages, Site, Command)\n >pickTextColorBasedOnBgColorSimple(bgColor, lightColor, darkColor)\n >escapeRegex(string)\n >sleep(ms)\n >waitFor(conditionFunction)\n >evil(fn)\n >copyToClipboard(text)\n >^SE(ElementSelector)    ^ISE(ElementSelector)\n");
+    } else if (command.match(/Code_source/i)) {
+      console.log("GlobalToolscript source: [IN PROCESS]")
+    } else {
+      console.error("ERROR, The command is not available!");
+    }
+  } else if (!command) {
+    console.error("there's no command!\n*try GlobalToolscript_inf(\"help\")!");
+  }
+  return;
+}
+//---------------------------------------------------------------------------------------------------------------------------------------------------
+// Source: .. WHAT?? You think I got this from "SOMEONE"XD.. LOL so Innocence, of course not. Beside, this is still lacking a lot of stuff~
+// Buat buka kode nuklir:P BIAR GAMPANG AE
+function KodeNuklir(Code, Pages, Site, Command) {
+  if (Command) {
+    if (Command.match(/help/i)) {
+      console.log("Available command:\n -Open: Open it in new tab.\n -SiteList: Show site list that is supported.\n -CodeExplanation: It is what it said\n*YEP THAT\'S IT FOR NOW..\n**Also, FYI the cases doesn\'t matter but the text is matter!");
+      return;
+    } else if (Command.match(/SiteList/i)) {
+      console.log("Site List:\n  >nhentai\n");
+      return;
+    } else if (Command.match(/CodeExplanation/i)) {
+      console.log("CODE NUCLEAR EXPLANED\n    Soo.. the code I\m talking about is not an actual \"NUCLEAR\". But! A code for anime/comics/porn vid that is encrypted and shared online. There's several site for it but I only find few of it.. SADLY. Nuclear code can be found like this \"ABs-324\" or only 6 number. It depends on the site that is using it.");
+      return;
+    }
+  }
+  
+  var URLz;
+  if (!Site) {
+    URLz = "https://nhentai.net/g/";
+  } else if (Site.match(/nhentai/i)) {
+    URLz = "https://nhentai.net/g/";
+  }
+  URLz += Code;
+  if (Pages) {
+    URLz += "/" + Pages;
+  }
+  if (Command.match(/Open/i)) {
+    window.open(URLz,'_blank');
+  }
+  return URLz;
+}
+
+
+
+// Source: https://stackoverflow.com/a/41491220/15715476
+// The name of the function, already explain it all
+function pickTextColorBasedOnBgColorSimple(bgColor, lightColor, darkColor) {
+  var color = (bgColor.charAt(0) === '#') ? bgColor.substring(1, 7) : bgColor;
+  var r = parseInt(color.substring(0, 2), 16); // hexToR
+  var g = parseInt(color.substring(2, 4), 16); // hexToG
+  var b = parseInt(color.substring(4, 6), 16); // hexToB
+  return (((r * 0.299) + (g * 0.587) + (b * 0.114)) > 186) ?
+    darkColor : lightColor;
+}
+
+
+
+// Source: https://stackoverflow.com/a/3561711/15715476
+// Escape (with blackslash) special characters that have purpose to use in regex
+function escapeRegex(string) {
+    return string.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+}
+
+
+
+// Source: https://stackoverflow.com/a/39914235/15715476
+// use "sleep(N)" to use this function, it is useful to wait for certain time.
+// btw just FYI "N"mean the time you needed, it is in ms btw so-- 1 sec mean 1000 miliseconds
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+
+
+// Source: https://stackoverflow.com/a/52652681/15715476
+// use waitFor(conditionFunction) to wait for a certain condition to met.
+//** Example:
+//* >Example 1
+//  async function demo() {
+//    await waitFor(_ => flag === true);
+//    console.log('the wait is over!');
+//  }
+//* Or
+//* >Example 2
+//  waitFor(_ => flag === true)
+//    .then(_ => console.log('the wait is over!'));
+//* 
+//*
+// Note: Yes. It must use "_ => " at the start. Cannot explain it since I don't know too rnXD
+function waitFor(conditionFunction) {
+  const poll = resolve => {
+    if(conditionFunction()) resolve();
+    else setTimeout(_ => poll(resolve), 400);
+  }
+  return new Promise(poll);
+}
+
+
+
+// Source: https://stackoverflow.com/a/18082175/15715476
+// For Counting a string. Similar to Eval() I.. literally don't know what's the difference rn btw..
+function evil(fn) {
+  return new Function('return ' + fn)();
+}
+
+
+
+// Source: https://stackoverflow.com/questions/400212/how-do-i-copy-to-the-clipboard-in-javascript
+// Copy Text. or things, to clipboard.
+function copyToClipboard(text) {
+   const elem = document.createElement('textarea');
+   elem.value = text;
+   document.body.appendChild(elem);
+   elem.select();
+   document.execCommand('copy');
+   document.body.removeChild(elem);
+}
+
+
+
+// Source: Myself HAHA
+// Select Element by ElementSelector just like CSS. It's use "document.querySelector" (Individual Element) or "document.querySelectorAll" (Multiple Element).
+// Depends on how you use it!
+//---Grouping Mode
+function SE(ElementSelector) {
+  if (document.querySelectorAll(ElementSelector).length === 0) {
+    return null;
+  }
+  return document.querySelectorAll(ElementSelector);
+}
+//---Individually Mode
+function ISE(ElementSelector) {
+  return document.querySelector(ElementSelector);
+}
+
+
+
+//=============================================================================      =====================================================================================
