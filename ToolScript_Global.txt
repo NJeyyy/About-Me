@@ -5,7 +5,7 @@
 function GlobalToolscript_inf(command) {
   if (command) {
     if (command.match(/help/i)) {
-      console.log("Command list:\n >help -- Show Command list\n >Code_list -- Show code list of GlobalToolscript\n >Code_source -- Show URL/Link of the code source(blob)");
+      console.log("Command list:\n >help -- Show Command list\n >Code_list -- Show code list of GlobalToolscript\n >Code_source -- Show URL/Link of the code source(blob) cannot be turned into raw, sadly. If you want to that, might just copy permalink from the source first");
       return;
     } else if (Code_list) {
       console.log("Code List:\n >function KodeNuklir(Code, Pages, Site, Command)\n >pickTextColorBasedOnBgColorSimple(bgColor, lightColor, darkColor)\n >escapeRegex(string)\n >sleep(ms)\n >waitFor(conditionFunction)\n >evil(fn)\n >copyToClipboard(text)\n >^SE(ElementSelector)    ^ISE(ElementSelector)\n");
