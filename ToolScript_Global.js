@@ -38,6 +38,7 @@ function KodeNuklir(Code, Pages, Site, Command) {
       return;
     }
   }
+  var cmdest = null;
   
   var URLz = null;
   if (!Site) {
@@ -49,10 +50,11 @@ function KodeNuklir(Code, Pages, Site, Command) {
   if (Pages) {
     URLz += "/" + Pages;
   }
-  if (Command.match(/Open/i)) {
-    window.open(URLz,'_blank');
+  if (Command && Command.match(/Open/i)) {
+      window.open(URLz,'_blank');
+      cmdest = true;
   }
-  if (Command) {
+  if (Command && cmdest == null) {
     console.error("Looks like you're insert a command that\'s not exist.")
   }
   if (Code) {
