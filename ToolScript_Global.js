@@ -55,7 +55,7 @@ function KodeNuklir(Code, Pages, Site, Command) {
       cmdest = true;
   }
   if (Command && cmdest == null) {
-    console.error("Looks like you're insert a command that\'s not exist.")
+    console.error("Looks like you insert a command that\'s not exist.")
   }
   if (Code) {
     return URLz;
