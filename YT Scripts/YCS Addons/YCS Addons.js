@@ -3,7 +3,7 @@
 // @namespace        YCS_Addons
 // @homepageURL      https://github.com/NJeyyy/About-Me/tree/Userscripts/YT%20Scripts/YCS%20Addons
 // @supportURL       https://github.com/NJeyyy/About-Me/blob/Userscripts/YT%20Scripts/YCS%20Addons/Logs.log
-// @version          4.5.2
+// @version          5.2.01032022
 // @description      Various optional function for the YCS Extension!
 // @author           NJ1n9
 // @match            https://www.youtube.com/*
@@ -363,67 +363,55 @@ async function AddmoreButtonFunctionality() {
             console.error("%c01000101501010010501010010501001111501010010500100001500100000501010100501101000501100101501110010501100101500100111501110011500100000501101110501101111500100000501100011501101111501101101501101101501100101501101110501110100500100000501100110501101111501110101501101110501100100500100000501110111501101001501110100501101000500100000501110100501101000501100101500100000501101101501100001501110100501100011501101000501100101501100100500100000501110100501101001501101101501100101501110011501110100501100001501101101501110000500101110", CStyle);
             ISE("label#YCS_TimestampMatchResult").innerHTML = "";
           } else if (SearchInput && SearchInput.match(/([0-9]+:)?[0-9]+:[0-9]+/gi)){
-            let regexTOyk = new RegExp(".*(?<![0-9])" + SearchInput + "([0-9])?(\\s+)?.*(\\s+)?(.*)?", "gm");
-            var a = ISE("#ycs-search-result #ycs_wrap_comments").textContent.match(regexTOyk);
-            var d = [];
-            if (a) {
-              console.groupCollapsed("element with the matched timestamp[" + SearchInput + "] founded in:");
-              /*for (let i = 0; i < a.length; i++) { // Just checking the result..
-                let CheckMatchedTimestamp = a[i].match(/[0-9]?[A-z]/g);
-                if (!CheckMatchedTimestamp) {
-                  let MultiAddline = "(.*)?\n(.*)?";
-                  ac = a[i].match(/\S.*[0-z](\s)?/);
-                  b = new RegExp("(?<![0-9])" + ac[0] + ab, "gm");
-                  bc = ISE("#ycs-search-result #ycs_allsearch__wrap_comments").textContent.match(b)
-                  cd = bc[0].match(/[0-9]?[A-z]/)
-                  ab = "(.*)?\n(.*)?"
-                  a = "   0:40 "
-                  ac = a.match(/\S.*[0-z](\s)?/)
-                  b = new RegExp("(?<![0-9])" + ac[0] + ab, "gm");
-                  bc = ISE("#ycs-search-result #ycs_allsearch__wrap_comments").textContent.match(b)
-                  while (!cd) {
-                    ab += "\n(.*)?"
-                    b = new RegExp(".*(?<![0-9])" +ac[0] + ab, "gm");
-                    bc = c.match(b)
-                    cd = bc[0].match(new RegExp(ac[0] + "[0-z]"));
-                    console.count("AHAHAHAHAHA");
-                  }
-                  a.splice(i, 1, bc)
-                }
-              }*/
-              for (let i = 0; i < a.length; i++) {
-                var b = a[i].match(/\S.*[0-z]/g);
-                let c = new RegExp(escapeRegex(b[0]));
-                for (let i = 0; i < SE("#ycs-search-result #ycs_allsearch__wrap_comments #ycs_wrap_comments .ycs-render-comment").length; i++) {
-                  if (SE("#ycs-search-result #ycs_wrap_comments .ycs-render-comment")[i].querySelector("div.ycs-comment__main-text").textContent.innerText.match(c)) {
-                    //alert(toString(SE("#ycs-search-result #ycs_allsearch__wrap_comments #ycs_wrap_comments .ycs-render-comment")[i]));
-                    console.log("index of " + i);
-                    d.push(SE("#ycs-search-result #ycs_allsearch__wrap_comments #ycs_wrap_comments .ycs-render-comment")[i]);
+            var regexTOyk = new RegExp(".*(?<![0-9])" + SearchInput + "([0-9])?(\\s+)?.*(\\s+)?(.*)?", "gm");
+            //var a = ISE("#ycs-search-result #ycs_wrap_comments").textContent.match(regexTOyk);
+            var a__data = {
+              "Index": {
+                "Included": [],
+                "Excluded": []
+              },
+              "Matched_Comment": [],
+              "Excluded_Comment": []
+            }
+            for (var i0 = 0; i0 < SE("#ycs-search-result #ycs_allsearch__wrap_comments div.ycs-render-comment").length; i0++) {
+              if (SE("#ycs-search-result #ycs_allsearch__wrap_comments div.ycs-render-comment")[i0].querySelector(".ycs-comment__main-text").textContent.match(regexTOyk)) {
+                let iN = i0 + 1;
+                a__data["Matched_Comment"].push(SE("#ycs-search-result #ycs_allsearch__wrap_comments div.ycs-render-comment")[i0]);
+                a__data["Index"]["Included"].push(iN);
+              } else {
+                let iN = i0 + 1;
+                a__data["Excluded_Comment"].push(SE("#ycs-search-result #ycs_allsearch__wrap_comments div.ycs-render-comment")[i0]);
+                a__data["Index"]["Excluded"].push(iN);
+                //console.log("index of ["+ i +"] EXLUDED!!");
+                //console.log(SE("#ycs-search-result #ycs_allsearch__wrap_comments div.ycs-render-comment")[i].querySelector(".ycs-comment__main-text").textContent);
+              }
+            }
+            if (a__data && a__data["Matched_Comment"].length != 0) {
+              console.groupCollapsed("comment(s) with the matched timestamp[" + SearchInput + "] founded data:");
+              if (a__data["Matched_Comment"].length != 0) {
+                for (var iElem1 = 0; iElem1 < a__data["Matched_Comment"].length; iElem1++) {
+                  if (!a__data["Matched_Comment"][iElem1].classList.contains("Absolutematch_yttimestamp")) {
+                    a__data["Matched_Comment"][iElem1].classList.add("Absolutematch_yttimestamp");
                   }
                 }
               }
-              console.log(d);
+              if (a__data["Matched_Comment"].length != 0 && SE(".Absolutematch_yttimestamp")) {
+                for (let iElem2 = 0; iElem2 < SE(".Absolutematch_yttimestamp").length; iElem2++) {
+                  ISE("#ycs_wrap_comments").prepend(SE(".Absolutematch_yttimestamp")[iElem2]);
+                }
+              }
+              console.log("Index that is matched to the timestamp: " + a__data["Index"]["Included"].join(", "));
+              console.log("Index that is excluded because it doesnt match with the wanted timestamp: " + a__data["Index"]["Excluded"].join(", "));
+              console.log(a__data);
               console.groupEnd();
-              ISE("label#YCS_TimestampMatchResult").innerHTML = "Comment with timestamp match found: " + d.length;
-            } else if (!a) {
+              ISE("label#YCS_TimestampMatchResult").innerHTML = "Comment with timestamp match found: " + a__data["Matched_Comment"].length;
+            } else if (a__data && a__data["Matched_Comment"].length == 0 || !a__data) {
               console.error("NOT FOUND!");
               ISE("label#YCS_TimestampMatchResult").style.color = "red";
               ISE("label#YCS_TimestampMatchResult").innerHTML = "There\'s no matched timestamp.'"
               return null;
-            }
-            
-            if (d.length != 0) {
-              for (let i = 0; i < d.length; i++) {
-                if (!d[i].classList.contains("Absolutematch_yttimestamp")) {
-                  d[i].classList.add("Absolutematch_yttimestamp");
-                }
-              }
-            }
-            
-            if (d.length != 0 && SE(".Absolutematch_yttimestamp")) {
-              for (let iz = 0; iz < SE(".Absolutematch_yttimestamp").length; iz++) {
-                ISE("#ycs_wrap_comments").prepend(SE(".Absolutematch_yttimestamp")[iz]);
-              }
+            } else {
+              console.error(a__data);
             }
           } else {
             console.log("You're not searching a timestamp!");
