@@ -2,8 +2,8 @@
 - 👀 I’m interested in Coding, but not really :P I more interested on traveling tbh
 - 💻 I'm somekind of understand HTML, CSS, Batch.. But not really because there's more to learn
 - 🌱 I’m currently learning JavaScript(+Userscript) right now
-- 🤍 I’m looking to collaborate on <strong>NOTHING</strong>, I need a lot of free time soo..
-- 📫 How to reach me: I'm not comfortable sharing my media social to stranger so.. 😛
+- 🤍 I’m looking to collaborate on I think anything as long the language is the one that I understand, But after I finish my homework lol
+- 📫 How to reach me: I'm not comfortable sharing my media social to stranger and wanted to keep it private😛, but you could DM me in twitter [@zifebort](https://twitter.com/zifebort)
 
 Btw.. I respect you're time reading this so..
 HERE SOME CUTE PICTURE FROM UNSPLASH!!🥰😃👏
