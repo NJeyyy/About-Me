@@ -161,4 +161,23 @@ ______________________________________________________________________________
 ============================================================
 
 ______________________________________________________________________________
+||05:16 PM 08/Mar03/2022 (v5.4.08032022)
+Note: Srry for a long TIME not updating lp:P yknow how lazy i am to log it and describe thing here.. SKSKSKKSKSKSKS
+Note2: The changelog also available in the userscript history in this repo btw
+> will go to top of page when blurred with shortcut, but only if it's not in overlay mode
+> If the search input blank and the user press enter It's gonna clear the comment result and unfocus the search field immediately (changed to 'keyup' from 'search' eventType)
+> Add physical function (just adding more button)
+ -Change Behaviour:
+  + Button: Go to Top of page --> now right-click for the document and left-click for the search-result
+ -NEW Button added:
+  + Toggle search input filter: timestamp matching
+  + Toggle button: Pause video when search input focused
+  + Toggle button: Unfocus text automatically in specified time after user enter it
+  + Button: Switch YCS-Box mode
+> Add YCS element box various theme to make it much more convenient (Overlay, Simple Overlay, Default)
+> Show what text being search (toggle-state specified by the text or the button filter)
+> Move the 'YCSSTARTER' function for the userscript to the top
+> Add NEW feature: Show what text being searched below the input-element
+============================================================
+______________________________________________________________________________
 Add another log here please😄
