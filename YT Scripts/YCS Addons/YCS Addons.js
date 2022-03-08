@@ -3,7 +3,7 @@
 // @namespace        YCS_Addons
 // @homepageURL      https://github.com/NJeyyy/About-Me/tree/Userscripts/YT%20Scripts/YCS%20Addons
 // @supportURL       https://github.com/NJeyyy/About-Me/blob/Userscripts/YT%20Scripts/YCS%20Addons/Logs.log
-// @version          5.3.02032022
+// @version          5.4.08032022
 // @description      Various optional function for the YCS Extension!
 // @author           NJ1n9
 // @match            https://www.youtube.com/*
@@ -29,12 +29,13 @@
 
 
 //||~~~~~~~~~~~~USERSCRIPT REQUIREMENTS~~~~~~~~~~~~~~~~~~~~~~~~~~~||\\
+/*
 // >Custom Addition ToolScript
 // >FontIcon Script
 // >Optional EventListener
 //[NOTE!! You can insert the code below here too since this is from "Custom Addition ToolScript"]
 // Above this line (Or just.. use @require)
-//=================================================================================================================
+//=================================================================================================================*/
 //STARTER
 //sessionStorage.setItem("AlreadyRUN_YCSoptionalfunction", "false");
 
@@ -96,7 +97,7 @@ async function YCSSTARTER() {
   await sleep(90);
   if (window.location.href.match("www.youtube.com\/watch*")) {
     document.addEventListener('keyup', doc_keyUp, false);
-    document.getElementById("ycs-input-search").addEventListener('search', SearchValueCLEAR);
+    document.getElementById("ycs-input-search").addEventListener('keyup', SearchValueCLEAR);
     await sleep(70);
     if (!ISE("#YCS_SearchTextPreview")) {
       await waitFor(_ => document.visibilityState == 'visible');
@@ -112,6 +113,10 @@ async function YCSSTARTER() {
     if (document.getElementById('ycs-input-search').getAttribute("type") != "search") {
       document.getElementById('ycs-input-search').setAttribute("type", "search");
     }
+    document.getElementById("ycs-input-search").addEventListener("blur", function() {
+      //await sleep(300);
+      document.getSelection().removeAllRanges();
+    });
     ISE("ytd-app").focus();
     console.log("The Script is running.");
   } else {
@@ -364,88 +369,91 @@ async function AddmoreButtonFunctionality() {
           console.error("%c01000101501010010501010010501001111501010010500100001500100000501010100501101000501100101501110010501100101500100111501110011500100000501101110501101111500100000501100011501101111501101101501101101501100101501101110501110100500100000501100110501101111501110101501101110501100100500100000501110111501101001501110100501101000500100000501110100501101000501100101500100000501101101501100001501110100501100011501101000501100101501100100500100000501110100501101001501101101501100101501110011501110100501100001501101101501110000500101110", CStyle);
           ISE("label#YCS_TimestampMatchResult").innerHTML = "";
         } else if (SearchInput && SearchInput.match(/([0-9]+:)?[0-9]+:[0-9]+/gi)){
-          var regexTOyk = new RegExp(".*(?<![1-9])" + SearchInput + "([0-9])?(\\s+)?.*(\\s+)?(.*)?", "gm");
-          //var a = ISE("#ycs-search-result #ycs_wrap_comments").textContent.match(regexTOyk);
-          var a__data = {
-            "Index": {
-              "Included": [],
-              "Excluded": []
-            },
-            "Matched_Comment": [],
-            "Excluded_Comment": []
-          }
-          for (var i0 = 0; i0 < SE("#ycs-search-result #ycs_allsearch__wrap_comments div.ycs-render-comment").length; i0++) {
-            if (SE("#ycs-search-result #ycs_allsearch__wrap_comments div.ycs-render-comment")[i0].querySelector(".ycs-comment__main-text").textContent.match(regexTOyk) && SE("#ycs-search-result #ycs_allsearch__wrap_comments div.ycs-render-comment")[i0].querySelector("a.ycs-gotochat-video[href]")) {
-              if (SE("#ycs-search-result #ycs_allsearch__wrap_comments div.ycs-render-comment")[i0].querySelectorAll("a.ycs-gotochat-video[href]").length > 1) {
-                for (var i1 = 0; i1 < SE("#ycs-search-result #ycs_allsearch__wrap_comments div.ycs-render-comment")[i0].querySelectorAll("a.ycs-gotochat-video[href]").length; i1++) {
-                  if (SE("#ycs-search-result #ycs_allsearch__wrap_comments div.ycs-render-comment")[i0].querySelectorAll("a.ycs-gotochat-video[href]")[i1].textContent.match(regexTOyk)) {
-                    //dosmaskja
+          if (SE("#ycs-search-result #ycs_wrap_comments div.ycs-render-comment")) {
+            var regexTOyk = new RegExp(".*(?<![1-9])" + SearchInput + "([0-9])?(\\s+)?.*(\\s+)?(.*)?", "gm");
+            //var a = ISE("#ycs-search-result #ycs_wrap_comments").textContent.match(regexTOyk);
+            var a__data = {
+              "Index": {
+                "Included": [],
+                "Excluded": []
+              },
+              "Matched_Comment": [],
+              "Excluded_Comment": []
+            }
+            for (var i0 = 0; i0 < SE("#ycs-search-result #ycs_wrap_comments div.ycs-render-comment").length; i0++) {
+              if (SE("#ycs-search-result #ycs_wrap_comments div.ycs-render-comment")[i0].querySelector(".ycs-comment__main-text").textContent.match(regexTOyk) && SE("#ycs-search-result #ycs_wrap_comments div.ycs-render-comment")[i0].querySelector("a.ycs-gotochat-video[href]")) {
+                if (SE("#ycs-search-result #ycs_wrap_comments div.ycs-render-comment")[i0].querySelectorAll("a.ycs-gotochat-video[href]").length > 1) {
+                  for (var i1 = 0; i1 < SE("#ycs-search-result #ycs_wrap_comments div.ycs-render-comment")[i0].querySelectorAll("a.ycs-gotochat-video[href]").length; i1++) {
+                    if (SE("#ycs-search-result #ycs_wrap_comments div.ycs-render-comment")[i0].querySelectorAll("a.ycs-gotochat-video[href]")[i1].textContent.match(regexTOyk)) {
+                      let iN = i0 + 1;
+                      a__data["Matched_Comment"].push(SE("#ycs-search-result #ycs_wrap_comments div.ycs-render-comment")[i0]);
+                      a__data["Index"]["Included"].push(iN);
+                      break;
+                    }
+                    let max_check = SE("#ycs-search-result #ycs_wrap_comments div.ycs-render-comment")[1].querySelectorAll("a.ycs-gotochat-video[href]").length - 1;
+                    if (i1 == max_check) {
+                      let iN = i0 + 1;
+                      a__data["Excluded_Comment"].push(SE("#ycs-search-result #ycs_wrap_comments div.ycs-render-comment")[i0]);
+                      a__data["Index"]["Excluded"].push(iN);
+                      break;
+                    }
+                  }
+                } else if (SE("#ycs-search-result #ycs_wrap_comments div.ycs-render-comment")[i0].querySelectorAll("a.ycs-gotochat-video[href]").length == 1) {
+                  if (SE("#ycs-search-result #ycs_wrap_comments div.ycs-render-comment")[i0].querySelectorAll("a.ycs-gotochat-video[href]")[0].textContent.match(regexTOyk)) {
                     let iN = i0 + 1;
-                    a__data["Matched_Comment"].push(SE("#ycs-search-result #ycs_allsearch__wrap_comments div.ycs-render-comment")[i0]);
+                    a__data["Matched_Comment"].push(SE("#ycs-search-result #ycs_wrap_comments div.ycs-render-comment")[i0]);
                     a__data["Index"]["Included"].push(iN);
-                    break;
-                  }
-                  let max_check = SE("#ycs-search-result #ycs_allsearch__wrap_comments div.ycs-render-comment")[1].querySelectorAll("a.ycs-gotochat-video[href]").length - 1;
-                  if (i1 == max_check) {
+                  } else {
                     let iN = i0 + 1;
-                    a__data["Excluded_Comment"].push(SE("#ycs-search-result #ycs_allsearch__wrap_comments div.ycs-render-comment")[i0]);
+                    a__data["Excluded_Comment"].push(SE("#ycs-search-result #ycs_wrap_comments div.ycs-render-comment")[i0]);
                     a__data["Index"]["Excluded"].push(iN);
-                    break;
                   }
                 }
-              } else if (SE("#ycs-search-result #ycs_allsearch__wrap_comments div.ycs-render-comment")[i0].querySelectorAll("a.ycs-gotochat-video[href]").length == 1) {
-                if (SE("#ycs-search-result #ycs_allsearch__wrap_comments div.ycs-render-comment")[i0].querySelectorAll("a.ycs-gotochat-video[href]")[0].textContent.match(regexTOyk)) {
-                  let iN = i0 + 1;
-                  a__data["Matched_Comment"].push(SE("#ycs-search-result #ycs_allsearch__wrap_comments div.ycs-render-comment")[i0]);
-                  a__data["Index"]["Included"].push(iN);
-                } else {
-                  let iN = i0 + 1;
-                  a__data["Excluded_Comment"].push(SE("#ycs-search-result #ycs_allsearch__wrap_comments div.ycs-render-comment")[i0]);
-                  a__data["Index"]["Excluded"].push(iN);
+              } else {
+                let iN = i0 + 1;
+                a__data["Excluded_Comment"].push(SE("#ycs-search-result #ycs_wrap_comments div.ycs-render-comment")[i0]);
+                a__data["Index"]["Excluded"].push(iN);
+                //console.log("index of ["+ i +"] EXLUDED!!");
+                //console.log(SE("#ycs-search-result #ycs_allsearch__wrap_comments div.ycs-render-comment")[i].querySelector(".ycs-comment__main-text").textContent);
+              }
+            }
+            if (a__data && a__data["Matched_Comment"].length != 0) {
+              console.groupCollapsed("comment(s) with the matched timestamp [" + SearchInput + "] founded data:");
+              if (a__data["Matched_Comment"].length != 0) {
+                for (var iElem1 = 0; iElem1 < a__data["Matched_Comment"].length; iElem1++) {
+                  if (!a__data["Matched_Comment"][iElem1].classList.contains("Absolutematch_yttimestamp")) {
+                    a__data["Matched_Comment"][iElem1].classList.add("Absolutematch_yttimestamp");
+                  }
                 }
               }
+              if (a__data["Matched_Comment"].length != 0 && SE(".Absolutematch_yttimestamp")) {
+                for (let iElem2 = 0; iElem2 < SE(".Absolutematch_yttimestamp").length; iElem2++) {
+                  ISE("#ycs_wrap_comments").prepend(SE(".Absolutematch_yttimestamp")[iElem2]);
+                }
+              }
+              console.log("Index that\'s match the specified timestamp: " + a__data["Index"]["Included"].join(", "));
+              if (a__data["Index"]["Excluded"].length != 0) {
+                console.log("Index that\'s excluded--doesnt match the specified timestamp: " + a__data["Index"]["Excluded"].join(", "));
+              } else if (a__data["Index"]["Excluded"].length == 0) {
+                console.log("Index that\'s excluded--doesnt match the specified timestamp: All comment is match the timestamp, nothing excluded");
+              }
+              console.log(a__data);
+              console.groupEnd();
+              if (a__data["Index"]["Excluded"].length != 0) {
+                ISE("label#YCS_TimestampMatchResult").innerHTML = "Comment with timestamp match found: " + a__data["Matched_Comment"].length;
+              } else if (a__data["Index"]["Excluded"].length == 0) {
+                ISE("label#YCS_TimestampMatchResult").innerHTML = "Comment with timestamp match found: All";
+              }
+            } else if (a__data && a__data["Matched_Comment"].length == 0 || !a__data) {
+              console.error("NOT FOUND!");
+              ISE("label#YCS_TimestampMatchResult").style.color = "red";
+              ISE("label#YCS_TimestampMatchResult").innerHTML = "There\'s no matched timestamp.";
+              return null;
             } else {
-              let iN = i0 + 1;
-              a__data["Excluded_Comment"].push(SE("#ycs-search-result #ycs_allsearch__wrap_comments div.ycs-render-comment")[i0]);
-              a__data["Index"]["Excluded"].push(iN);
-              //console.log("index of ["+ i +"] EXLUDED!!");
-              //console.log(SE("#ycs-search-result #ycs_allsearch__wrap_comments div.ycs-render-comment")[i].querySelector(".ycs-comment__main-text").textContent);
+              console.error(a__data);
             }
-          }
-          if (a__data && a__data["Matched_Comment"].length != 0) {
-            console.groupCollapsed("comment(s) with the matched timestamp [" + SearchInput + "] founded data:");
-            if (a__data["Matched_Comment"].length != 0) {
-              for (var iElem1 = 0; iElem1 < a__data["Matched_Comment"].length; iElem1++) {
-                if (!a__data["Matched_Comment"][iElem1].classList.contains("Absolutematch_yttimestamp")) {
-                  a__data["Matched_Comment"][iElem1].classList.add("Absolutematch_yttimestamp");
-                }
-              }
-            }
-            if (a__data["Matched_Comment"].length != 0 && SE(".Absolutematch_yttimestamp")) {
-              for (let iElem2 = 0; iElem2 < SE(".Absolutematch_yttimestamp").length; iElem2++) {
-                ISE("#ycs_wrap_comments").prepend(SE(".Absolutematch_yttimestamp")[iElem2]);
-              }
-            }
-            console.log("Index that\'s match the specified timestamp: " + a__data["Index"]["Included"].join(", "));
-            if (a__data["Index"]["Excluded"].length != 0) {
-              console.log("Index that\'s excluded--doesnt match the specified timestamp: " + a__data["Index"]["Excluded"].join(", "));
-            } else if (a__data["Index"]["Excluded"].length == 0) {
-              console.log("Index that\'s excluded--doesnt match the specified timestamp: All comment is match the timestamp, nothing excluded");
-            }
-            console.log(a__data);
-            console.groupEnd();
-            if (a__data["Index"]["Excluded"].length != 0) {
-              ISE("label#YCS_TimestampMatchResult").innerHTML = "Comment with timestamp match found: " + a__data["Matched_Comment"].length;
-            } else if (a__data["Index"]["Excluded"].length == 0) {
-              ISE("label#YCS_TimestampMatchResult").innerHTML = "Comment with timestamp match found: All";
-            }
-          } else if (a__data && a__data["Matched_Comment"].length == 0 || !a__data) {
-            console.error("NOT FOUND!");
-            ISE("label#YCS_TimestampMatchResult").style.color = "red";
-            ISE("label#YCS_TimestampMatchResult").innerHTML = "There\'s no matched timestamp."
-            return null;
           } else {
-            console.error(a__data);
+            ISE("label#YCS_TimestampMatchResult").innerHTML = "There\'s no matched timestamp nor comment available";
           }
         } else {
           console.log("You're not searching a timestamp!");
@@ -468,7 +476,7 @@ async function AddmoreButtonFunctionality() {
       ISE("#ycs_btn_clear").addEventListener("click", ClearResult);
       ISE('.Checkbox_SearchAddons#FindMatchedTimeStamps input[type="checkbox"]').addEventListener("change", async function() {
         if (ISE('.Checkbox_SearchAddons#FindMatchedTimeStamps input[type="checkbox"]').checked) {
-          document.getElementById("ycs-input-search").addEventListener("search", FindComment_TimeStamps);
+          document.getElementById("ycs-input-search").addEventListener("keyup", FindComment_TimeStamps);
           ISE("#ycs_btn_search").addEventListener("click", FindComment_TimeStamps);
           await GM.setValue("YCSADDONS_YTMatchedTimeStamp", true);
           console.log("ON");
@@ -477,7 +485,7 @@ async function AddmoreButtonFunctionality() {
           await document.getElementById("ycs-search").children[0].appendChild(YTFindMatchedResult);
           ISE("label#YCS_TimestampMatchResult").style.float = "right";
         } else if (!ISE('.Checkbox_SearchAddons#FindMatchedTimeStamps input[type="checkbox"]').checked) {
-          document.getElementById("ycs-input-search").removeEventListener("search", FindComment_TimeStamps);
+          document.getElementById("ycs-input-search").removeEventListener("keyup", FindComment_TimeStamps);
           ISE("#ycs_btn_search").removeEventListener("click", FindComment_TimeStamps);
           await GM.setValue("YCSADDONS_YTMatchedTimeStamp", false);
           while (ISE("label#YCS_TimestampMatchResult")) {
@@ -489,7 +497,7 @@ async function AddmoreButtonFunctionality() {
       
       let ToggleState = await GM.getValue("YCSADDONS_YTMatchedTimeStamp", false);
       if (ToggleState && ToggleState == true) {
-        document.getElementById("ycs-input-search").addEventListener("search", FindComment_TimeStamps);
+        document.getElementById("ycs-input-search").addEventListener("keyup", FindComment_TimeStamps);
         ISE("#ycs_btn_search").addEventListener("click", FindComment_TimeStamps);
         let YTFindMatchedResult = document.createElement("label");
         YTFindMatchedResult.setAttribute("id", "YCS_TimestampMatchResult");
@@ -544,23 +552,16 @@ async function AddmoreButtonFunctionality() {
 			function SelectAllOnfocus_func() { //<-- Function for the target Element(Search Input)
 				LocationElem_Searchfield.select();
 			}
-      async function DeselectAllOnblur_func() {
-        await sleep(300);
-        document.getSelection().removeAllRanges();
-      }
 			function SelectAllOnfocus_ON() { //<-- For the button (toggle)
 				document.getElementById("SelectAll-Onfocus").classList.replace("fa-pen", "fa-pen-square");
 				document.getElementById("SelectAll-Onfocus").setAttribute("title", "All Text selected when input field is focused.");
 				LocationElem_Searchfield.addEventListener("focus", SelectAllOnfocus_func);
-        LocationElem_Searchfield.addEventListener("blur", DeselectAllOnblur_func);
 				document.getElementById("SelectAll-Onfocus").removeEventListener("click", SelectAllOnfocus_ON);
 				document.getElementById("SelectAll-Onfocus").addEventListener("click", SelectAllOnfocus_OFF);
 			}
 			function SelectAllOnfocus_OFF() { //<-- For the button (toggle)
 				document.getElementById("SelectAll-Onfocus").classList.replace("fa-pen-square", "fa-pen");
 				document.getElementById("SelectAll-Onfocus").setAttribute("title", "Just like casual");
-				LocationElem_Searchfield.removeEventListener("focus", SelectAllOnfocus_func);
-        LocationElem_Searchfield.removeEventListener("blur", DeselectAllOnblur_func);
 				document.getElementById("SelectAll-Onfocus").addEventListener("click", SelectAllOnfocus_ON);
 				document.getElementById("SelectAll-Onfocus").removeEventListener("click", SelectAllOnfocus_OFF);
 			}
@@ -576,7 +577,6 @@ async function AddmoreButtonFunctionality() {
 			}
 			else if (ToggleStatus == "ON") {
 				LocationElem_Searchfield.addEventListener("focus", SelectAllOnfocus_func);
-        LocationElem_Searchfield.addEventListener("blur", DeselectAllOnblur_func);
 				let Create_toggleSelectAllOnfocus = document.createElement("div");
 				Create_toggleSelectAllOnfocus.setAttribute("id", "SelectAll-Onfocus");
 				Create_toggleSelectAllOnfocus.setAttribute("style", "display: inline-block;background: rgb(231 231 231);border-radius: 25%;text-shadow: -1px 1px 0px #ffffff, 1px 1px 0px #fff, 1px -1px 0 #fff, -1px -1px 0 #fff;cursor: grabbing;color: grey;");
@@ -644,50 +644,52 @@ async function AddmoreButtonFunctionality() {
     let ToggleStatusOfThisFunc_Stored = await GM.getValue("BlurAfterEnterinSearchField_Toggle", false);
     let ToggleStatusOfThisFunc = "OFF"; //"ON" make it turned on at the start, "OFF" is the opposite.
     
-    let CSS_BlurAfterEnterinSearchField = "\n\n\n/* ===Blur() after enter in SearchField CSS=== */\n"
-    + '#BlurAfterSearch[ToggleStatus="OFF"] {\n'
-    + ' box-shadow: inset 0 0 20px 1px rgba(219, 83, 83, 40%), 0 0 5px 0 black;\n'
-    + ' color: #72706f;\n'
-    + '}\n'
-    + '#BlurAfterSearch[ToggleStatus="ON"] {\n'
-    + ' box-shadow: inset 0 0 15px 1px greenyellow, 0 0 5px 0 rgb(100,100,100);\n'
-    + ' animation: shakyshakeHourglass_icon 2s infinite;\n'
-    + ' color: #FFF;\n'
-    + '}\n'
-    + '@keyframes shakyshakeHourglass_icon {\n'
-    + ' 0% {\n'
-    + '  transform: rotatez(0deg);\n'
-    + ' }\n'
-    + ' 25% {\n'
-    + '  transform: rotatez(10deg);\n'
-    + ' }\n'
-    + ' 30% {\n'
-    + '  transform: rotatez(15deg);\n'
-    + ' }\n'
-    + ' 35% {\n'
-    + '  transform: rotatez(10deg);\n'
-    + ' }\n'
-    + ' 40% {\n'
-    + '  transform: rotatez(15deg);\n'
-    + ' }\n'
-    + ' 50% {\n'
-    + '  transform: rotatez(0deg);\n'
-    + ' }\n'
-    + ' 75% {\n'
-    + '  transform: rotatez(-10deg);\n'
-    + ' }\n'
-    + ' 80% {\n'
-    + '  transform: rotatez(-15deg);\n'
-    + ' }\n'
-    + ' 85% {\n'
-    + '  transform: rotatez(-10deg);\n'
-    + ' }\n'
-    + ' 90% {\n'
-    + '  transform: rotatez(-15deg);\n'
-    + ' }\n'
-    + '}\n'
+    let CSS_BlurAfterEnterinSearchField = {
+      "a": "\n\n\n/* ===Blur() after enter in SearchField CSS=== */\n"
+      + '#BlurAfterSearch[ToggleStatus="OFF"] {\n'
+      + ' box-shadow: inset 0 0 20px 1px rgba(219, 83, 83, 40%), 0 0 5px 0 black;\n'
+      + ' color: #72706f;\n'
+      + '}\n'
+      + '#BlurAfterSearch[ToggleStatus="ON"] {\n'
+      + ' box-shadow: inset 0 0 15px 1px greenyellow, 0 0 5px 0 rgb(100,100,100);\n'
+      + ' animation: shakyshakeHourglass_icon 2s infinite;\n'
+      + ' color: #FFF;\n'
+      + '}\n'
+      + '@keyframes shakyshakeHourglass_icon {\n'
+      + ' 0% {\n'
+      + '  transform: rotatez(0deg);\n'
+      + ' }\n'
+      + ' 25% {\n'
+      + '  transform: rotatez(10deg);\n'
+      + ' }\n'
+      + ' 30% {\n'
+      + '  transform: rotatez(15deg);\n'
+      + ' }\n'
+      + ' 35% {\n'
+      + '  transform: rotatez(10deg);\n'
+      + ' }\n'
+      + ' 40% {\n'
+      + '  transform: rotatez(15deg);\n'
+      + ' }\n'
+      + ' 50% {\n'
+      + '  transform: rotatez(0deg);\n'
+      + ' }\n'
+      + ' 75% {\n'
+      + '  transform: rotatez(-10deg);\n'
+      + ' }\n'
+      + ' 80% {\n'
+      + '  transform: rotatez(-15deg);\n'
+      + ' }\n'
+      + ' 85% {\n'
+      + '  transform: rotatez(-10deg);\n'
+      + ' }\n'
+      + ' 90% {\n'
+      + '  transform: rotatez(-15deg);\n'
+      + ' }\n'
+      + '}\n'
+    }
     ;
-    CSSContainer.innerHTML += CSS_BlurAfterEnterinSearchField
+    CSSContainer.innerHTML += CSS_BlurAfterEnterinSearchField.a
     let Create_thisfunctionElem = document.createElement("div");
     Create_thisfunctionElem.setAttribute("style", "background: rgb(240,240,240);text-align: center;padding: 5px;border-radius: 7px;width: 27px;margin: 0;font-size: 17px;cursor: progress;");
     Create_thisfunctionElem.setAttribute("id", "BlurAfterSearch");
@@ -722,7 +724,7 @@ async function AddmoreButtonFunctionality() {
       let Get_thisfunctionElem = document.getElementById("BlurAfterSearch");
       Get_thisfunctionElem.setAttribute("ToggleStatus", "ON");
       Get_thisfunctionElem.setAttribute("class", "fas fa-hourglass-half");
-      LocationElem_Searchfield.addEventListener("search", BlurycsSearchField);
+      LocationElem_Searchfield.addEventListener("keyup", BlurycsSearchField);
       let GetDelay = await GM.getValue("BlurycsSearchField_delay", null) || 10;
 			Get_thisfunctionElem.setAttribute("title", "Gonna blur() the search element after enter the search in " + GetDelay + " Secs");
       Get_thisfunctionElem.addEventListener("click", BlurAfterEnterinSearchField_Disableit, {once: true});
@@ -732,22 +734,22 @@ async function AddmoreButtonFunctionality() {
       let Get_thisfunctionElem = document.getElementById("BlurAfterSearch");
       Get_thisfunctionElem.setAttribute("ToggleStatus", "OFF");
       Get_thisfunctionElem.setAttribute("class", "fas fa-hourglass");
-      LocationElem_Searchfield.removeEventListener("search", BlurycsSearchField);
+      LocationElem_Searchfield.removeEventListener("keyup", BlurycsSearchField);
       await GM.setValue("BlurycsSearchField_delay", 10);
 			Get_thisfunctionElem.setAttribute("title", "Not gonna blur() the Search element when it\'s entered");
       Get_thisfunctionElem.addEventListener("click", BlurAfterEnterinSearchField_Enableit, {once: true});
       GM.setValue("BlurAfterEnterinSearchField_Toggle", "OFF")
     }
     
-    if (ToggleStatusOfThisFunc_Stored == "ON" || ToggleStatusOfThisFunc == "ON") { // ONNNNNNN
+    if (ToggleStatusOfThisFunc.match(/ON/i) || ToggleStatusOfThisFunc_Stored.match(/ON/i)) { // ONNNNNNN
       let Get_thisfunctionElem = document.getElementById("BlurAfterSearch");
       Get_thisfunctionElem.setAttribute("ToggleStatus", "ON");
       Get_thisfunctionElem.setAttribute("class", "fas fa-hourglass-half");
-			let GetDelay = await GM.getValue("BlurycsSearchField_delay", 10) || 10;
+			let GetDelay = await GM.getValue("BlurycsSearchField_delay", 10);
 			Get_thisfunctionElem.setAttribute("title", "Gonna blur() the search element after enter the search in " + GetDelay + " Secs");
-      LocationElem_Searchfield.addEventListener("search", BlurycsSearchField);
+      LocationElem_Searchfield.addEventListener("keyup", BlurycsSearchField);
       Get_thisfunctionElem.addEventListener("click", BlurAfterEnterinSearchField_Disableit, {once: true});
-    } else if (ToggleStatusOfThisFunc_Stored == "OFF" || ToggleStatusOfThisFunc == "OFF") { // OFFFFFFFFF
+    } else if (ToggleStatusOfThisFunc.match(/OFF/i) || ToggleStatusOfThisFunc_Stored.match(/OFF/i)) { // OFFFFFFFFF
       let Get_thisfunctionElem = document.getElementById("BlurAfterSearch");
       Get_thisfunctionElem.setAttribute("ToggleStatus", "OFF");
 			Get_thisfunctionElem.setAttribute("title", "Not gonna blur() the Search element when it\'s entered");
@@ -930,6 +932,11 @@ async function AddmoreButtonFunctionality() {
         await sleep(70);
         ISE(".ycs-app").style.opacity = "";
         ISE(".ycs-app").style.transitionDuration = "";
+        await YCSBox_NotOverwhelmHeight();
+        window.addEventListener("resize", YCSBox_NotOverwhelmHeight);
+        LocationElem_Searchfield.addEventListener("search", CheckSizeResize);
+        ISE("#ycs_btn_search").addEventListener("click", CheckSizeResize);
+        ISE(".ycs-btn-panel.ycs_noselect").addEventListener("click", CheckSizeResize);
         
       } else if (ISE(".ycs-app").classList.contains("YCS-ModCSSByNJ1n9_OverlaySimple")) {
       if (ISE(".ycs-app").getAttribute("CollapsedState") == "false") {
@@ -942,9 +949,16 @@ async function AddmoreButtonFunctionality() {
       if (ISE(".ycs-app").getAttribute("style").length == 0) {
         ISE(".ycs-app").removeAttribute("style");
       }
-      ISE(".ycs-app").removeAttribute("CollapsedState");
-      GM.setValue("YCSSTYLEMod_State", null);
-      ISE("#YCSBox-OverlayToggle").setAttribute("title", "YCS-Box is normal mode.");
+        window.removeEventListener("resize", YCSBox_NotOverwhelmHeight);
+        LocationElem_Searchfield.removeEventListener("search", CheckSizeResize);
+        ISE("#ycs_btn_search").removeEventListener("click", CheckSizeResize);
+        ISE(".ycs-btn-panel.ycs_noselect").removeEventListener("click", CheckSizeResize);
+        ISE(".ycs-app").removeAttribute("CollapsedState");
+        if (ISE(".ycs-app[CollapsedState] .ycs-app-main #ycs-search-result")) {
+          ISE(".ycs-app[CollapsedState] .ycs-app-main #ycs-search-result").style.maxHeight = "";
+        }
+        GM.setValue("YCSSTYLEMod_State", null);
+        ISE("#YCSBox-OverlayToggle").setAttribute("title", "YCS-Box is normal mode.");
     }
     });
     
@@ -980,6 +994,11 @@ async function AddmoreButtonFunctionality() {
       await waitFor(_ => document.visibilityState == 'visible');
       ISE(".ycs-app").style.opacity = "";
       ISE(".ycs-app").style.transitionDuration = "";
+      await YCSBox_NotOverwhelmHeight();
+      window.addEventListener("resize", YCSBox_NotOverwhelmHeight);
+      LocationElem_Searchfield.addEventListener("search", CheckSizeResize);
+      ISE("#ycs_btn_search").addEventListener("click", CheckSizeResize);
+      ISE(".ycs-btn-panel.ycs_noselect").addEventListener("click", CheckSizeResize);
       if (document.activeElement == ISE("#ycs-input-search.ycs-search__input")) {
         if (ISE(".ycs-app").getAttribute("CollapsedState") == "true") {
           await waitFor(_ => ISE("#CollapseButton"));
@@ -1061,17 +1080,16 @@ async function AddmoreButtonFunctionality() {
       + "}\n",
     "YCSSToggleList": "\n\n/* ===YCSBOX-ModeToggleList=== *\/\n"
       + "#YCSSTYLEMod_ToggleList {\n"
-      + "  z-index: 3000;\n"
       + "  position: fixed;\n"
       + "  background: #6e948d;\n"
       + "  width: 95px;\n"
       + "  height: 75px;\n"
       + "  font-size: 13px;\n"
       + "  line-height: 10px;\n"
-      + "  padding-top: 7px;\n"
-      + "  padding-left: 5px;\n"
-      + "  padding-right: 5px;\n"
-      + "  padding-bottom: 5px;\n"
+      + '  padding-top: 4px;\n'
+      + '  padding-bottom: 1px;\n'
+      + '  padding-left: 3px;\n'
+      + '  padding-right: 3px;\n'
       + "  font-family: 'Baloo 2';\n"
       + "  text-align: center;\n"
       + "  border-radius: 3px;\n"
@@ -1085,12 +1103,18 @@ async function AddmoreButtonFunctionality() {
       + "#YCSSTYLEMod_ToggleList[Opened] {\n"
       + "  transform: scale(1);\n"
       + "}\n"
-      + ".YCSSTYLEMod_ToggleList {\n"
+      + '.YCSSTYLEMod_ToggleList {\n'
       + "  padding-top: 7px;\n"
       + "  padding-bottom: 7px;\n"
       + "  padding-left: 2px;\n"
       + "  padding-right: 2px;\n"
+      + '}\n'
+      + ".ycs-app.YCS-ModCSSByNJ1n9_Overlay #YCSSTYLEMod_ToggleList, .ycs-app.YCS-ModCSSByNJ1n9_OverlaySimple #YCSSTYLEMod_ToggleList {\n"
+      + "  z-index: 3000;\n"
       + "}\n"
+      + '.ycs-app:not(.YCS-ModCSSByNJ1n9_Overlay, .YCS-ModCSSByNJ1n9_OverlaySimple) #YCSSTYLEMod_ToggleList {\n'
+      + '  z-index: 2000;\n'
+      + '}\n'
       + ".YCSSTYLEMod_ToggleList:hover:not([selected]) {\n"
       + "  background: linear-gradient(to right, #00000064, #00000000, #00000000, #00000064);\n"
       + "  cursor: pointer;\n"
@@ -1160,7 +1184,7 @@ async function AddmoreButtonFunctionality() {
         let ELEml = document.querySelector("#YCSSTYLEMod_ToggleList[Opened]");
         ELEml.style.animation = "ExpandYCSToggleList 500ms 1";
         if (!ISE(".ycs-app").classList.contains("YCS-ModCSSByNJ1n9_Overlay") && !ISE(".ycs-app").classList.contains("YCS-ModCSSByNJ1n9_OverlaySimple")) {
-          document.querySelector("#YCSSTYLEMod_ToggleList[Opened]").style.top = "1130px";
+          document.querySelector("#YCSSTYLEMod_ToggleList[Opened]").style.top = "1278px";
           document.querySelector("#YCSSTYLEMod_ToggleList[Opened]").style.position = "absolute";
         } else {
           document.querySelector("#YCSSTYLEMod_ToggleList[Opened]").style.top = (ButtonEl.getBoundingClientRect().bottom - 10) + "px";
@@ -1296,6 +1320,14 @@ async function AddmoreButtonFunctionality() {
       ISE(".ycs-btn-panel.ycs_noselect").removeEventListener("click", CheckSizeResize);
     } else if (ISE(".ycs-app").classList.contains("YCS-ModCSSByNJ1n9_OverlaySimple")) {
       ISE(".ycs-app").classList.remove("YCS-ModCSSByNJ1n9_OverlaySimple");
+      window.removeEventListener("resize", YCSBox_NotOverwhelmHeight);
+      LocationElem_Searchfield.removeEventListener("search", CheckSizeResize);
+      ISE("#ycs_btn_search").removeEventListener("click", CheckSizeResize);
+      ISE(".ycs-btn-panel.ycs_noselect").removeEventListener("click", CheckSizeResize);
+      ISE(".ycs-app").removeAttribute("CollapsedState");
+    }
+    if (ISE(".ycs-app[CollapsedState] .ycs-app-main #ycs-search-result")) {
+      ISE(".ycs-app[CollapsedState] .ycs-app-main #ycs-search-result").style.maxHeight = "";
     }
     await GM.setValue("YCSSTYLEMod_State", null);
     ISE("#YCSBox-OverlayToggle").setAttribute("title", "YCS-Box is normal mode.");
@@ -1310,7 +1342,11 @@ async function AddmoreButtonFunctionality() {
       //Your code after the buttonswitch selected, and what to do with it
 		  var selectedmode = E.target.getAttribute("ToggleValue");
       console.log("E.target--Toggle Value: " + selectedmode);
-      await sleep(200);
+      console.groupCollapsed("CheckMode");
+      console.log("overlay\n", selectedmode.match(/^Overlay/i));
+      console.log("simple overlay\n", selectedmode.match(/^SimpleOverlay/i));
+      console.groupEnd();
+      //await sleep(200);
       if (selectedmode == null || selectedmode == false) {
         alert("ERROR, check DevTools!");
         return;
@@ -1356,7 +1392,7 @@ async function AddmoreButtonFunctionality() {
           ISE(".ycs-btn-panel.ycs_noselect").addEventListener("click", CheckSizeResize);
           ISE(".ycs-app").style.opacity = "";
           ISE(".ycs-app").style.transitionDuration = "";
-          if (CollapseGetSTATE == "false") {
+          if (CollapseGetSTATE && CollapseGetSTATE == "false") {
             ISE(".ycs-app").setAttribute("CollapsedState", "false");
           }
         }
@@ -1389,9 +1425,14 @@ async function AddmoreButtonFunctionality() {
           
           ISE("#YCSBox-OverlayToggle").setAttribute("title", "YCS-Box is in overlay-mode\n[Simpler version].");
           await sleep(70);
+          await YCSBox_NotOverwhelmHeight();
+          window.addEventListener("resize", YCSBox_NotOverwhelmHeight);
+          document.getElementById("ycs-input-search").addEventListener("search", CheckSizeResize);
+          ISE("#ycs_btn_search").addEventListener("click", CheckSizeResize);
+          ISE(".ycs-btn-panel.ycs_noselect").addEventListener("click", CheckSizeResize);
           ISE(".ycs-app").style.opacity = "";
           ISE(".ycs-app").style.transitionDuration = "";
-          if (CollapseGetSTATE == "false") {
+          if (CollapseGetSTATE && CollapseGetSTATE == "false") {
             ISE(".ycs-app").setAttribute("CollapsedState", "false");
           }
         }
@@ -1406,7 +1447,7 @@ async function AddmoreButtonFunctionality() {
   
   
 	async function BlurycsSearchField() {
-    let msTIME = await GM.getValue("BlurycsSearchField_delay", null) || 10; //<-- SPECIFY YOUR DELAY (Number and not string! and also in milisecond.)
+    let msTIME = await GM.getValue("BlurycsSearchField_delay", 10); //<-- SPECIFY YOUR DELAY (Number and not string! and also in milisecond.)
     let mT = Number(msTIME);
     await sleep(mT * 1000);
     if (document.activeElement.id == "ycs-input-search") {
@@ -1479,9 +1520,11 @@ async function AddmoreButtonFunctionality() {
       Elem_Searchfield.removeEventListener("search", CheckSizeResize);
       ISE("#ycs_btn_search").removeEventListener("click", CheckSizeResize);
       ISE(".ycs-btn-panel.ycs_noselect").removeEventListener("click", CheckSizeResize);
-      ISE(".ycs-app.YCS-ModCSSByNJ1n9_Overlay .ycs-app-main #ycs-search-result").style.maxHeight = "";
-      if (ISE(".ycs-app.YCS-ModCSSByNJ1n9_Overlay .ycs-app-main #ycs-search-result").style.length == 0) {
-        ISE(".ycs-app.YCS-ModCSSByNJ1n9_Overlay .ycs-app-main #ycs-search-result").removeAttribute("style");
+      if (ISE(".ycs-app[CollapsedState] .ycs-app-main #ycs-search-result")) {
+        ISE(".ycs-app.YCS-ModCSSByNJ1n9_Overlay .ycs-app-main #ycs-search-result").style.maxHeight = "";
+        if (ISE(".ycs-app.YCS-ModCSSByNJ1n9_Overlay .ycs-app-main #ycs-search-result").style.length == 0) {
+          ISE(".ycs-app.YCS-ModCSSByNJ1n9_Overlay .ycs-app-main #ycs-search-result").removeAttribute("style");
+        }
       }
     }
   }
@@ -1543,7 +1586,7 @@ async function WhatTextIsSearchedin_YCS() {
     }
   }
   await waitFor(_=> document.getElementById("ycs-input-search"));
-  document.getElementById("ycs-input-search").addEventListener("search", PreviewWhatTextSearched);
+  document.getElementById("ycs-input-search").addEventListener("keyup", PreviewWhatTextSearched);
 	ISE("#ycs_btn_search").addEventListener("click", PreviewWhatTextSearched);
 	ISE("#ycs_btn_timestamps").addEventListener("click", function(){
 		let Get_TextPreviewElem = document.getElementById("YCS_SearchTextPreview");
@@ -1604,9 +1647,10 @@ async function WhatTextIsSearchedin_YCS() {
 //**
 //Addons for the YCS-Box Overlay Mode: Resize the YCS-Box so the height will not be collapsed by window size
 async function YCSBox_NotOverwhelmHeight(AdjustedSign) {
+  if (ISE(".ycs-app[CollapsedState] .ycs-app-main #ycs-search-result")) {
   var YCSBox_HeightCalculated = (96 / 100) * ISE(".ycs-app").offsetHeight - 10;
-  if (AdjustedSign != true && YCSBox_HeightCalculated < window.innerHeight && ISE(".ycs-app.YCS-ModCSSByNJ1n9_Overlay .ycs-app-main #ycs-search-result").style.length != 0) {
-    ISE(".ycs-app.YCS-ModCSSByNJ1n9_Overlay .ycs-app-main #ycs-search-result").style.maxHeight = "";
+  if (AdjustedSign != true && YCSBox_HeightCalculated < window.innerHeight && ISE(".ycs-app[CollapsedState] .ycs-app-main #ycs-search-result").style.length != 0) {
+    ISE(".ycs-app[CollapsedState] .ycs-app-main #ycs-search-result").style.maxHeight = "";
     await sleep(50);
     YCSBox_NotOverwhelmHeight(true);
     await sleep(90);
@@ -1615,24 +1659,24 @@ async function YCSBox_NotOverwhelmHeight(AdjustedSign) {
     console.log("YAY! The height is adjusted as needed now!");
     return;
   } else if (YCSBox_HeightCalculated > window.innerHeight) {
-    let Get_MaxHeightElem = Number(ISE(".ycs-app.YCS-ModCSSByNJ1n9_Overlay .ycs-app-main #ycs-search-result").style.maxHeight.replace(/[a-z]/g, ""));
+    let Get_MaxHeightElem = Number(ISE(".ycs-app[CollapsedState] .ycs-app-main #ycs-search-result").style.maxHeight.replace(/[a-z]/g, ""));
     if (Get_MaxHeightElem > 700) {
-      ISE(".ycs-app.YCS-ModCSSByNJ1n9_Overlay .ycs-app-main #ycs-search-result").style.maxHeight = "";
+      ISE(".ycs-app[CollapsedState] .ycs-app-main #ycs-search-result").style.maxHeight = "";
       await sleep(50);
       YCSBox_NotOverwhelmHeight(true);
       await sleep(50);
       return;
     }
-    let ChangeMaxHeight = (ISE(".ycs-app.YCS-ModCSSByNJ1n9_Overlay .ycs-app-main #ycs-search-result").offsetHeight - 10);
+    let ChangeMaxHeight = (ISE(".ycs-app[CollapsedState] .ycs-app-main #ycs-search-result").offsetHeight - 10);
     if (Math.sign(ChangeMaxHeight) == -1) {
-      ISE(".ycs-app.YCS-ModCSSByNJ1n9_Overlay .ycs-app-main #ycs-search-result").style.maxHeight = "";
+      ISE(".ycs-app[CollapsedState] .ycs-app-main #ycs-search-result").style.maxHeight = "";
       await sleep(50);
       YCSBox_NotOverwhelmHeight(true);
       await sleep(50);
       return;
     }
     let ConvertToPixelsHeight = ChangeMaxHeight + "px";
-    ISE(".ycs-app.YCS-ModCSSByNJ1n9_Overlay .ycs-app-main #ycs-search-result").style.setProperty("max-height", ConvertToPixelsHeight, "important");
+    ISE(".ycs-app[CollapsedState] .ycs-app-main #ycs-search-result").style.setProperty("max-height", ConvertToPixelsHeight, "important");
     /*if (AdjustedSign) {
       //console.log("Still calculating the MaxHeight...");
     } else {
@@ -1644,6 +1688,7 @@ async function YCSBox_NotOverwhelmHeight(AdjustedSign) {
   } else if (YCSBox_HeightCalculated < window.innerHeight && AdjustedSign != true) {
     console.log("No need to adjust the height, it is perfect the way it is!~");
     return;
+  }
   }
   return;
 }
