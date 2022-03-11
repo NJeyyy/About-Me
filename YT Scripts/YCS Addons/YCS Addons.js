@@ -3,7 +3,7 @@
 // @namespace        YCS_Addons
 // @homepageURL      https://github.com/NJeyyy/About-Me/tree/Userscripts/YT%20Scripts/YCS%20Addons
 // @supportURL       https://github.com/NJeyyy/About-Me/blob/Userscripts/YT%20Scripts/YCS%20Addons/Logs.log
-// @version          5.6.2.1531_11032022
+// @version          5.6.2b.1553_11032022
 // @description      Various optional function for the YCS Extension!
 // @author           NJ1n9
 // @match            https://www.youtube.com/*
@@ -384,6 +384,7 @@ async function AddmoreButtonFunctionality() {
         } else if (!ISE('.Checkbox_SearchAddons#FindMatchedTimeStamps input[type="checkbox"]').checked) {
           document.getElementById("ycs-input-search").removeEventListener("keyup", FindComment_TimeStamps);
           ISE("#ycs_btn_search").removeEventListener("click", FindComment_TimeStamps);
+          ISE("label#YCS_TimestampMatchResult").innerHTML = "";
           await GM.setValue("YCSADDONS_YTMatchedTimeStamp", false);
           console.log("OFF");
         }
