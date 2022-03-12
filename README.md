@@ -22,7 +22,7 @@ TBH [ViolentMonkey](https://microsoftedge.microsoft.com/addons/detail/violentmon
 But I still use VM[^2] now because.. uhh.. I am to lazy to switch..😞🙄<br>
 THE UI IS DOPE!! OKAY!!!.. and also at first TM[^3] it's kinda broken bro--although the problem is me-not the extension L😔🙏<br>
 TM[^3] is better functionality and more advanced, and VM[^2] is better UI and easier to use-<br>
-I mean.. I also to lazy to switchy swatcha back.. Already have my shoes wet here. And it feels like home rn.. So...<br>
+I mean.. I also too lazy to switchy swatcha back.. Already have my shoes wet here. And it feels like home rn.. So I cannot switch it that easily<br>
 <br>
 Oh yea.. also I am using *UserScript* now because it seems that I really need the function to use my extension or other thing that cannot be applied by other ppl work. I cannot make my "Extension" rn so.. yeah.. USERSCRIPT FOR NOW U <strike>BITCH</strike><br>
 <hr>
