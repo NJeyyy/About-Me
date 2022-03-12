@@ -9,13 +9,14 @@
 Here some features that I created to just make me feel more comfortable and convenient while using it.!
 
 Features added with this userscript:
-- Focus on YCS Search Field with shortcut[^1]
-  * When blurred with shortcut, will go to top of page[^2]
+- Focus on YCS Search Field with shortcut[^1]<br>
+  `*When blurred with shortcut, will go to top of page`<br>
 - If the search input blank and the user press `enter` It's gonna clear the comment result and unfocus the search field immediately
 - Edit the "type" attribute to add clear field button
 - Add physical function (just adding more button)[^4]
   * Toggle search input filter: timestamp matching<br>
-   `Find comment with the timestamp in the search input (if specified), then highlight the comment and bring it to the top`
+   `Find comment with the timestamp in the search input (if specified), then highlight the comment and bring it to the top`<br>
+   `ATTENTION!! It still in BETA since I need to face the problem first and its still kind of problematic lmao`<br>
   * Button: Go to Top of page<br>
    `Left-click go to top in search result, Right-click in the page`
   * Toggle button: select all-text in search field when focused.[^3]
@@ -36,6 +37,5 @@ Features added with this userscript:
 
 [^1]: Hotkey is "Alt"+"S" by default  
 And also select All text (if available), when the field is on-focus. You could disable some function.. to do that; add "//" at the first collumn <s>(or before the command)</s> on the line of command <s>(/function)</s> you wanted to disable.  
-[^2]: Can be disabled
 [^3]: Could be customized on how it's started (i.e Turned ON/OFF)
 [^4]: All of the below could be disabled or enabled
