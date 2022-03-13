@@ -16,7 +16,7 @@
       > The theme of the site gonna change based on time the setted<br>
       > <em>*You could edit it on your own(just figure that on yourself)</em><br>
     * Toggle theme by button.<br>
-      > So you did not must to go to the profile section AND WAIT IT TO LOAD.. or edit the file to your desire **EVERY. SINGLE. TIME*
+      > So you did not must to go to the profile section AND WAIT IT TO LOAD.. or edit the file to your desire **EVERY. SINGLE. TIME**
     * Stop Autoplay on load (and on URL changes) `Video will keep played if there's an ads`  
     * WIP Script[^1]
 <br>
