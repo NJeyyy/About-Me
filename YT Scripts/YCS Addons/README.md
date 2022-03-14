@@ -3,10 +3,13 @@
 <strong>[YCS Ext link](https://chrome.google.com/webstore/detail/ycs-youtube-comment-searc/pmfhcilikeembgbiadjiojgfgcfbcoaa)</strong><br>
 ![YCS - logo](https://lh3.googleusercontent.com/yTBf-HXTR-FATN5bad0R2XFwBGpdbxzN_dRKoALQHS3qaY7rd1cizbvp9vZ_X3uKdE2d_31iDGRXehNTAOQBXrim=w128-h128-e365-rj-sc0x00ffffff) ![Userscript - Icon](https://cdn-icons-png.flaticon.com/128/1383/1383327.png)<br>
 <br>
-> Note: The dev literally suck tho.. This is rlly easy to achive but y'knowww.... 🤓  
-So I add some function THAT I WANT:DD with this userscript!!  
+`Note: The dev literally suck tho.. This is rlly easy to achive but y'knowww.... 🤓`  
+`So I add some function THAT I WANT:DD with this userscript!!`  
+> ⚠️📛 **ATTENTION!!** 📛⚠️<br>
+> I just created the minified version of this userscript! Please use that instead of the original one,  
+> So it doesn't slow down the site load and your browsing experience!  
+> *\*Well except you want to use it and also see how it works or learn something from it lol*  
 >
-<br>
 Here some features that I created to just make me feel more comfortable and convenient while using it.!
 
 Features added with this userscript:
