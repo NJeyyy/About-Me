@@ -47,7 +47,7 @@ _-----------------------pREVIOUS Script-------------------____________________
 ======================================
 `08:35 PM 10/Des12/2021 [Version 1.7] {THE THEME CHANGER BASED ON TIME HAS BEEN ABLE TO WORK (a bit)}
 > THE "Change Theme based on time" HAS WORKED!! (Although it's still somekind of glitchy)
-    ~ Already fix some bugs: The script runs to fast and broke the page, so make I make it slower; wait till the page load and wait for 5 sec
+    ~ Already fix some bugs: The script runs too fast and broke the page, so make I make it slower; wait till the page load and wait for 5 sec
 > Update the Skip Ads shortcut Condition: It's still runs when typing comments or reply so I add more condition to it!
 ======================================
 
@@ -70,6 +70,9 @@ Note: Most of it is not from nowXD Thx for me on the past for the effort! sadly 
 > Edit some error code (e.g the ToggleThemeBTN eventlistener, etc)
 > Add more optional option so you be able to control it more deeply
 > Add some code to make it be easily on control
+> Remove to force load comment since it doesnt work..
+> Script now runs when the #document/page is complete the load
+> Adding additional script using @require
 > ETC
 ======================================
 
