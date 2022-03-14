@@ -1,5 +1,9 @@
  ## This is YT Scripts Section
- 
+> ⚠️📛 ATTENTION!! 📛⚠️<br>
+> I just created the minified version of this userscript! Please use that instead of the original one,<br>
+> So it doesn't slow down the site load and your browsing experience!<br>
+> *\*Well except you want to use it and also see how it works or learn something from it lol*<br>
+ <br>
  Here is a list of what script already created on this section:
  - \[YCS Addons\]
     * Focus on YCS search field with shortcut/hotkey
