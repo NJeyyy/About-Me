@@ -2,12 +2,13 @@
 // @name            Custom Addition ToolScript
 // @namespace       GlobalFunction_CustomAdditionTLScript
 // @match           *://*/*
-// @version         1.5a
+// @version         1.6
 // @author          NJ1n9
 // @description     Some ToolScript that combined.
 // @icon            https://cdn.iconscout.com/icon/free/png-256/code-336-830581.png
+// @grant           GM_getResourceText
+// @resource        GlobalToolscript_External https://github.com/NJeyyy/About-Me/raw/f539b83ff93ee0da307b58d8684ac4b6dc80cff0/ToolScript_Global.min.js
 // @noframes
-// @grant           none
 // ==/UserScript==
 //Created on 04/01/2022, 22:04:26
 
@@ -17,12 +18,10 @@
         You can use it by installing this userscript. Or by copying
         some function listed below depends on your desire on every
         script you use!
-        Note: If you install this. Script(/userscript) you use only
-        be able to use it once it loaded. So make sure on userscript it "@run-at"..
-        The one that not "document-start" or before that;D
+        *NOTE. This only can be used in DevTools, if you want to use this in your userscript or take the script file check my github page!
  * 
  */
-/**
+/*
 // ToolScript 1
 //===========SLEEP(miliseconds) Function================================================================\\  <-- Added on V1
 // Source: https://stackoverflow.com/a/39914235/15715476
@@ -103,14 +102,14 @@ function ISE(ElementSelector) {
 }
 
 //```````````````````````````````````````````````````````````````````````````````````````````````````````````\\
-//*/
+*/
 
 
 
 //~~~~~~~~~~~Implement in to the "head" tag so it can be used globally~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\\ <-- Added and fixed in v1.5
 /**/
-Custom_Addition_ToolScript();
 AddonsScript();
+/*Custom_Addition_ToolScript();
 async function Custom_Addition_ToolScript() {
   // ToolScript1-- SLEEP(miliseconds) Function
   let ToolScript1 = "function sleep(ms) {\n" + "  return new Promise(resolve => setTimeout(resolve, ms));\n" + "};\n";
@@ -138,29 +137,73 @@ async function Custom_Addition_ToolScript() {
   Create_CustomAdditionToolScriptElem.setAttribute("id", "Custom-Addition-ToolScript")
   Create_CustomAdditionToolScriptElem.setAttribute("type", "application/javascript")
   Create_CustomAdditionToolScriptElem.innerHTML = Scriptof_CustomAdditionToolScript;
-  await document.head.appendChild(Create_CustomAdditionToolScriptElem)
+  await document.head.appendChild(Create_CustomAdditionToolScriptElem);
+  await sleep(5000);
+  console.log(consolethng, "color: blue;font-family: monospace;");
+}*/
+AdditionToolscript_External();
+async function AdditionToolscript_External() {
+  let ElemInnerJS = GM_getResourceText("GlobalToolscript_External");
+  let Create_JSExternal = document.createElement("script");
+  Create_JSExternal.setAttribute("id", "Custom-Addition-ToolScript")
+  Create_JSExternal.setAttribute("type", "application/javascript")
+  Create_JSExternal.innerHTML = ElemInnerJS;
+  await document.head.appendChild(Create_JSExternal);
+  await sleep(5000);
+  let consolethng = "%c" + "Type GlobalToolscript_inf(\"help\") to see the command for the support code,\nand GlobalToolscript_inf(\"Code_list\")!\n*Note! the case doesn\'t really matter!!'"
   console.log(consolethng, "color: blue;font-family: monospace;");
 }
 
 async function AddonsScript() {
   var TheScriptElem = document.getElementById("Custom-Addition-ToolScript");
-  var CurrentHost = window.location.hostname;
+  var CurrentHost = document.location.hostname;
   //Host list, Only add this script on specific domain/host.
   var YT = "www.youtube.com"
+  var WA = "web.whatsapp.com"
   
   if (CurrentHost == YT) {
     let YT_AddonS1_varqup1 = /^https?\:\/\/(?:www\.youtube(?:\-nocookie)?\.com\/|m\.youtube\.com\/|youtube\.com\/)?(?:ytscreeningroom\?vi?=|youtu\.be\/|vi?\/|user\/.+\/u\/\w{1,2}\/|embed\/|watch\?(?:.*\&)?vi?=|\&vi?=|\?(?:.*\&)?vi?=)([^#\&\?\n\/<>"]*)/i
-    let YT_AddonS1 = "function GetYoutubeVid_id(url){\n" + ' var regExp = ' + YT_AddonS1_varqup1 + ';\n' + ' var match = url.match(regExp);\n' + ' return (match && match[1].length==11)? match[1] : false;\n' + '}\n'
-    let YT_Addon = "\n" + YT_AddonS1;
+    let YT_AddonS1 = "function GetYoutubeVid_id(url){\n" + ' var regExp = ' + YT_AddonS1_varqup1 + ';\n' + ' var match = url.match(regExp);\n' + ' return (match && match[1].length==11)? match[1] : false;\n' + '}\n';
+    let YT_AddonS2 = "function YouTubePlayer_GotoSpecificTimestamp(ms) {\n" + '  ISE("#movie_player").seekTo(ms, true);\n' + "  return;\n" + "}\n";
+    let YT_AddonS3 = "function use_YTv3API(CommentVid_ID, APItype) {\n" + '  if (!CommentVid_ID.match(/(https:\\/\\/www.youtube.com\\/watch\\?v=)/)) {\n' + '    var a;\n' + '    if (APItype == "videos") {\n' + '      a = "https://youtube.googleapis.com/youtube/v3/videos?part=snippet&id=" + CommentVid_ID + "&key=AIzaSyDfI-mocImdy_XWT8Wj4Pxe9hHH9E8rwQc";\n' + '    } else if (APItype == "comments") {\n' + '      a = "https://www.googleapis.com/youtube/v3/comments?part=snippet&id=" + CommentVid_ID + "&textFormat=plainText&key=AIzaSyDfI-mocImdy_XWT8Wj4Pxe9hHH9E8rwQc";\n' + '    } else {\n' + '      console.error("The APItype is invalid! or maybe empty!");\n' + '    }\n' + '    return $.getJSON(a, function(data){\n' + '      var display = `User_ID: ${data.userId}<br>\n' + '      ID: ${data.id}<br>\n' + '      Title: ${data.title}<br>\n' + '      Completion_Status: ${data.completed}`\n' + '      $(".display").html(display);\n' + '    });\n' + '  } else {\n' + '    console.error("Link/URL not allowed! ONLY Comment/Video ID!!");\n' + '  }\n' + '}\n';
+    let YT_AddonS4 = "async function CheckVidPublishedTimes(VideosID) {\n" + '  if (!VideosID.match(/(https:\\/\\/www.youtube.com\\/watch\\?v=)/)) {\n' + '    let a = await use_YTv3API(VideosID, "videos");\n' + '    let ab = a.items[0].snippet;\n' + '    let vpublished = ab.publishedAt\n' + '    let vpublishedD = new Date("2021-10-22T17:03:23Z"); /* midnight in China on April 13th */\n' + '    let vpublishedTimes = vpublishedD.toLocaleString(\'en-US\', { timeZone: \'Asia/Jakarta\' });\n' + '    let vtitle = ab.title;\n' + '    let outputz = "%c" + "Title: " + vtitle + "\\nPublished at: " + vpublishedTimes;\n' + '    console.log(outputz, "color: #b50d0d;");\n' + '  } else {\n' + '    console.error("Link/URL not allowed! ONLY Video ID!!");\n' + '  }\n' + '}\n';
+    let YT_AddonS5 = "function OpenVideosID_NewTab(VidID) {\n" + "    let a = \"https://www.youtube.com/watch?v=\" + VidID;\n" + "    window.open(a, \"_blank\");\n" + "}\n";
+    let ToolScriptSeparator = "\n//_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _\n\n"
+    let YT_Addon = "\n" + YT_AddonS1 + ToolScriptSeparator + YT_AddonS2 + ToolScriptSeparator + YT_AddonS3 + ToolScriptSeparator + YT_AddonS4 + ToolScriptSeparator + YT_AddonS5;
     
     let CreateAddition_CustomAdditionToolScriptElem = document.createElement("script");
     CreateAddition_CustomAdditionToolScriptElem.setAttribute("class", "Custom-Addition-ToolScript_Optional");
     CreateAddition_CustomAdditionToolScriptElem.setAttribute("type", "application/javascript");
     CreateAddition_CustomAdditionToolScriptElem.innerHTML = YT_Addon;
     await document.head.appendChild(CreateAddition_CustomAdditionToolScriptElem);
-    let consolethng = "%c" + "Another Command:\n" + ">GetYoutubeVid_id(url)\n  Get YouTube Video id!";
+    let consolethng = "%c" + "Another Command:\n"
+    + ">GetYoutubeVid_id(url)\n  Get YouTube Video id!\n"
+    + ">YouTubePlayer_GotoSpecificTimestamp(ms)\n  Seek to specific timestamp!, only could be specified in milisecond tho..\n"
+    + ">use_YTv3API(CommentVid_ID, APItype)\n Use YT API to fetch some data/information!, Sadly only Video and Comment for now..\nAPItype option:\n- videos\n- comments\n*The ID of comment and vid!\n"
+    + ">CheckVidPublishedTimes(VideosID)\n*NOTE! use_YTv3API(CommentVid_ID, APItype) function is required*\n Get when video published (Maybe if available) with Youtubev3 API\n"
+    + ">OpenVideosID_NewTab(VidID)\n Open YT Video ID in new tab!\n"
+    ;
+    await sleep(10000);
     console.log(consolethng, "color: navy;font-family: monospace;");
-  }
+    
+    
+  } else if (CurrentHost == WA) {
+    let WA_AddonS1 = 'function CompareWAlocalStorage(a, b) {\n' + '   // "a" for the localStorage object\n' + '   // "b" for the stored object\n' + '   var aLr = Object.keys(a).length - 2;\n' + '   var aLc = 0;\n' + '   console.groupCollapsed("Compare WhatsApp localStorage data with yours!");\n' + '   for (let index = 0; index < Object.keys(a).length; index++) {\n' + '     var Ca = Object.keys(a)[index];\n' + '      if (Ca != "whatsapp-mutex" && Ca != "debugCursor") {\n' + '         console.log(Ca);\n' + '         if (a[Ca] == b[Ca]) {\n' + '            console.log(a[Ca] == b[Ca]);\n' + '            aLc++;\n' + '          } else if (a[Ca] != b[Ca]) {\n' + '            console.error(a[Ca] == b[Ca]);\n' + '            console.error("Either the keys different, or not exist.\nOr maybe the value\'s just different.");\n' + '          }\n' + '      } else if (Ca == "debugCursor") {\n' + '         console.warn("\"debugCursor\" keys ignored");\n' + '      } else if (Ca == "whatsapp-mutex") {\n' + '         console.warn("\"whatsapp-mutex\" keys ignored");\n' + '      }\n' + '   }\n' + '   console.groupEnd();\n' + '   if (aLr == aLc) {\n' + '     return true;\n' + '   } else {\n' + '     return false;\n' + '   }\n' + '}\n';
+    let ToolScriptSeparator = "\n//_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _\n\n";
+    let WA_Addon = WA_AddonS1;
+    
+    let CreateAddition_CustomAdditionToolScriptElem = document.createElement("script");
+    CreateAddition_CustomAdditionToolScriptElem.setAttribute("class", "Custom-Addition-ToolScript_Optional");
+    CreateAddition_CustomAdditionToolScriptElem.setAttribute("type", "application/javascript");
+    CreateAddition_CustomAdditionToolScriptElem.innerHTML = WA_Addon;
+    await document.head.appendChild(CreateAddition_CustomAdditionToolScriptElem);
+    let consolethng = "%c" + "Another Command:\n"
+    + ">CompareWAlocalStorage(a, b)\n  Compare localStorage object data!\n"
+    await sleep(10000);
+    console.log(consolethng, "color: navy;font-family: monospace;");
+    
+    
+    }
 }
 //*/
 //###############################################################################################################\\
