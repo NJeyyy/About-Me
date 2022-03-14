@@ -42,7 +42,7 @@ Features added with this userscript:
 <br>
 
 [^1]: Hotkey is "Alt"+"S" by default  
-And also select All text (if enabled), when the field is on-focus. Its also toglable by the button<br>
+And also select All text (if enabled), when the field is on-focus. Its also toggleable by the button<br>
 [^2]: Still in BETA version, so it's a bit unstable and problematic. I'll try to improve it tho!
 [^3]: Could be customized on how it's started (i.e Turned ON/OFF)
 [^4]: All of the below could be disabled or enabled
