@@ -19,6 +19,7 @@ That userscript	cannot be run without some of these this script, or they will tu
 	> I also make it to implement it to <head> So it can be used GLOBALLY[^3]  
 	> `NOTE!` Sadly the you cant use it in the userscript except you use @require and use the link [*here*](https://github.com/NJeyyy/About-Me/blob/Userscripts/Global%20Tool%20Script/Custom%20Addition%20ToolScript%5BOnly%20the%20script%20list%5D.js)<br>
 	> and there is also another one you could use for your userscript [*here*](https://github.com/NJeyyy/About-Me/blob/1b4a61868e711e461848561e24f6ebf3b76c7304/ToolScript_Global.js)! *Just a recommendation lol*
+	> **Just FYI, There is the minified version please use that instead if you're just planning to use it.◕∪◕**
 	
 	---
 For userscript Requirements: They can be found on top/bottom of script:D *(Except if they're is the minified version)*  
