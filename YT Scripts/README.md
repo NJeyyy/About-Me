@@ -2,8 +2,8 @@
 > ⚠️📛 ATTENTION!! 📛⚠️<br>
 > I just created the minified version of this userscript! Please use that instead of the original one,<br>
 > So it doesn't slow down the site load and your browsing experience!<br>
-> *\*Well except you want to use it to see how it works and/or learn something from it lol*<br>
- <br>
+> *\*Well except you want to use it to see how it works and/or learn something from it lol*
+ 
  Here is a list of what script already created on this section:
  - \[YCS Addons\]
     * Focus on YCS search field with shortcut/hotkey
