@@ -4,7 +4,7 @@
 ![YCS - logo](https://lh3.googleusercontent.com/yTBf-HXTR-FATN5bad0R2XFwBGpdbxzN_dRKoALQHS3qaY7rd1cizbvp9vZ_X3uKdE2d_31iDGRXehNTAOQBXrim=w128-h128-e365-rj-sc0x00ffffff) ![Userscript - Icon](https://cdn-icons-png.flaticon.com/128/1383/1383327.png)<br>
 <br>
 `Note: The dev literally suck tho.. This is rlly easy to achive but y'knowww.... 🤓`  
-`So I add some function THAT I WANT:DD with this userscript!!`  
+`So I add some features THAT I WANT:DD with this userscript!!`  
 > ⚠️📛 **ATTENTION!!** 📛⚠️<br>
 > I just created the minified version of this userscript! Please use that instead of the original one,  
 > So it doesn't slow down the site load and your browsing experience!  
