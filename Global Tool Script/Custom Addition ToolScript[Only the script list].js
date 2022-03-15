@@ -103,11 +103,17 @@ function pickTextColorBasedOnBgColorSimple(bgColor, lightColor, darkColor) {
 }
 
 
-
 // Source: https://stackoverflow.com/a/3561711/15715476
 // Escape (with blackslash) special characters that have purpose to use in regex
 function escapeRegex(string) {
     return string.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
 }
 
+
+// Source: https://thispointer.com/javascript-check-if-string-is-url/
+// Check if its a valid URL or not.
+function isValidUrl(_string) {
+  const matchpattern = /^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)$/gm;
+  return matchpattern.test(_string);
+}
 //*/
