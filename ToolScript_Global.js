@@ -124,9 +124,11 @@ function waitFor(conditionFunction) {
 
 // Source: https://stackoverflow.com/a/18082175/15715476
 // For Counting a string. Similar to Eval() I.. literally don't know what's the difference rn btw..
+/*
 function evil(fn) {
   return new Function('return ' + fn)();
 }
+*/
 
 
 
