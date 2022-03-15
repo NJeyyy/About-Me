@@ -169,4 +169,86 @@ function isValidUrl(_string) {
 
 
 
+// Source: few of StackOverflow post and I combine them
+// Convert Unit of Time
+// Unit that convertable right now: Second, Minute, Hour
+function ConvertUnitTIME(ConvertFrom, ConvertTo, SpecifiedNumber, EnableDecimal = false) {
+	if (!isNaN(SpecifiedNumber)) {
+		var ERRORConvertType = 'UNIT INPUT INVALID, ONLY \"Second(s)\", \"Minute(s)\", and \"Hour(s)\" are valid!\n*Cases doesnt matter tho\nNOTE: Also sorry because right now its only support min, hrs, and sec. But later on its gonna support other else like date and day!';
+		if (ConvertFrom.match(/Seconds?/i)) {
+			if (ConvertTo.match(/Minutes?/i)) {
+				if (EnableDecimal == false) {
+					if (Math.floor(SpecifiedNumber / 60)) {
+						return Math.floor(SpecifiedNumber / 60);
+					} else {
+						return null;
+					}
+				} else if (EnableDecimal == true) {
+					return SpecifiedNumber / 60;
+				} else {
+					console.error('EnableDecimal error value: only boolean are valid');
+					return undefined;
+				}
+			} else if (ConvertTo.match(/Hours?/i)) {
+				if (EnableDecimal == false) {
+					if (Math.floor(SpecifiedNumber / 3600)) {
+						return Math.floor(SpecifiedNumber / 3600);
+					} else {
+						return null;
+					}
+				} else if (EnableDecimal == true) {
+					return SpecifiedNumber / 3600;
+				} else {
+					console.error('EnableDecimal error value: only boolean are valid');
+					return undefined;
+				}
+			} else if (ConvertTo.match(/Seconds?/i)) {
+				return SpecifiedNumber;
+			} else {
+				console.error(ERRORConvertType);
+				return null;
+			}
+		} else if (ConvertFrom.match(/Minutes?/i)) {
+			if (ConvertTo.match(/Seconds?/i)) {
+				return SpecifiedNumber * 60;
+			} else if (ConvertTo.match(/Hours?/i)) {
+				if (EnableDecimal == false) {
+					if (Math.floor(SpecifiedNumber / 60)) {
+						return Math.floor(SpecifiedNumber / 60);
+					}
+				} else if (EnableDecimal == true) {
+					return SpecifiedNumber / 60;
+				} else {
+					console.error('EnableDecimal error value: only boolean are valid');
+					return undefined;
+				}
+			} else if (ConvertTo.match(/Minutes?/i)) {
+				return SpecifiedNumber;
+			} else {
+				console.error(ERRORConvertType);
+				return null;
+			}
+		} else if (ConvertFrom.match(/Hours?/i)) {
+			if (ConvertTo.match(/Seconds?/i)) {
+				return SpecifiedNumber * 3600;
+			} else if (ConvertTo.match(/Minutes?/i)) {
+				return SpecifiedNumber * 60;
+			} else if (ConvertTo.match(/Hours?/i)) {
+				return SpecifiedNumber;
+			} else {
+				console.error(ERRORConvertType);
+				return null;
+			}
+		} else {
+			console.error(ERRORConvertType);
+			return null;
+		}
+	} else {
+		console.error('Specified Number is not a number.\nYour Input: ' + SpecifiedNumber);
+		return false;
+	}
+}
+
+
+
 //=============================================================================      =====================================================================================
