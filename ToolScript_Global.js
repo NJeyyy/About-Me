@@ -1,5 +1,6 @@
 //Created on Saturday, 26 Feb 2022 [07:55PM] | Perum Mega Sentul Jl. Bougenville IX Kota Bogor, Indonesia
 // CODE LANGUAGE IS IN JS aka JAVASCRIPT, but the file is .txt because I use this in userscript @resource and just so I could got the code by extracting it easily
+// NOTE! Before it doesnt work in js format, but now its working:>
 
 //######################################################################################################################################
 function GlobalToolscript_inf(command) {
@@ -155,6 +156,15 @@ function SE(ElementSelector) {
 //---Individually Mode
 function ISE(ElementSelector) {
   return document.querySelector(ElementSelector);
+}
+
+
+
+// Source: https://thispointer.com/javascript-check-if-string-is-url/
+// Check if its a valid URL or not.
+function isValidUrl(_string) {
+  const matchpattern = /^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)$/gm;
+  return matchpattern.test(_string);
 }
 
 
