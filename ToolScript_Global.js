@@ -253,4 +253,21 @@ function ConvertUnitTIME(ConvertFrom, ConvertTo, SpecifiedNumber, EnableDecimal 
 
 
 
+// Source: Pure me.
+// Set Favicon of a site
+function setFavicon(UrL) {
+  var set_FAVICON;
+  if (document.querySelector("link[rel*='icon']")) {
+    set_FAVICON = document.querySelector("link[rel*='icon']");
+  } else {
+    set_FAVICON = document.createElement("link");
+    set_FAVICON.type = "image/png";
+    set_FAVICON.rel = "shortcut icon";
+    document.getElementsByTagName("head")[0].appendChild(set_FAVICON);
+  }
+  set_FAVICON.setAttribute('href', UrL);
+}
+
+
+
 //=============================================================================      =====================================================================================
