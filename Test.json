@@ -1,0 +1,14 @@
+ {
+   "email":"support@emailverifier.com",
+   "primary_result":"risky",
+   "secondary_result":"accept_all",
+   "process_result":{
+     "syntax_check":"Pass",
+     "mx_check":"Pass",
+     "smtp_check":"Pass",
+     "catch_all_check":"Pass",
+     "role_check":"Fail",
+     "disposable_check":"Pass"
+   },
+   "Password":"Not defined for security purposes"
+ }
