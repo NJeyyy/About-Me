@@ -270,4 +270,14 @@ function setFavicon(UrL) {
 
 
 
+// Source: https://love2dev.com/blog/javascript-remove-from-array/#create-remove-method
+// Remove element inside array defined by value
+function arrayRemove(arr, value) {
+  return arr.filter(function(ele){ 
+    return ele != value; 
+  });
+}
+
+
+
 //=============================================================================      =====================================================================================
