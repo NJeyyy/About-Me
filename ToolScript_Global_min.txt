@@ -71,3 +71,7 @@ function setFavicon(Url) {
   var set_FAVICON;
   document.querySelector("link[rel*='icon']") ? set_FAVICON = document.querySelector("link[rel*='icon']") : ((set_FAVICON = document.createElement("link")).type = "image/png", set_FAVICON.rel = "shortcut icon", document.getElementsByTagName("head")[0].appendChild(set_FAVICON)), set_FAVICON.setAttribute("href", Url);
 }
+
+function arrayRemove(arr, value) {
+  return arr.filter(function(ele){return ele != value;});
+}
