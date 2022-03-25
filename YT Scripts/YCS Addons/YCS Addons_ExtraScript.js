@@ -20,7 +20,7 @@ async function FindComment_TimeStamps(e) {
 		ISE("#YCS_TimestampMatchResult label").style.color = "";
 		ISE("#YCS_TimestampMatchResult label").style.fontStyle = "";
 		if (e && ((e.type === 'keyup' && e.which == 13) || e.type === 'click') || e == null) {
-			ISE("#YCS_TimestampMatchResult label").innerHTML = "Loading..";
+			ISE("#YCS_TimestampMatchResult label").setAttribute('Loading', '');
 			SearchInput = document.querySelector("#ycs-input-search").value;
 		}
 		if (SearchInput) {
