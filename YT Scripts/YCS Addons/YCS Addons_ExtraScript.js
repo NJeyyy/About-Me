@@ -11,6 +11,7 @@ async function FindComment_TimeStamps(e) {
 		}
 	}
 	if ((e && (e.type === 'contextmenu' && e.path.includes(ISE('#FindMatchedTimeStamps.Checkbox_SearchAddons'))) || e && ((e.type === 'keyup' && e.which == 13) || e.type === 'click') || e == null) && !ISE("#YCS_TimestampMatchResult label[Loading]")) {
+		ISE('#YCS_TimestampMatchResult .LoadingBar').removeAttribute('style');
 		ISE("#YCS_TimestampMatchResult label").innerHTML = "";
 		while (ISE(".Absolutematch_yttimestamp")) {
 			ISE(".Absolutematch_yttimestamp").classList.remove("Absolutematch_yttimestamp");
