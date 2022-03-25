@@ -202,6 +202,7 @@ async function FindComment_TimeStamps(e) {
 				ISE("#YCS_TimestampMatchResult label").removeAttribute('Loading');
 				ISE("#YCS_TimestampMatchResult label").removeAttribute('title');
 			}
+			ISE('#YCS_TimestampMatchResult .LoadingBar').style.setProperty('width', '0%', 'important');
 		}
 	} else {
 		console.error('BLOCKED!');
