@@ -160,8 +160,6 @@ async function FindComment_TimeStamps(e) {
 							ISE('#YCS_TimestampMatchResult label ~ #LoadingBar').removeAttribute('title');
 						}
 						ISE("#YCS_TimestampMatchResult label").setAttribute('title', SearchInput + '\n' + '\nMatch Timestamp: ' + a__data["Matched_Comment"].length + '\nMatch Text: ' + a__data["TextMatch"].length);
-						ISE("#YCS_TimestampMatchResult label").removeAttribute('Loading');
-						ISE('#YCS_TimestampMatchResult label ~ #LoadingBar').removeAttribute('title');
 					} else if (a__data && a__data["Matched_Comment"].length == 0 || !a__data) {
 						console.error("NOT FOUND!");
 						console.log(a__data);
