@@ -182,11 +182,15 @@ async function FindComment_TimeStamps(e) {
 						}
 					}
 					console.groupEnd();
-					ISE("#YCS_TimestampMatchResult label").removeAttribute('Loading');
-					ISE('#YCS_TimestampMatchResult label ~ #LoadingBar').removeAttribute('title');
 					CurrentProgress++;
 					ISE('#YCS_TimestampMatchResult .LoadingBar').style.setProperty('width', (CurrentProgress/TotalProgress)*100 + '%', 'important');
+					await sleep(600);
+					ISE("#YCS_TimestampMatchResult label").removeAttribute('Loading');
+					ISE('#YCS_TimestampMatchResult label ~ #LoadingBar').removeAttribute('title');
 				} else {
+					CurrentProgress++;
+					ISE('#YCS_TimestampMatchResult .LoadingBar').style.setProperty('width', (CurrentProgress/TotalProgress)*100 + '%', 'important');
+					await sleep(600);
 					ISE("#YCS_TimestampMatchResult label").innerHTML = "There\'s no matched timestamp nor comment available";
 					ISE("#YCS_TimestampMatchResult label").removeAttribute('Loading');
 					ISE("#YCS_TimestampMatchResult label").removeAttribute('title');
