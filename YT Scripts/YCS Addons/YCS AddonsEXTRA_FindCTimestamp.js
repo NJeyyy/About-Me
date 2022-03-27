@@ -39,7 +39,7 @@ async function FindComment_TimeStamps(e) {
 				ISE('#YCS_TimestampMatchResult label ~ #LoadingBar').removeAttribute('title');
 			} else if (SearchInput && SearchInput.match(/([\|\(\)\-\[\]0-9]+:)?[\|\(\)\-\[\]0-9]+:[\|\(\)\-\[\]0-9]+/g)) {
 				if (SE("#ycs-search-result #ycs_wrap_comments div.ycs-render-comment:not([SpamCommentDisplay])")) {
-					var regexTOyk = new RegExp(".*(?<![0-9])(?<!:)\\b[0]?" + SearchInput + "([0-9])?(\\s+)?.*(\\s+)?(.*)?", "gm");
+					var regexTOyk = new RegExp(".*(?<![1-9])(?<!:)\\b[0]?" + SearchInput + "([0-9]{2})?[^:](?![:])(\\s+)?.*(\\s+)?(.*)?", "gm");
 					var a__data = {
 						"Index": {
 							"Included": [],
