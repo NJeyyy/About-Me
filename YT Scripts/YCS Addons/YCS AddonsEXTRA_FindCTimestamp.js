@@ -164,6 +164,8 @@ async function FindComment_TimeStamps(e) {
 						ISE('#YCS_TimestampMatchResult label ~ #LoadingBar').removeAttribute('title');
 					} else if (a__data && a__data["Matched_Comment"].length == 0 || !a__data) {
 						console.error("NOT FOUND!");
+						console.log(a__data);
+						console.log('RegEx used: ' + regexTOyk);
 						console.groupEnd();
 						ISE("#YCS_TimestampMatchResult label").style.color = "red";
 						ISE("#YCS_TimestampMatchResult label").innerHTML = "There\'s no matched timestamp.";
