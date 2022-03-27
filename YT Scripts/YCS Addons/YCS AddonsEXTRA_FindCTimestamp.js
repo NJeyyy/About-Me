@@ -149,6 +149,7 @@ async function FindComment_TimeStamps(e) {
 							console.log("Index that\'s excluded--doesnt match the specified timestamp: All comment is match the timestamp, nothing excluded");
 						}
 						console.log(a__data);
+						console.log('RegEx used: ' + regexTOyk);
 						if (a__data["Index"]["Excluded"].length != 0) {
 							ISE("#YCS_TimestampMatchResult label").innerHTML = "Comment with timestamp match found: " + a__data["Matched_Comment"].length + "/" + SE("#ycs-search-result #ycs_wrap_comments div.ycs-render-comment:not([SpamCommentDisplay])").length;
 							ISE("#YCS_TimestampMatchResult label").removeAttribute('Loading');
