@@ -28,6 +28,7 @@ async function FindComment_TimeStamps(e) {
 			ISE("#YCS_TimestampMatchResult label").setAttribute('Loading', '');
 			CurrentProgress++;
 			ISE('#YCS_TimestampMatchResult .LoadingBar').style.setProperty('width', (CurrentProgress/TotalProgress)*100 + '%', 'important');
+			await sleep(100);
       ISE('#YCS_TimestampMatchResult label[Loading] ~ #LoadingBar').setAttribute('title', 'Checking search input..');
 			await sleep(1200); // DELAY----------------------------------------------------------
 			if (!SearchInput || SearchInput.length == 0) {
@@ -57,8 +58,9 @@ async function FindComment_TimeStamps(e) {
 					//console.groupCollapsed('Matching comment log of ' + SE("#ycs-search-result #ycs_wrap_comments div.ycs-render-comment").length + ' comments:');
 					console.group('Matching comment log of ' + SE("#ycs-search-result #ycs_wrap_comments div.ycs-render-comment").length + ' comments:');
 					CurrentProgress++;
-					ISE('#YCS_TimestampMatchResult .LoadingBar').style.setProperty('width', (CurrentProgress/TotalProgress)*100 + '%', 'important');
           ISE('#YCS_TimestampMatchResult label[Loading] ~ #LoadingBar').setAttribute('title', 'Extracting the comments result..');
+					ISE('#YCS_TimestampMatchResult .LoadingBar').style.setProperty('width', (CurrentProgress/TotalProgress)*100 + '%', 'important');
+					await sleep(150);
 					for (var i0 = 0; i0 < SE("#ycs-search-result #ycs_wrap_comments div.ycs-render-comment:not([SpamCommentDisplay])").length; i0++) {
 						if (SE("#ycs-search-result #ycs_wrap_comments div.ycs-render-comment")[i0].querySelector(".ycs-comment__main-text").textContent.match(regexTOyk)) {
 							if (SE("#ycs-search-result #ycs_wrap_comments div.ycs-render-comment")[i0].querySelector("a.ycs-gotochat-video[href]")) {
@@ -122,6 +124,7 @@ async function FindComment_TimeStamps(e) {
 					ISE('#YCS_TimestampMatchResult label[Loading] ~ #LoadingBar').setAttribute('title', 'Highlighting the comments..');
 					CurrentProgress++;
 					ISE('#YCS_TimestampMatchResult .LoadingBar').style.setProperty('width', (CurrentProgress/TotalProgress)*100 + '%', 'important');
+					await sleep(150);
 					if (a__data && a__data["Matched_Comment"].length != 0) {
 						for (var iElemA1_1 = 0; iElemA1_1 < a__data["Matched_Comment"].length; iElemA1_1++) {
 							if (!a__data["Matched_Comment"][iElemA1_1].classList.contains("Absolutematch_yttimestamp")) {
@@ -206,10 +209,10 @@ async function FindComment_TimeStamps(e) {
 				console.groupEnd();
 			}
 		} else {
-      ISE("#YCS_TimestampMatchResult label").innerHTML = "No input.";
-      ISE("#YCS_TimestampMatchResult label").removeAttribute('Loading');
+			ISE("#YCS_TimestampMatchResult label").removeAttribute('Loading');
 			ISE("#YCS_TimestampMatchResult label").removeAttribute('title');
       ISE('#YCS_TimestampMatchResult .LoadingBar').style.setProperty('width', '0%', 'important');
+      ISE("#YCS_TimestampMatchResult label").innerHTML = "No input.";
       return null;
     }
 		if (ISE("label#YCS_TimestampMatchResult[Loading]")) {
