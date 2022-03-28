@@ -22,10 +22,9 @@ async function FindComment_TimeStamps(e) {
 		ISE("#YCS_TimestampMatchResult label").style.color = "";
 		ISE("#YCS_TimestampMatchResult label").style.fontStyle = "";
 		if (e && ((e.type === 'keyup' && e.which == 13) || e.type === 'click') || e == null) {
-			ISE("#YCS_TimestampMatchResult label").setAttribute('Loading', '');
 			SearchInput = document.querySelector("#ycs-input-search").value;
 		}
-		if (SearchInput) {
+		if (SearchInput && SearchInput.length > 0) {
 			ISE("#YCS_TimestampMatchResult label").setAttribute('Loading', '');
 			CurrentProgress++;
 			ISE('#YCS_TimestampMatchResult .LoadingBar').style.setProperty('width', (CurrentProgress/TotalProgress)*100 + '%', 'important');
@@ -35,7 +34,7 @@ async function FindComment_TimeStamps(e) {
 				let CStyle = "font-weight: 900; color: red;";
 				console.error("%c01000101501010010501010010501001111501010010500100001500100000501010100501101000501100101501110010501100101500100111501110011500100000501101110501101111500100000501100011501101111501101101501101101501100101501101110501110100500100000501100110501101111501110101501101110501100100500100000501110111501101001501110100501101000500100000501110100501101000501100101500100000501101101501100001501110100501100011501101000501100101501100100500100000501110100501101001501101101501100101501110011501110100501100001501101101501110000500101110", CStyle);
 				ISE('#YCS_TimestampMatchResult .LoadingBar').style.setProperty('width', '100%', 'important');
-				await sleep(600);
+				await sleep(150);
 				ISE("#YCS_TimestampMatchResult label").removeAttribute('Loading');
 				ISE('#YCS_TimestampMatchResult label ~ #LoadingBar').removeAttribute('title');
 				ISE("#YCS_TimestampMatchResult label").innerHTML = "No input!!";
@@ -182,13 +181,13 @@ async function FindComment_TimeStamps(e) {
 					console.groupEnd();
 					CurrentProgress++;
 					ISE('#YCS_TimestampMatchResult .LoadingBar').style.setProperty('width', (CurrentProgress/TotalProgress)*100 + '%', 'important');
-					await sleep(600);
+					await sleep(150);
 					ISE("#YCS_TimestampMatchResult label").removeAttribute('Loading');
 					ISE('#YCS_TimestampMatchResult label ~ #LoadingBar').removeAttribute('title');
 				} else {
 					CurrentProgress++;
 					ISE('#YCS_TimestampMatchResult .LoadingBar').style.setProperty('width', (CurrentProgress/TotalProgress)*100 + '%', 'important');
-					await sleep(600);
+					await sleep(150);
 					ISE("#YCS_TimestampMatchResult label").innerHTML = "There\'s no matched timestamp nor comment available";
 					ISE("#YCS_TimestampMatchResult label").removeAttribute('Loading');
 					ISE("#YCS_TimestampMatchResult label").removeAttribute('title');
@@ -199,14 +198,20 @@ async function FindComment_TimeStamps(e) {
 				ISE("#YCS_TimestampMatchResult label").style.fontStyle = "italic";
 				ISE("#YCS_TimestampMatchResult label").style.color = "red";
 				ISE('#YCS_TimestampMatchResult .LoadingBar').style.setProperty('width', '100%', 'important');
-				await sleep(600);
+				await sleep(150);
 				ISE("#YCS_TimestampMatchResult label").removeAttribute('Loading');
 				ISE("#YCS_TimestampMatchResult label").removeAttribute('title');
 				ISE('#YCS_TimestampMatchResult label ~ #LoadingBar').removeAttribute('title');
 				ISE("#YCS_TimestampMatchResult label").innerHTML = "[No match—the input is not a timestamp]";
 				console.groupEnd();
 			}
-		}
+		} else {
+      ISE("#YCS_TimestampMatchResult label").innerHTML = "No input.";
+      ISE("#YCS_TimestampMatchResult label").removeAttribute('Loading');
+			ISE("#YCS_TimestampMatchResult label").removeAttribute('title');
+      ISE('#YCS_TimestampMatchResult .LoadingBar').style.setProperty('width', '0%', 'important');
+      return null;
+    }
 		if (ISE("label#YCS_TimestampMatchResult[Loading]")) {
 			ISE("#YCS_TimestampMatchResult label").removeAttribute('Loading');
 			ISE("#YCS_TimestampMatchResult label").removeAttribute('title');
