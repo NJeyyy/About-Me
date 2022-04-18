@@ -1,5 +1,5 @@
 (function(){
-  var a;
+  var a = '';
   const YTR_CSSObj = {
     'CSSInfo': [
       {
