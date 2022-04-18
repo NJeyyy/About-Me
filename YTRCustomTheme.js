@@ -1,5 +1,5 @@
 (function(){
-  var a = '';
+  var a = '\n\n\n/*Youtuber Custom Theme*/\n';
   const YTR_CSSObj = {
     'CSSInfo': [
       {
