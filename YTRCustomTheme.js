@@ -37,7 +37,7 @@
   for (var loopI=0; loopI<YTR_CSSObj.CSSInfo.length; loopI++) {
     a += '/* '+ YTR_CSSObj.CSSInfo[loopI].YTRName +' */\n';
     a += YTR_CSSObj.CSSHandler[0][0].replaceAll('YTChannelName', YTR_CSSObj.CSSInfo[loopI].YTRName) + YTR_CSSObj.CSSHandler[0][1].replaceAll('ImageLink', YTR_CSSObj.CSSInfo[loopI].defaultCursor);
-    a += YTR_CSSObj.CSSHandler[1][0].replaceAll('YTChannelName', YTR_CSSObj.CSSInfo[loopI].YTRName) + YTR_CSSObj.CSSHandler[1][1].replaceAll('ImageLink', YTR_CSSObj.CSSInfo[0].PointerCursor);
+    a += YTR_CSSObj.CSSHandler[1][0].replaceAll('YTChannelName', YTR_CSSObj.CSSInfo[loopI].YTRName) + YTR_CSSObj.CSSHandler[1][1].replaceAll('ImageLink', YTR_CSSObj.CSSInfo[loopI].PointerCursor);
     a += '\n';
   }
   console.log('%c'+a, 'color:purple;font-family:garamond;font-size:18px;');
