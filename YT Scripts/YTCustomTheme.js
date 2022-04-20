@@ -2,7 +2,7 @@
 // @name              YTCustomTheme - "kinda" Simple
 // @namespace         youtube.com_CustomTheme
 // @match             https://www.youtube.com/*
-// @version           0.4
+// @version           0.4a
 // @author            NJ1n9
 // @description       My Custom Simple Theme for YT
 // @require           https://github.com/NJeyyy/About-Me/raw/13e26733d8953ed7989cf852d5836357cc47f1d8/ToolScript_Global_min.js
@@ -130,30 +130,6 @@ async function AddCustomTheme_SimpleTheme() {
 			}
 			Get_CSSElem.innerHTML += YTR_CSSPlus;
       
-      //TEMPLATE
-      //+ "/* YTChannelName */\n"
-      //+ 'html[YTR_Theme="YTChannelName"] * {\n'
-      //+ "   cursor: url(), auto;\n"
-      //+ "}\n"
-      //+ 'html[YTR_Theme="YTChannelName"] a, html[YTR_Theme="YTChannelName"] a *,
-      //html[YTR_Theme="YTChannelName"] button, html[YTR_Theme="YTChannelName"] button *,
-      //html[YTR_Theme="YTChannelName"] div.YCS-optional-function-CONTAINER *, html[YTR_Theme="YTChannelName"] #CollapseButton,
-      //html[YTR_Theme="YTChannelName"] #button *, html[YTR_Theme="YTChannelName"] #button,
-      //html[YTR_Theme="YTChannelName"] tp-yt-paper-tab, html[YTR_Theme="YTChannelName"] tp-yt-paper-tab *,
-      //html[YTR_Theme="YTChannelName"] [CPointer] {\n'
-      //+ "   cursor: url(), pointer !important;\n"
-      //+ '}\n'
-      //+ "\n"
-      
-      // else if (document.location.href.match() || document.title.match() || ISE("#channel-name .ytd-channel-name .ytd-channel-name .ytd-channel-name a").textContent.match()) {
-      //    ISE("html").setAttribute("YTR_Theme", "");
-      // }
-      
-      /* Pointer:
-       * a, a *, button, button *, div.YCS-optional-function-CONTAINER *,
-       * #button, #button *, #CollapseButton, tp-yt-paper-tab, tp-yt-paper-tab *,
-       * [CPointer]
-      */
     }
   }
   console.log("the CSS has been added!");
