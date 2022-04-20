@@ -2,7 +2,7 @@
 // @name              YTCustomTheme - "kinda" Simple
 // @namespace         youtube.com_CustomTheme
 // @match             https://www.youtube.com/*
-// @version           0.3c
+// @version           0.4
 // @author            NJ1n9
 // @description       My Custom Simple Theme for YT
 // @require           https://github.com/NJeyyy/About-Me/raw/13e26733d8953ed7989cf852d5836357cc47f1d8/ToolScript_Global_min.js
@@ -34,7 +34,7 @@ window.addEventListener('locationchange', SyncTheme_SimpleTheme);
 
 async function AddCustomTheme_SimpleTheme() {
   if (!ISE("#NJ1n9_Simple-Theme")) {
-    let ValueCSSElem = "\n"
+    const ValueCSSElem = "\n"
     /*
      	+ "#button.style-scope.ytd-toggle-button-renderer.style-default-active {\n"
      	+ "  color: rgb(41 199 177);\n"
@@ -52,78 +52,83 @@ async function AddCustomTheme_SimpleTheme() {
     + "  filter: drop-shadow(2px 2px 3px);\n"
     + "}\n"
     + "\n\n"
-    + "/* Customize the Chapter Section of vid */"
-    + "/* WTF YOUTUBE WHY YOU PUT THIS MIRACULOUS FEATURES AT THE BOTTOM OF NOWHERE FUCKING ASSHOLEE!! */"
+    /*+ "/ Customize the Chapter Section of vid /"
+    + "/ WTF YOUTUBE WHY YOU PUT THIS MIRACULOUS FEATURES AT THE BOTTOM OF NOWHERE FUCKING ASSHOLEE!! /"
     + "#info-contents ytd-video-primary-info-renderer ytd-horizontal-card-list-renderer[HideChapters] {\n"
     + "  transform: scaleY(0);\n"
     + "  transform-origin: top;\n"
-    + "}\n"
+    + "}\n"*/
     ;
+		/* YTR_Theme; that planned to be added:
+		>Drew Gooden -- Only have the sketch
+		>Kurtis Conner -- Done. Just need to a little bit extra stuff and get the .png file!
+		>Bread Boys -- Just planning to add, not yet planning the other thingXD
+		>BeaconCream -- Already have a reference and a bit illustration for it
+		*/
     var AddCSSElem = document.createElement("style");
     AddCSSElem.setAttribute("id", "NJ1n9_Simple-Theme");
     AddCSSElem.innerHTML = ValueCSSElem;
     await document.head.appendChild(AddCSSElem);
     var Get_CSSElem = ISE("#NJ1n9_Simple-Theme");
-  
-      let YTR_ThemePlusSTATE = true; /* Custom THEME for several Youtuber! */
-    
-    //Danny Gonzalez
-    if (YTR_ThemePlusSTATE) {
-      let YTR_CSSPlus = "\n\n\n/*Youtuber Custom Theme*/\n"
-      + "/* Danny Gonzalez */\n"
-      + 'html[YTR_Theme="Danny Gonzalez"] * {\n'
-      + "   cursor: url(https://i.ibb.co/Wv32v9d/Nut-Cracker-Danny-Gonzalez.png), auto;"
-      + "}\n"
-      + 'html[YTR_Theme="Danny Gonzalez"] a, html[YTR_Theme="Danny Gonzalez"] a *, '
-      + 'html[YTR_Theme="Danny Gonzalez"] button, html[YTR_Theme="Danny Gonzalez"] button *, '
-      + 'html[YTR_Theme="Danny Gonzalez"] #button, html[YTR_Theme="Danny Gonzalez"] #button *, '
-      + 'html[YTR_Theme="Danny Gonzalez"] div.YCS-optional-function-CONTAINER *, html[YTR_Theme="Danny Gonzalez"] #CollapseButton, '
-      + 'html[YTR_Theme="Danny Gonzalez"] tp-yt-paper-tab, html[YTR_Theme="Danny Gonzalez"] tp-yt-paper-tab *, '
-      + 'html[YTR_Theme="Danny Gonzalez"] [CPointer] {\n'
-      + "   cursor: url(https://i.ibb.co/sthbwsP/GREG-Danny-Gonzalez.png), pointer !important;"
-      + "}\n"
-      + "\n"
-      + "/* Markiplier */\n"
-      + 'html[YTR_Theme="Markiplier"] * {\n'
-      + "   cursor: url(https://i.ibb.co/8XxwMHM/MARKIPLIER.png), auto;\n"
-      + "}\n"
-      + 'html[YTR_Theme="Markiplier"] a, html[YTR_Theme="Markiplier"] a *, '
-      + 'html[YTR_Theme="Markiplier"] button, html[YTR_Theme="Markiplier"] button *, '
-      + 'html[YTR_Theme="Markiplier"] div.YCS-optional-function-CONTAINER *, html[YTR_Theme="Markiplier"] #CollapseButton, '
-      + 'html[YTR_Theme="Markiplier"] #button *, html[YTR_Theme="Markiplier"] #button, '
-      + 'html[YTR_Theme="Markiplier"] tp-yt-paper-tab, html[YTR_Theme="Markiplier"] tp-yt-paper-tab *, '
-      + 'html[YTR_Theme="Markiplier"] [CPointer] {\n'
-      + "   cursor: url(https://i.ibb.co/smQvRPn/MARKIPLIER2.png), pointer !important;\n"
-      + '}\n'
-      + "\n"
-      + "/* MiawAug */\n"
-      + 'html[YTR_Theme="MiawAug"] * {\n'
-      + "   cursor: url(https://i.ibb.co/FndNSwM/MiawAug.png), auto;\n"
-      + "}\n"
-      + 'html[YTR_Theme="MiawAug"] a, html[YTR_Theme="MiawAug"] a *, '
-      + 'html[YTR_Theme="MiawAug"] button, html[YTR_Theme="MiawAug"] button *, '
-      + 'html[YTR_Theme="MiawAug"] div.YCS-optional-function-CONTAINER *, html[YTR_Theme="MiawAug"] #CollapseButton, '
-      + 'html[YTR_Theme="MiawAug"] #button *, html[YTR_Theme="MiawAug"] #button, '
-      + 'html[YTR_Theme="MiawAug"] tp-yt-paper-tab, html[YTR_Theme="MiawAug"] tp-yt-paper-tab *, '
-      + 'html[YTR_Theme="MiawAug"] [CPointer] {\n'
-      + "   cursor: url(https://i.ibb.co/3scr8XZ/MiawAug2.png), pointer !important;\n"
-      + '}\n'
-      + "\n"
-      + "/* Jacksepticeye */\n"
-      + 'html[YTR_Theme="Jacksepticeye"] * {\n'
-      + "   cursor: url(https://i.ibb.co/2Mntsps/Jacksepticeye-SAM-the-mascot.png), auto;\n"
-      + "}\n"
-      + 'html[YTR_Theme="Jacksepticeye"] a, html[YTR_Theme="Jacksepticeye"] a *, '
-      + 'html[YTR_Theme="Jacksepticeye"] button, html[YTR_Theme="Jacksepticeye"] button *, '
-      + 'html[YTR_Theme="Jacksepticeye"] div.YCS-optional-function-CONTAINER *, html[YTR_Theme="Jacksepticeye"] #CollapseButton, '
-      + 'html[YTR_Theme="Jacksepticeye"] #button *, html[YTR_Theme="Jacksepticeye"] #button, '
-      + 'html[YTR_Theme="Jacksepticeye"] tp-yt-paper-tab, html[YTR_Theme="Jacksepticeye"] tp-yt-paper-tab *, '
-      + 'html[YTR_Theme="Jacksepticeye"] [CPointer] {\n'
-      + "   cursor: url(https://i.ibb.co/h1QY33S/Jacksepticeye-Bell.png), pointer !important;\n"
-      + '}\n'
-      + "\n"
-      ;
-      Get_CSSElem.innerHTML += YTR_CSSPlus;
+		
+		let YTR_ThemePlusSTATE = true; /* Custom THEME for several Youtuber! */
+		
+		if (YTR_ThemePlusSTATE) {
+			var YTR_CSSPlus = "\n\n\n/*Youtuber Custom Theme*/\n";
+			const YTR_CSSObj = {
+				'CSSInfo': [
+					{
+						'YTRName': 'Danny Gonzalez',
+						'defaultCursor': 'https://i.ibb.co/Wv32v9d/Nut-Cracker-Danny-Gonzalez.png',
+						'PointerCursor': 'https://i.ibb.co/sthbwsP/GREG-Danny-Gonzalez.png'
+					},
+					{
+						'YTRName': 'Markiplier',
+						'defaultCursor': 'https://i.ibb.co/8XxwMHM/MARKIPLIER.png',
+						'PointerCursor': 'https://i.ibb.co/smQvRPn/MARKIPLIER2.png'
+					},
+					{
+						'YTRName': 'MiawAug',
+						'defaultCursor': 'https://i.ibb.co/FndNSwM/MiawAug.png',
+						'PointerCursor': 'https://i.ibb.co/3scr8XZ/MiawAug2.png'
+					},
+					{
+						'YTRName': 'Jacksepticeye',
+						'defaultCursor': 'https://i.ibb.co/2Mntsps/Jacksepticeye-SAM-the-mascot.png',
+						'PointerCursor': 'https://i.ibb.co/h1QY33S/Jacksepticeye-Bell.png'
+					},
+					{
+						'YTRName': 'Kurtis Conner',
+						'defaultCursor': 'https://i.ibb.co/4mMwt3P/KURTISTOWN-Kurtis-Conner.png',
+						'PointerCursor': 'https://i.ibb.co/QFYmJL0/FOLKS-Kurtis-Conner.png'
+					}
+				],
+				'CSSHandler': [
+					[
+						'html[YTR_Theme="YTChannelName"] *',
+						' {\n cursor: url(ImageLink), auto;\n}\n'
+					],
+					[
+						'html[YTR_Theme="YTChannelName"] a, html[YTR_Theme="YTChannelName"] a *, html[YTR_Theme="YTChannelName"] button, html[YTR_Theme="YTChannelName"] button *, html[YTR_Theme="YTChannelName"] div.YCS-optional-function-CONTAINER *, html[YTR_Theme="YTChannelName"] #CollapseButton, html[YTR_Theme="YTChannelName"] #button *, html[YTR_Theme="YTChannelName"] #button, html[YTR_Theme="YTChannelName"] tp-yt-paper-tab, html[YTR_Theme="YTChannelName"] tp-yt-paper-tab *, html[YTR_Theme="YTChannelName"] [CPointer]',
+						' {\n cursor: url(ImageLink), pointer !important;\n}\n'
+					]
+				]
+			};
+			for (var loopI=0; loopI<YTR_CSSObj.CSSInfo.length; loopI++) {
+				YTR_CSSPlus += '/* '+ YTR_CSSObj.CSSInfo[loopI].YTRName +' */\n';
+				YTR_CSSPlus += YTR_CSSObj.CSSHandler[0][0].replaceAll('YTChannelName', YTR_CSSObj.CSSInfo[loopI].YTRName);
+				if (YTR_CSSObj.CSSInfo[loopI].ExtraAttr) {
+					YTR_CSSPlus += YTR_CSSObj.CSSInfo[loopI].ExtraAttr;
+				}
+				YTR_CSSPlus += YTR_CSSObj.CSSHandler[0][1].replaceAll('ImageLink', YTR_CSSObj.CSSInfo[loopI].defaultCursor);
+				YTR_CSSPlus += YTR_CSSObj.CSSHandler[1][0].replaceAll('YTChannelName', YTR_CSSObj.CSSInfo[loopI].YTRName);
+				if (YTR_CSSObj.CSSInfo[loopI].ExtraAttr) {
+					YTR_CSSPlus += YTR_CSSObj.CSSInfo[loopI].ExtraAttr;
+				}
+				YTR_CSSPlus += YTR_CSSObj.CSSHandler[1][1].replaceAll('ImageLink', YTR_CSSObj.CSSInfo[loopI].PointerCursor);
+				YTR_CSSPlus += '\n';
+			}
+			Get_CSSElem.innerHTML += YTR_CSSPlus;
       
       //TEMPLATE
       //+ "/* YTChannelName */\n"
@@ -160,22 +165,24 @@ async function SyncTheme_SimpleTheme() {
   await waitFor(_ => document.visibilityState == 'visible' || document.webkitVisibilityState == "visible");
   
   
-  if (document.location.href.match(/(Danny100)|(2Danny2Furious)|(DannyGonzalez)/gi) || document.title.match(/(Danny Gonzalez - YouTube)|(2 Danny 2 Furious - YouTube)/i) || ISE("#channel-name .ytd-channel-name .ytd-channel-name .ytd-channel-name a").textContent.match(/(Danny100)|(2Danny2Furious)|(DannyGonzalez)/i)) {
+  if (document.location.href.match(/(Danny100|2Danny2Furious|DannyGonzalez)/gi) || document.title.match(/^([()0-9\s]+)?(Danny Gonzalez - YouTube|2 Danny 2 Furious - YouTube)/i) || ISE("#channel-name .ytd-channel-name .ytd-channel-name .ytd-channel-name a").textContent.match(/(2 Danny 2 Furious|Danny Gonzalez)/gi)) {
     ISE("html").setAttribute("YTR_Theme", "Danny Gonzalez");
-  } else if (document.location.href.match(/Markiplier/gi) || document.title.match(/Markiplier - YouTube/i) || ISE("#channel-name .ytd-channel-name .ytd-channel-name .ytd-channel-name a").textContent.match(/Markiplier/i)) {
+  } else if (document.location.href.match(/Markiplier/gi) || document.title.match(/^([()0-9\s]+)?Markiplier - YouTube/i) || ISE("#channel-name .ytd-channel-name .ytd-channel-name .ytd-channel-name a").textContent.match(/Markiplier/ig)) {
     ISE("html").setAttribute("YTR_Theme", "Markiplier");
-  } else if (document.location.href.match(/(MiawAug)|(MeotMiawAug)|(Meot)/i) || document.title.match(/(MiawAug - YouTube)|(Meot - YouTube)/i) || ISE("#channel-name .ytd-channel-name .ytd-channel-name .ytd-channel-name a").textContent.match(/(MiawAug)|(MeotMiawAug)|(Meot)/i)) {
+  } else if (document.location.href.match(/(MiawAug|MeotMiawAug|Meot)/gi) || document.title.match(/^([()0-9\s]+)?(MiawAug - YouTube|Meot - YouTube)/i) || ISE("#channel-name .ytd-channel-name .ytd-channel-name .ytd-channel-name a").textContent.match(/(MiawAug|Meot)/ig)) {
     ISE("html").setAttribute("YTR_Theme", "MiawAug");
-  } else if (document.location.href.match(/(Jacksepticeye)|(Jacksepticeye?Clips)/i) || document.title.match(/(Jacksepticeye Clips - YouTube)|(jacksepticeye - YouTube)/i) || ISE("#channel-name .ytd-channel-name .ytd-channel-name .ytd-channel-name a").textContent.match(/(Jacksepticeye)|(Jacksepticeye?Clips)/i)) {
+  } else if (document.location.href.match(/(Jacksepticeye|JacksepticeyeClips)/gi) || document.title.match(/^([()0-9\s]+)?(Jacksepticeye Clips - YouTube|jacksepticeye - YouTube)/i) || ISE("#channel-name .ytd-channel-name .ytd-channel-name .ytd-channel-name a").textContent.match(/(Jacksepticeye|Jacksepticeye Clips)/gi)) {
     ISE("html").setAttribute("YTR_Theme", "Jacksepticeye");
+	} else if (document.location.href.match(/(KurtisConner|VeryReallyGood)/gi) || document.title.match(/^([()0-9\s]+)?(Kurtis Conner - YouTube|Very Really Good - YouTube)/i) || ISE("#channel-name .ytd-channel-name .ytd-channel-name .ytd-channel-name a").textContent.match(/(Kurtis Conner|Very Really Good)/gi)) {
+		ISE("html").setAttribute("YTR_Theme", "Kurtis Conner");
   } else {
-    ISE("html").setAttribute("YTR_Theme", "");
+    ISE("html").removeAttribute("YTR_Theme");
   }
   console.log("the CSS cursor type has been set!");
   
   /*if (ISE("#info-contents ytd-video-primary-info-renderer ytd-horizontal-card-list-renderer")) {
     ISE("#info-contents ytd-video-primary-info-renderer ytd-horizontal-card-list-renderer").remove();
-    ISE("#info-contents ytd-video-primary-info-renderer div#button");
+    ISE("#info-contents ytd-video-primary-info-renderer div#button")
   } else {
     MoveUPChapterSection(); // <-- About.. the FUCKIN' CHAPTERS SECTION!?
   }*/
@@ -224,10 +231,4 @@ async function SyncTheme_SimpleTheme() {
     }
   }
   return false;
-}/*
-
-/* YTR_Theme; that planned to be added:
->Kurtis Conner -- Still planning on the cursor design
->Bread Boys -- Just planning to add, not yet planning anythingXD
->BeaconCream -- One cursor is a cream, and the others.. just check the channel and think about it later..
-*/
+}*/
