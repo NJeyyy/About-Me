@@ -1,3 +1,4 @@
+//
 async function FindComment_TimeStamps(e) {
 	var SearchInput;
 	var TotalProgress = 4; //Check search-input, Extracting comments, highlighting them, Send result to DevTools and finishing the progress!
@@ -42,7 +43,8 @@ async function FindComment_TimeStamps(e) {
 				ISE('#YCS_TimestampMatchResult .LoadingBar').style.setProperty('width', '0%', 'important');
 				return null;
 			} else if (SearchInput && SearchInput.match(/([\|\(\)\-\[\]0-9]+:)?[\|\(\)\-\[\]0-9]+:[\|\(\)\-\[\]0-9]+/g)) {
-				if (SE("#ycs-search-result #ycs_wrap_comments div.ycs-render-comment:not([SpamCommentDisplay])")) {
+				var CommentsElementSelector = SE("#ycs-search-result #ycs_wrap_comments div.ycs-render-comment:not(.ycs-show_more_block, [SpamCommentDisplay])");
+				if (CommentsElementSelector) {
 					var regexTOyk = new RegExp(".*(?<![1-9])(?<!:)\\b[0]?" + SearchInput + "([0-9]{2})?[^:](?![:])(\\s+)?.*(\\s+)?(.*)?", "gm");
 					var a__data = {
 						"Index": {
@@ -61,7 +63,7 @@ async function FindComment_TimeStamps(e) {
           ISE('#YCS_TimestampMatchResult label[Loading] ~ #LoadingBar').setAttribute('title', 'Extracting the comments result..');
 					ISE('#YCS_TimestampMatchResult .LoadingBar').style.setProperty('width', (CurrentProgress/TotalProgress)*100 + '%', 'important');
 					await sleep(150);
-					for (var i0 = 0; i0 < SE("#ycs-search-result #ycs_wrap_comments div.ycs-render-comment:not([SpamCommentDisplay])").length; i0++) {
+					for (var i0 = 0; i0 < CommentsElementSelector.length; i0++) {
 						if (SE("#ycs-search-result #ycs_wrap_comments div.ycs-render-comment")[i0].querySelector(".ycs-comment__main-text").textContent.match(regexTOyk)) {
 							if (SE("#ycs-search-result #ycs_wrap_comments div.ycs-render-comment")[i0].querySelector("a.ycs-gotochat-video[href]")) {
 								if (SE("#ycs-search-result #ycs_wrap_comments div.ycs-render-comment")[i0].querySelectorAll("a.ycs-gotochat-video[href]").length > 1) {
@@ -157,11 +159,14 @@ async function FindComment_TimeStamps(e) {
 						console.log(a__data);
 						console.log('RegEx used: ' + regexTOyk);
 						if (a__data["Index"]["Excluded"].length != 0) {
-							ISE("#YCS_TimestampMatchResult label").innerHTML = "Comment with timestamp match found: " + a__data["Matched_Comment"].length + "/" + SE("#ycs-search-result #ycs_wrap_comments div.ycs-render-comment:not([SpamCommentDisplay])").length;
+							ISE("#YCS_TimestampMatchResult label").innerHTML = "Comment with timestamp match found: " + a__data["Matched_Comment"].length + "/" + CommentsElementSelector.length;
 						} else if (a__data["Index"]["Excluded"].length == 0) {
 							ISE("#YCS_TimestampMatchResult label").innerHTML = "Comment with timestamp match found: All";
 						}
-						ISE("#YCS_TimestampMatchResult label").setAttribute('title', SearchInput + '\n' + '\nMatch Timestamp: ' + a__data["Matched_Comment"].length + '\nMatch Text: ' + a__data["TextMatch"].length);
+						ISE("#YCS_TimestampMatchResult label").setAttribute('title', SearchInput + '\n' + '\nMatch Timestamp: ' + a__data["Matched_Comment"].length
+																																+ '\nMatch Text: ' + a__data["TextMatch"].length
+																																+ '\nComments Excluded(Got Hidden): ' + ISE("#ycs-search-result #ycs_wrap_comments div.ycs-render-comment.ycs-show_more_block").textContent.match(/[0-9]+/)[0]
+																															  + '*𝘛𝘰 𝘴𝘤𝘢𝘯 𝘢𝘭𝘭 𝘰𝘧 𝘵𝘩𝘦 𝘤𝘰𝘮𝘮𝘦𝘯𝘵𝘴, 𝘺𝘰𝘶 𝘯𝘦𝘦𝘥 𝘵𝘰 𝘴𝘩𝘰𝘸 𝘢𝘭𝘭 𝘵𝘩𝘦 𝘤𝘰𝘮𝘮𝘦𝘯𝘵𝘴 𝘣𝘺 𝘤𝘭𝘪𝘤𝘬𝘪𝘯𝘨 𝘵𝘩𝘦 𝘣𝘶𝘵𝘵𝘰𝘯 𝘵𝘰 𝘴𝘩𝘰𝘸 𝘮𝘰𝘳𝘦 𝘰𝘧 𝘵𝘩𝘦𝘮!');
 					} else if (a__data && a__data["Matched_Comment"].length == 0 || !a__data) {
 						console.error("NOT FOUND!");
 						console.log(a__data);
