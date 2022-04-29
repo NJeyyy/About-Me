@@ -10,7 +10,7 @@
 // @run-at            document-idle
 // @icon              https://cdn-icons-png.flaticon.com/128/1383/1383327.png
 // @require           https://github.com/NJeyyy/About-Me/raw/13e26733d8953ed7989cf852d5836357cc47f1d8/ToolScript_Global_min.js
-// @require           https://github.com/NJeyyy/About-Me/raw/5dd9f5d9537356bd2756bafa3955a559e0d81de1/YT%20Scripts/YCS%20Addons/YCS%20AddonsEXTRA_FindCTimestamp.js
+// @require           https://github.com/NJeyyy/About-Me/raw/a0ff93865f6e7a2784854cda64d9804aeb96989a/YT%20Scripts/YCS%20Addons/YCS%20AddonsEXTRA_FindCTimestamp.js
 // @grant             GM.setValue
 // @grant             GM.getValue
 // @noframes
