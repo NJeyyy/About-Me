@@ -267,6 +267,7 @@ async function Startonlyonvideopage() {
 					}
 				}
 			}
+			console.log('This video is played in a playlist.. correct?');
 		}
     sessionStorage.setItem("AlreadyRUN_YTOptionalFunction1", true);
 		console.log("DONE! that\'s script that's only run in video page!");
