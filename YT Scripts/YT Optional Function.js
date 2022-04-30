@@ -2,7 +2,7 @@
 
 // ==UserScript==
 // @name           YT Optional Function
-// @version        2.6b_1759-30042022
+// @version        2.6c_1846-30042022
 // @namespace      YT_scripts
 // @homepageURL    https://github.com/NJeyyy/About-Me/tree/Userscripts/YT%20Scripts
 // @supportURL     https://github.com/NJeyyy/About-Me/blob/Userscripts/YT%20Scripts/YT%20Optional%20Function.log
@@ -251,22 +251,23 @@ async function Startonlyonvideopage() {
 			ISE('.view-count.ytd-video-view-count-renderer').setAttribute('title', ISE('div#info-strings yt-formatted-string.ytd-video-primary-info-renderer').textContent);
 		}, {once: true});
 		ISE('.view-count.ytd-video-view-count-renderer').setAttribute('title', ISE('div#info-strings yt-formatted-string.ytd-video-primary-info-renderer').textContent);
-		ISE('video').onplay = E => {
-			var thiz = E.path[0];
-			var getPrevTimestamp = thiz.duration - 0.15;
-			if (thiz.currentTime >= getPrevTimestamp) {
-				thiz.pause();
-				thiz.currentTime = getPrevTimestamp;
-				thiz.onplay = E1 => {
-            if (thiz.currentTime >= getPrevTimestamp) {
+		if (document.location.href.match(/&list=/)) {
+			ISE('video').onplay = E => {
+				var thiz = E.path[0];
+				var getPrevTimestamp = thiz.duration - 0.15;
+				if (thiz.currentTime >= getPrevTimestamp) {
+					thiz.pause();
+					thiz.currentTime = getPrevTimestamp;
+					thiz.onplay = E1 => {
+						if (thiz.currentTime >= getPrevTimestamp) {
 							thiz.pause();
 							thiz.currentTime = getPrevTimestamp;console.error(E.path[0].currentTime);
 							console.warn('This video was about to end... Moreover, it seems that your video was shown in a playlist.\nSo... it\'s best to stop here to not proceed to the next video without your consent.');
 						}
+					}
 				}
 			}
 		}
-		
     sessionStorage.setItem("AlreadyRUN_YTOptionalFunction1", true);
 		console.log("DONE! that\'s script that's only run in video page!");
   } else {
