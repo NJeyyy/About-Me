@@ -13,6 +13,8 @@ async function FindComment_TimeStamps(e) {
 			ISE("#YCS_TimestampMatchResult label").setAttribute('Loading', ''); CurrentProgress=1;ISE('#YCS_TimestampMatchResult .LoadingBar').style.setProperty('width', (CurrentProgress/TotalProgress)*100 + '%', 'important');
 			//await sleep(10);
       ISE('#YCS_TimestampMatchResult label[Loading] ~ #LoadingBar').setAttribute('title', 'Checking search input..');
+			await waitFor(_=>ISE("#ycs_wrap_comments"));
+			ISE("#ycs_wrap_comments").setAttribute("HideSpoilerTS", "Loading");
 			await sleep(100); // DELAY----------------------------------------------------------
 			if (!SearchInput || SearchInput.length == 0) {
 				const CStyle = "font-weight: 900; color: red;";
@@ -24,7 +26,6 @@ async function FindComment_TimeStamps(e) {
 				ISE('#YCS_TimestampMatchResult .LoadingBar').removeAttribute("style");
 				return null;
 			} else if (SearchInput && SearchInput.match(/([\|\(\)\-\[\]0-9]+:)?[\|\(\)\-\[\]0-9]+:[\|\(\)\-\[\]0-9]+/g)) {
-				ISE("#ycs_wrap_comments").setAttribute("HideSpoilerTS", "Loading");
 				var CommentsElementSelector = SE("#ycs-search-result #ycs_wrap_comments div.ycs-render-comment:not(.ycs-show_more_block, [SpamCommentDisplay])");
 				if (CommentsElementSelector) {
 					const regexTOyk = new RegExp(".*(?<![1-9])(?<!:)\\b[0]?" + SearchInput + "([0-9]{2})?[^:](?![:])(\\s+)?.*(\\s+)?(.*)?", "gm");
