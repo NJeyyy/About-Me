@@ -1,20 +1,13 @@
 async function FindComment_TimeStamps(e) {
-  var SearchInput;var CurrentProgress = 0;
-	var TotalProgress = 4; //Check search-input, Extracting comments, highlighting them, Send result to DevTools and finishing the progress!
+  let SearchInput;var CurrentProgress = 0;
+	const TotalProgress = 4; //Check search-input, Extracting comments, highlighting them, Send result to DevTools and finishing the progress!
 	if (e && e.type === 'contextmenu' && e.path.includes(ISE('#FindMatchedTimeStamps.Checkbox_SearchAddons'))) {
-		e.preventDefault();
-		SearchInput = prompt('Insert a timestamp.');
-		if (SearchInput.length == 0) {
-			alert('THERE\'S NOTHING GOD DAMNIT!!');
-			return;
-		}
+		e.preventDefault(); SearchInput = prompt('Insert a timestamp.');
+		if (SearchInput.length == 0) {alert('THERE\'S NOTHING GOD DAMNIT!!'); return;}
 	}
 	if ((e && (e.type === 'contextmenu' && e.path.includes(ISE('#FindMatchedTimeStamps.Checkbox_SearchAddons'))) || e && ((e.type === 'keyup' && e.which == 13) || e.type === 'click') || e == null) && !ISE("#YCS_TimestampMatchResult label[Loading]")) {
-		ISE('#YCS_TimestampMatchResult .LoadingBar').removeAttribute('style');
-		ISE("#YCS_TimestampMatchResult label").innerHTML = "";
-		while (ISE(".Absolutematch_yttimestamp")) {ISE(".Absolutematch_yttimestamp").classList.remove("Absolutematch_yttimestamp");}
-		while (ISE(".Textmatch_yttimestampEXP")) {ISE(".Textmatch_yttimestampEXP").classList.remove("Textmatch_yttimestampEXP");}
-		ISE("#YCS_TimestampMatchResult label").style.color = "";ISE("#YCS_TimestampMatchResult label").style.fontStyle = "";
+		ISE('#YCS_TimestampMatchResult .LoadingBar').removeAttribute('style'); ISE("#YCS_TimestampMatchResult label").innerHTML = ""; ISE("#YCS_TimestampMatchResult label").style.color = ""; ISE("#YCS_TimestampMatchResult label").removeAttribute("style");
+		while(ISE(".Absolutematch_yttimestamp")) {ISE(".Absolutematch_yttimestamp").classList.remove("Absolutematch_yttimestamp");} while(ISE(".Textmatch_yttimestampEXP")) {ISE(".Textmatch_yttimestampEXP").classList.remove("Textmatch_yttimestampEXP");}
 		if (e && ((e.type === 'keyup' && e.which == 13) || e.type === 'click') || e == null) {
 			SearchInput = document.querySelector("#ycs-input-search").value;
 		}
@@ -25,7 +18,7 @@ async function FindComment_TimeStamps(e) {
       ISE('#YCS_TimestampMatchResult label[Loading] ~ #LoadingBar').setAttribute('title', 'Checking search input..');
 			await sleep(200); // DELAY----------------------------------------------------------
 			if (!SearchInput || SearchInput.length == 0) {
-				let CStyle = "font-weight: 900; color: red;";
+				const CStyle = "font-weight: 900; color: red;";
 				console.error("%c01000101501010010501010010501001111501010010500100001500100000501010100501101000501100101501110010501100101500100111501110011500100000501101110501101111500100000501100011501101111501101101501101101501100101501101110501110100500100000501100110501101111501110101501101110501100100500100000501110111501101001501110100501101000500100000501110100501101000501100101500100000501101101501100001501110100501100011501101000501100101501100100500100000501110100501101001501101101501100101501110011501110100501100001501101101501110000500101110", CStyle);
 				ISE('#YCS_TimestampMatchResult .LoadingBar').style.setProperty('width', '100%', 'important');
 				//await sleep(10);
@@ -37,7 +30,7 @@ async function FindComment_TimeStamps(e) {
 			} else if (SearchInput && SearchInput.match(/([\|\(\)\-\[\]0-9]+:)?[\|\(\)\-\[\]0-9]+:[\|\(\)\-\[\]0-9]+/g)) {
 				var CommentsElementSelector = SE("#ycs-search-result #ycs_wrap_comments div.ycs-render-comment:not(.ycs-show_more_block, [SpamCommentDisplay])");
 				if (CommentsElementSelector) {
-					var regexTOyk = new RegExp(".*(?<![1-9])(?<!:)\\b[0]?" + SearchInput + "([0-9]{2})?[^:](?![:])(\\s+)?.*(\\s+)?(.*)?", "gm");
+					const regexTOyk = new RegExp(".*(?<![1-9])(?<!:)\\b[0]?" + SearchInput + "([0-9]{2})?[^:](?![:])(\\s+)?.*(\\s+)?(.*)?", "gm");
 					var a__data = {
 						"Index": {
 							"Included": [],
@@ -55,11 +48,11 @@ async function FindComment_TimeStamps(e) {
           ISE('#YCS_TimestampMatchResult label[Loading] ~ #LoadingBar').setAttribute('title', 'Extracting the comments result..');
 					ISE('#YCS_TimestampMatchResult .LoadingBar').style.setProperty('width', (CurrentProgress/TotalProgress)*100 + '%', 'important');
 					//await sleep(10);
-					for (var i0 = 0; i0 < CommentsElementSelector.length; i0++) {
+					for (let i0 = 0; i0 < CommentsElementSelector.length; i0++) {
 						if (SE("#ycs-search-result #ycs_wrap_comments div.ycs-render-comment")[i0].querySelector(".ycs-comment__main-text").textContent.match(regexTOyk)) {
 							if (SE("#ycs-search-result #ycs_wrap_comments div.ycs-render-comment")[i0].querySelector("a.ycs-gotochat-video[href]")) {
 								if (SE("#ycs-search-result #ycs_wrap_comments div.ycs-render-comment")[i0].querySelectorAll("a.ycs-gotochat-video[href]").length > 1) {
-									for (var i1 = 0; i1 < SE("#ycs-search-result #ycs_wrap_comments div.ycs-render-comment")[i0].querySelectorAll("a.ycs-gotochat-video[href]").length; i1++) {
+									for (let i1 = 0; i1 < SE("#ycs-search-result #ycs_wrap_comments div.ycs-render-comment")[i0].querySelectorAll("a.ycs-gotochat-video[href]").length; i1++) {
 										let max_check = SE("#ycs-search-result #ycs_wrap_comments div.ycs-render-comment")[i0].querySelectorAll("a.ycs-gotochat-video[href]").length;
 										if (SE("#ycs-search-result #ycs_wrap_comments div.ycs-render-comment")[i0].querySelectorAll("a.ycs-gotochat-video[href]")[i1].textContent.match(regexTOyk)) {
 											let iN = i0 + 1;
@@ -119,12 +112,12 @@ async function FindComment_TimeStamps(e) {
 					CurrentProgress=3;ISE('#YCS_TimestampMatchResult .LoadingBar').style.setProperty('width', (CurrentProgress/TotalProgress)*100 + '%', 'important');
 					//await sleep(10);
 					if (a__data && a__data["Matched_Comment"].length != 0) {
-						for (var iElemA1_1 = 0; iElemA1_1 < a__data["Matched_Comment"].length; iElemA1_1++) {
+						for (let iElemA1_1 = 0; iElemA1_1 < a__data["Matched_Comment"].length; iElemA1_1++) {
 							if (!a__data["Matched_Comment"][iElemA1_1].classList.contains("Absolutematch_yttimestamp")) {
 								a__data["Matched_Comment"][iElemA1_1].classList.add("Absolutematch_yttimestamp");
 							}
 						}
-						for (var iElemA2_1 = 0; iElemA2_1 < a__data["TextMatch"].length; iElemA2_1++) {
+						for (let iElemA2_1 = 0; iElemA2_1 < a__data["TextMatch"].length; iElemA2_1++) {
 							if (!a__data["TextMatch"][iElemA2_1].classList.contains("Textmatch_yttimestampEXP")) {
 								a__data["TextMatch"][iElemA2_1].classList.add("Textmatch_yttimestampEXP");
 							}
@@ -211,7 +204,8 @@ async function FindComment_TimeStamps(e) {
 			ISE("#YCS_TimestampMatchResult label").removeAttribute('Loading');
 			ISE("#YCS_TimestampMatchResult label").removeAttribute('title');
 		}*/
-		ISE('#YCS_TimestampMatchResult .LoadingBar').style.setProperty('width', '0%', 'important');
+		ISE('#YCS_TimestampMatchResult .LoadingBar').removeAttribute('style');
+		if (SearchInput==document.querySelector("#ycs-input-search").value) {FindComment_TimeStamps();}
 	} else {console.error('BLOCKED!');}
 	return;
 }
