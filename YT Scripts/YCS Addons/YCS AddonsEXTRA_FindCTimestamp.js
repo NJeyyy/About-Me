@@ -195,7 +195,7 @@ async function FindComment_TimeStamps(e) {
 		ISE("#YCS_TimestampMatchResult label").removeAttribute('Loading');
 		ISE("#YCS_TimestampMatchResult label").removeAttribute('title');
 		ISE('#YCS_TimestampMatchResult .LoadingBar').removeAttribute('style');
-		if (SearchInput==document.querySelector("#ycs-input-search").value) {FindComment_TimeStamps();}
+		if (SearchInput!=document.querySelector("#ycs-input-search").value) {FindComment_TimeStamps();}
 	} else {console.error('BLOCKED!');}
 	return;
 }
