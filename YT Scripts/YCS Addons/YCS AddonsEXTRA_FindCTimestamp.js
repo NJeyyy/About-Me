@@ -110,15 +110,15 @@ async function FindComment_TimeStamps(e) {
 							}
 						}
 						if (a__data["TextMatch"].length != 0 && SE(".Textmatch_yttimestampEXP")) {
-							var TextMatchElements = Object.values(SE('.Textmatch_yttimestampEXP'));
-							for (let iElemA2_2 = 0; iElemA2_2 < TextMatchElements.length; iElemA2_2++) {
-								ISE("#ycs_wrap_comments").prepend(TextMatchElements.slice().reverse()[iElemA2_2]);
+							//var TextMatchElements = Object.values(SE('.Textmatch_yttimestampEXP'));
+							for (let iElemA2_2 = SE('.Textmatch_yttimestampEXP').length; iElemA2_2 >= 0; iElemA2_2--) {
+								ISE("#ycs_wrap_comments").prepend(SE('.Textmatch_yttimestampEXP')[iElemA2_2]);
 							}
 						}
 						if (a__data["Matched_Comment"].length != 0 && SE(".Absolutematch_yttimestamp")) {
-							var TimestampMatchElements = Object.values(SE('.Absolutematch_yttimestamp'));
-							for (let iElemA1_2 = 0; iElemA1_2 < TimestampMatchElements.length; iElemA1_2++) {
-								ISE("#ycs_wrap_comments").prepend(TimestampMatchElements.slice().reverse()[iElemA1_2]);
+							//var TimestampMatchElements = Object.values(SE('.Absolutematch_yttimestamp'));
+							for (let iElemA1_2 = SE('.Absolutematch_yttimestamp'); iElemA1_2 >= 0; iElemA1_2--) {
+								ISE("#ycs_wrap_comments").prepend(SE('.Absolutematch_yttimestamp')[iElemA1_2]);
 							}
 						}
 						console.log("Index that\'s match the specified timestamp: " + a__data["Index"]["Included"].join(", "));
@@ -151,8 +151,8 @@ async function FindComment_TimeStamps(e) {
 								}
 							}
 							var TextMatchElementsONLY = Object.values(SE('.Textmatch_yttimestampEXP'));
-							for (let iElemB2_2 = 0; iElemB2_2 < TextMatchElementsONLY.length; iElemB2_2++) {
-								ISE("#ycs_wrap_comments").prepend(TextMatchElementsONLY.slice().reverse()[iElemB2_2]);
+							for (let iElemB2_2 = SE('.Textmatch_yttimestampEXP').length; iElemB2_2 >= 0; iElemB2_2--) {
+								ISE("#ycs_wrap_comments").prepend(SE('.Textmatch_yttimestampEXP')[iElemB2_2]);
 							}
 							ISE("#ycs_wrap_comments").setAttribute("HideSpoilerTS", "TMatch");
 							ISE("#YCS_TimestampMatchResult label").innerHTML = "Only Text that\'s match the SearchInput, have fun with that!";
