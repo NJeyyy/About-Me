@@ -109,18 +109,18 @@ async function FindComment_TimeStamps(e) {
 								a__data["TextMatch"][iElemA2_1].classList.add("Textmatch_yttimestampEXP");
 							}
 						}
-						if (a__data["TextMatch"].length != 0 && SE(".Textmatch_yttimestampEXP")) {
+						if (/*(a__data["TextMatch"].length != 0 && SE(".Textmatch_yttimestampEXP"))*/ (a__data["Matched_Comment"].length != 0 && SE(".Absolutematch_yttimestamp"))) {
 							//var TextMatchElements = Object.values(SE('.Textmatch_yttimestampEXP'));
-							for (let iElemA2_2 = SE('.Textmatch_yttimestampEXP').length; iElemA2_2 >= 0; iElemA2_2--) {
-								ISE("#ycs_wrap_comments").prepend(SE('.Textmatch_yttimestampEXP')[iElemA2_2]);
+							for (let iElemA2_2 = SE(".Textmatch_yttimestampEXP, .Absolutematch_yttimestamp").length; iElemA2_2 >= 0; iElemA2_2--) {
+								ISE("#ycs_wrap_comments").prepend(SE(".Textmatch_yttimestampEXP, .Absolutematch_yttimestamp")[iElemA2_2]);
 							}
 						}
-						if (a__data["Matched_Comment"].length != 0 && SE(".Absolutematch_yttimestamp")) {
+						/*if (a__data["Matched_Comment"].length != 0 && SE(".Absolutematch_yttimestamp")) {
 							//var TimestampMatchElements = Object.values(SE('.Absolutematch_yttimestamp'));
 							for (let iElemA1_2 = SE('.Absolutematch_yttimestamp'); iElemA1_2 >= 0; iElemA1_2--) {
 								ISE("#ycs_wrap_comments").prepend(SE('.Absolutematch_yttimestamp')[iElemA1_2]);
 							}
-						}
+						}*/
 						console.log("Index that\'s match the specified timestamp: " + a__data["Index"]["Included"].join(", "));
 						if (a__data["Index"]["Excluded"].length != 0) {
 							console.log("Index that\'s excluded--doesnt match the specified timestamp: " + a__data["Index"]["Excluded"].join(", "));
