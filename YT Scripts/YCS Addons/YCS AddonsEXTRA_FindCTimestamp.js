@@ -1,18 +1,18 @@
 async function FindComment_TimeStamps(e) {
-  let SearchInput;var CurrentProgress = 0;
-	const TotalProgress = 4; //Check search-input, Extracting comments, highlighting them, Send result to DevTools and finishing the progress!
-	if (e && e.type === 'contextmenu' && e.path.includes(ISE('#FindMatchedTimeStamps.Checkbox_SearchAddons'))) {
-		e.preventDefault(); SearchInput = prompt('Insert a timestamp.');
-		if (SearchInput.length == 0) {alert('THERE\'S NOTHING GOD DAMNIT!!'); return;}
-	}
-	if ((e && (e.type === 'contextmenu' && e.path.includes(ISE('#FindMatchedTimeStamps.Checkbox_SearchAddons'))) || e && ((e.type === 'keyup' && e.which == 13) || e.type === 'click') || e == null) && !ISE("#YCS_TimestampMatchResult label[Loading]")) {
-		ISE('#YCS_TimestampMatchResult .LoadingBar').removeAttribute('style'); ISE("#YCS_TimestampMatchResult label").innerHTML = ""; ISE("#YCS_TimestampMatchResult label").style.color = ""; ISE("#YCS_TimestampMatchResult label").removeAttribute("style"); ISE("#YCS_TimestampMatchResult label").removeAttribute('title'); ISE("#ycs_wrap_comments").removeAttribute("HideSpoilerTS");
-		while(ISE(".Absolutematch_yttimestamp")) {ISE(".Absolutematch_yttimestamp").classList.remove("Absolutematch_yttimestamp");} while(ISE(".Textmatch_yttimestampEXP")) {ISE(".Textmatch_yttimestampEXP").classList.remove("Textmatch_yttimestampEXP");}
-		if (e && ((e.type === 'keyup' && e.which == 13) || e.type === 'click') || e == null) {SearchInput = document.querySelector("#ycs-input-search").value;}
-		if (SearchInput && SearchInput.length > 0) {
-			ISE("#YCS_TimestampMatchResult label").setAttribute('Loading', ''); CurrentProgress=1;ISE('#YCS_TimestampMatchResult .LoadingBar').style.setProperty('width', (CurrentProgress/TotalProgress)*100 + '%', 'important');
-			//await sleep(10);
-      ISE('#YCS_TimestampMatchResult label[Loading] ~ #LoadingBar').setAttribute('title', 'Checking search input..');
+    let SearchInput;var CurrentProgress = 0;
+    const TotalProgress = 4; //Check search-input, Extracting comments, highlighting them, Send result to DevTools and finishing the progress!
+    if (e && e.type === 'contextmenu' && e.path.includes(ISE('#FindMatchedTimeStamps.Checkbox_SearchAddons'))) {
+        e.preventDefault(); SearchInput = prompt('Insert a timestamp.');
+        if (SearchInput.length == 0) {alert('THERE\'S NOTHING GOD DAMNIT!!'); return;}
+    }
+    if ((e && (e.type === 'contextmenu' && e.path.includes(ISE('#FindMatchedTimeStamps.Checkbox_SearchAddons'))) || e && ((e.type === 'keyup' && e.which == 13) || e.type === 'click') || e == null) && !ISE("#YCS_TimestampMatchResult label[Loading]")) {
+        ISE('#YCS_TimestampMatchResult .LoadingBar').removeAttribute('style'); ISE("#YCS_TimestampMatchResult label").innerHTML = ""; ISE("#YCS_TimestampMatchResult label").style.color = ""; ISE("#YCS_TimestampMatchResult label").removeAttribute("style"); ISE("#YCS_TimestampMatchResult label").removeAttribute('title'); ISE("#ycs_wrap_comments").removeAttribute("HideSpoilerTS");
+        while(ISE(".Absolutematch_yttimestamp")) {ISE(".Absolutematch_yttimestamp").classList.remove("Absolutematch_yttimestamp");} while(ISE(".Textmatch_yttimestampEXP")) {ISE(".Textmatch_yttimestampEXP").classList.remove("Textmatch_yttimestampEXP");}
+        if (e && ((e.type === 'keyup' && e.which == 13) || e.type === 'click') || e == null) {SearchInput = document.querySelector("#ycs-input-search").value;}
+        if (SearchInput && SearchInput.length > 0) {
+            ISE("#YCS_TimestampMatchResult label").setAttribute('Loading', ''); CurrentProgress=1;ISE('#YCS_TimestampMatchResult .LoadingBar').style.setProperty('width', (CurrentProgress/TotalProgress)*100 + '%', 'important');
+            //await sleep(10);
+            ISE('#YCS_TimestampMatchResult label[Loading] ~ #LoadingBar').setAttribute('title', 'Checking search input..');
 			await waitFor(_=>ISE("#ycs_wrap_comments"));
 			ISE("#ycs_wrap_comments").setAttribute("HideSpoilerTS", "Loading");
 			await sleep(100); // DELAY----------------------------------------------------------
@@ -195,7 +195,9 @@ async function FindComment_TimeStamps(e) {
 		ISE("#YCS_TimestampMatchResult label").removeAttribute('Loading');ISE('#YCS_TimestampMatchResult label ~ #LoadingBar').removeAttribute('title');
 		ISE("#YCS_TimestampMatchResult label").removeAttribute('Loading');
 		ISE('#YCS_TimestampMatchResult .LoadingBar').removeAttribute('style');
-		if (SearchInput!=document.querySelector("#ycs-input-search").value) {FindComment_TimeStamps();}
-	} else {console.error('BLOCKED!');}
+		if (SearchInput!=document.querySelector("#ycs-input-search").value) {FindComment_TimeStamps();}else{
+			(Object.values($0.childNodes).filter(function(et){return et.nodeType == 3 && et.nodeValue.match(/undefined/i);})).forEach(function(that){that.remove();});
+		}
+	}/* else {console.error('BLOCKED!');}*/
 	return;
 }
