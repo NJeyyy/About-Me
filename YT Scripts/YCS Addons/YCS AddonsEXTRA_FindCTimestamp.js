@@ -196,7 +196,7 @@ async function FindComment_TimeStamps(e) {
 		ISE("#YCS_TimestampMatchResult label").removeAttribute('Loading');
 		ISE('#YCS_TimestampMatchResult .LoadingBar').removeAttribute('style');
 		if (SearchInput!=document.querySelector("#ycs-input-search").value) {FindComment_TimeStamps();}
-		setTimeout(function(){(Object.values($0.childNodes).filter(function(et){return et.nodeType == 3 && et.nodeValue.match(/^undefined$/i);})).forEach(function(that){that.remove();});}, 150);
+		setTimeout(function(){(Object.values(document.querySelector("#ycs-search-result #ycs_wrap_comments").childNodes).filter(function(et){return et.nodeType == 3 && et.nodeValue.match(/^undefined$/i);})).forEach(function(that){that.remove();});}, 150);
 		}/* else {console.error('BLOCKED!');}*/
 	return;
 }
