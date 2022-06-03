@@ -1,6 +1,6 @@
 //Created on Saturday, 26 Feb 2022 [07:55PM] | Perum Mega Sentul Jl. Bougenville IX Kota Bogor, Indonesia
-// CODE LANGUAGE IS IN JS aka JAVASCRIPT, but the file is .txt because I use this in userscript @resource and just so I could got the code by extracting it easily
-// NOTE! Before it doesnt work in js format, but now its working:>
+// CODE LANGUAGE IS IN JS aka JAVASCRIPT, but there's a .txt file version to this because I use it in userscript @resource and just so I could got the code by extracting it easily
+// NOTE! Before it doesn't work in js format, but now its working:>
 
 //######################################################################################################################################
 function GlobalToolscript_inf(command) {
@@ -278,6 +278,29 @@ function arrayRemove(arr, value) {
   });
 }
 
+// Source: 1 Grepper, 2 StackOverflow Answer, and ME
+// Create HTMLElement with Ease~
+function CreateElm(ElmTag, ElmAttrObj, ElmInnerHTML){
+	var ElmHdl;
+	if((typeof ElmTag).match(/string/i)&&(!ElmAttrObj||(typeof ElmAttrObj).match(/object/i))){
+		ElmHdl=document.createElement(ElmTag);
+		if(ElmAttrObj){
+			if(Array.isArray(ElmAttrObj)){
+				ElmAttrObj.forEach(function(SObj){ElmHdl.setAttribute(Object.keys(SObj)[0], Object.values(SObj)[0]);});
+			}else if(Object.keys(ElmAttrObj).length>1){
+				for(var b in ElmAttrObj){ElmHdl.setAttribute(b, ElmAttrObj[b]);}
+			}else{
+				ElmHdl.setAttribute(Object.keys(ElmAttrObj)[0], Object.values(ElmAttrObj)[0]);
+			}
+		}
+		if(ElmInnerHTML){ElmHdl.innerHTML=ElmInnerHTML;}
+	}
+	return ElmHdl;
+}
 
+//Source: https://www.educative.io/edpresso/how-to-escape-unescape-html-characters-in-string-in-javascript
+// Bypass HTMLCharacter or unescape it!
+function unescape_HTMLchar(strInput){return strInput.replaceAll(/&lt;/g , "<").replaceAll(/&gt;/g , ">").replaceAll(/&quot;/g , "\"").replaceAll(/&#39;/g , "\'").replaceAll(/&amp;/g , "&");}
+function escape_HTMLchar(strInput){return strInput.replaceAll(/&/g, "&amp;").replaceAll(/</g, "&lt;").replaceAll(/>/g, "&gt;").replaceAll(/"/g, "&quot;").replaceAll(/'/g, "&#39;");}
 
 //=============================================================================      =====================================================================================
