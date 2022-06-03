@@ -39,30 +39,19 @@ function KodeNuklir(Code, Pages, Site, Command) {
       return;
     }
   }
-  var cmdest = null;
+  let cmdest = null;
   
-  var URLz = null;
-  if (!Site) {
-    URLz = "https://nhentai.net/g/";
-  } else if (Site.match(/nhentai/i)) {
-    URLz = "https://nhentai.net/g/";
-  }
-  URLz += Code;
-  if (Pages) {
-    URLz += "/" + Pages;
-  }
+  let URLz = null;
+  URLz = Site.match(/nhentai/i)? "https://nhentai.net/g/" : "https://nhentai.net/g/";
+  URLz += Code +(Pages? "/"+Pages : '');
   if (Command && Command.match(/Open/i)) {
-      window.open(URLz,'_blank');
-      cmdest = true;
+		window.open(URLz,'_blank');cmdest = true;
   }
   if (Command && cmdest == null) {
     console.error("Looks like you insert a command that\'s not exist.")
   }
-  if (Code) {
-    return URLz;
-  } else {
-    console.error("Looks like you didn't put the code huh?");
-  }
+  if (Code) {return URLz;
+  } else {console.error("Looks like you didn't put the code huh?");}
 }
 
 
@@ -82,18 +71,14 @@ function pickTextColorBasedOnBgColorSimple(bgColor, lightColor, darkColor) {
 
 // Source: https://stackoverflow.com/a/3561711/15715476
 // Escape (with blackslash) special characters that have purpose to use in regex
-function escapeRegex(string) {
-    return string.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
-}
+function escapeRegex(string) {return string.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');}
 
 
 
 // Source: https://stackoverflow.com/a/39914235/15715476
 // use "sleep(N)" to use this function, it is useful to wait for certain time.
 // btw just FYI "N"mean the time you needed, it is in ms btw so-- 1 sec mean 1000 miliseconds
-function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
+function sleep(ms) {return new Promise(resolve => setTimeout(resolve, ms));}
 
 
 
@@ -125,9 +110,7 @@ function waitFor(conditionFunction) {
 // Source: https://stackoverflow.com/a/18082175/15715476
 // For Counting a string. Similar to Eval() I.. literally don't know what's the difference rn btw..
 /*
-function evil(fn) {
-  return new Function('return ' + fn)();
-}
+function evil(fn) {return new Function('return ' + fn)();}
 */
 
 
@@ -135,10 +118,8 @@ function evil(fn) {
 // Source: https://stackoverflow.com/questions/400212/how-do-i-copy-to-the-clipboard-in-javascript
 // Copy Text. or things, to clipboard.
 function copyToClipboard(text) {
-   const elem = document.createElement('textarea');
-   elem.value = text;
-   document.body.appendChild(elem);
-   elem.select();
+   const elem = document.createElement('textarea');elem.value = text;
+   document.body.appendChild(elem);elem.select();
    document.execCommand('copy');
    document.body.removeChild(elem);
 }
@@ -149,16 +130,9 @@ function copyToClipboard(text) {
 // Select Element by ElementSelector just like CSS. It's use "document.querySelector" (Individual Element) or "document.querySelectorAll" (Multiple Element).
 // Depends on how you use it!
 //---Grouping Mode
-function SE(ElementSelector) {
-  if (document.querySelectorAll(ElementSelector).length === 0) {
-    return null;
-  }
-  return document.querySelectorAll(ElementSelector);
-}
+function SE(ElementSelector) {return document.querySelectorAll(ElementSelector).length === 0? null : document.querySelectorAll(ElementSelector);}
 //---Individually Mode
-function ISE(ElementSelector) {
-  return document.querySelector(ElementSelector);
-}
+function ISE(ElementSelector) {return document.querySelector(ElementSelector);}
 
 
 
@@ -182,9 +156,7 @@ function ConvertUnitTIME(ConvertFrom, ConvertTo, SpecifiedNumber, EnableDecimal 
 				if (EnableDecimal == false) {
 					if (Math.floor(SpecifiedNumber / 60)) {
 						return Math.floor(SpecifiedNumber / 60);
-					} else {
-						return null;
-					}
+					} else {return null;}
 				} else if (EnableDecimal == true) {
 					return SpecifiedNumber / 60;
 				} else {
@@ -195,9 +167,7 @@ function ConvertUnitTIME(ConvertFrom, ConvertTo, SpecifiedNumber, EnableDecimal 
 				if (EnableDecimal == false) {
 					if (Math.floor(SpecifiedNumber / 3600)) {
 						return Math.floor(SpecifiedNumber / 3600);
-					} else {
-						return null;
-					}
+					} else {return null;}
 				} else if (EnableDecimal == true) {
 					return SpecifiedNumber / 3600;
 				} else {
@@ -273,9 +243,7 @@ function setFavicon(UrL) {
 // Source: https://love2dev.com/blog/javascript-remove-from-array/#create-remove-method
 // Remove element inside array defined by value
 function arrayRemove(arr, value) {
-  return arr.filter(function(ele){ 
-    return ele != value; 
-  });
+  return arr.filter(function(ele){return ele != value;});
 }
 
 // Source: 1 Grepper, 2 StackOverflow Answer, and ME
