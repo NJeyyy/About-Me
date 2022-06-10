@@ -3,6 +3,9 @@
 // NOTE! Before it doesn't work in js format, but now its working:>
 
 //######################################################################################################################################
+//Code that's only available here
+function OpenURL_CrtWindow(ThisUrl){window.open(ThisUrl, "_blank", "location=yes,width=600,height=700,scrollbars=yes,status=yes");}
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 function GlobalToolscript_inf(command) {
   if (command) {
     if (command.match(/help/i)) {
