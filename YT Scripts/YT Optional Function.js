@@ -1,19 +1,20 @@
-/* JUST SAVING IT HERE.. WHO KNOWs I WILL LOST IT RIGHT? */
-
 // ==UserScript==
 // @name           YT Optional Function
-// @version        2.6c_1846-30042022
+// @version        3.8-1256P_03072022
 // @namespace      YT_scripts
 // @homepageURL    https://github.com/NJeyyy/About-Me/tree/Userscripts/YT%20Scripts
 // @supportURL     https://github.com/NJeyyy/About-Me/blob/Userscripts/YT%20Scripts/YT%20Optional%20Function.log
 // @author         NJ1n9
 // @description    Optional YouTube function in a script😏🎸🎶🎧
-// @require        https://github.com/NJeyyy/About-Me/raw/13e26733d8953ed7989cf852d5836357cc47f1d8/ToolScript_Global_min.js
+// @require        https://github.com/NJeyyy/About-Me/raw/0f95d55a8d31162ee4fc03ccef9ac39bbefa7fd7/ToolScript_Global.js
 // @match          https://www.youtube.com/*
 // @run-at         document-idle
 // @icon           https://i.imgur.com/Xzfid2K.png
 // @grant          GM.setValue
 // @grant          GM.getValue
+// @grant          GM.deleteValue
+// @grant					 GM.registerMenuCommand
+// @grant					 GM_unregisterMenuCommand
 // @noframes
 // ==/UserScript==
 /** Description for each function available here:
@@ -32,7 +33,6 @@ and also this is temporary! so it is not saved:P
  *  Run command in desired time(included minutes): https://stackoverflow.com/a/57998003/15715476
  *  The simple tricks to change website theme: https://dev.to/lakshmananarumugam/the-simple-tricks-to-change-your-website-theme-based-on-day-and-night-23l0
  */
-
 //||~~~~~~~~~~~~USERSCRIPT REQUIREMENTS~~~~~~~~~~~~~~~~~~~~~~~~~~~||\\
 /*
 // >Custom Addition ToolScript
@@ -64,18 +64,19 @@ GM.setValue("SubmitCommentEvent_ErrorCounter", 0);
 start_YTOptionalFunction(); // <-- Start when the page load/reload
 
 async function start_YTOptionalFunction() {
-  if(!ISE('div#LutleLoadingSpinIcon')) {
-		var BlockVideo2Play;
+	var BlockVideo2Play=null;
+	var THEMETIMERL;
+  if(!ISE('div#LutleLoadingSpinIcon') && !ISE('.ToggleTHEME_NJ1n9') && !ISE('#AutoNav-ToggleBTN')) {
     if(window.location.href.match(/https\:\/\/www\.youtube\.com\/watch*/)) {
       BlockVideo2Play = setInterval(BLOCKAUTOPLAY, 100);
-			console.log('Interval ID: '+BlockVideo2Play);
+			console.log('BlockVideoPlaying Interval ID: '+BlockVideo2Play);
     }
     //RestorePreferredOption_4YT("First-Run");
     //await sleep(30);
     await waitFor(_ => document.readyState == 'complete');
 		await waitFor(_ => document.visibilityState == 'visible' || document.webkitVisibilityState == "visible");
     SidebarPARENT();
-    await LittleLoadingIcon(); //<-- Hmmm
+    await LittleLoadingIcon();
     if(window.location.href.match(/https\:\/\/www\.youtube\.com\/watch*/)) {
       let LoadingOverlayCSS = document.createElement("style");
       LoadingOverlayCSS.setAttribute("class", "LoadingOverlayELEMENTS");
@@ -96,7 +97,7 @@ async function start_YTOptionalFunction() {
         }
       });
     }
-		var THEMETIMERL = setInterval(Theme_BasedTime, 60 * 60000); // Change YouTube Website theme based on time (make it runs on time of interval)
+		THEMETIMERL = setInterval(Theme_BasedTime, 60 * 60000); // Change YouTube Website theme based on time (make it runs on time of interval)
 		await Theme_BasedTime();
     await sleep(70);
     ToggleTHEMEBTN();
@@ -119,6 +120,7 @@ async function start_YTOptionalFunction() {
     }*/
     await sleep(70);
     await waitFor(_ => document.visibilityState == 'visible' || document.webkitVisibilityState == "visible");
+		ModifyHTML_LBofW();
     await sleep(90);
     BLOCKAUTOPLAY();
     document.addEventListener('click', ClearYTSearchBox_Byfewact);
@@ -128,28 +130,15 @@ async function start_YTOptionalFunction() {
     while(document.getElementById("LutleLoadingSpinIcon")) {
       document.getElementById("LutleLoadingSpinIcon").remove();
     }
-    /*
-      let BlockVideo2Play_Modes = await GM.getValue("VideoBlockingModes", "Auto");
-      if (BlockVideo2Play_Modes == "Auto" && BlockVideo2Play) {
-        await clearInterval(BlockVideo2Play);
-    		await sleep(500);
-    		console.log("BlockVideo2Play Interval has been cleared.");
-      } else if (BlockVideo2Play_Modes == "Manual" && BlockVideo2Play) {
-        await waitFor(_ => document.getElementById("Optional-EventListener_CTXContainer"));
-        let Create_BlockVideo2PlayPreventElem = document.createElement("div");
-        Create_BlockVideo2PlayPreventElem.setAttribute("id", "BlockVideo2PlayButton");
-        Create_BlockVideo2PlayPreventElem.innerHTML = "Clear BlockVideo2Play Interval";
-        document.getElementById("Optional-EventListener_CTXContainer").appendChild(Create_BlockVideo2PlayPreventElem);
-        Create_BlockVideo2PlayPreventElem.addEventListener("click", function(){clearInterval(BlockVideo2Play);Create_BlockVideo2PlayPreventElem.remove();console.log("BlockVideo2Play Interval is cleared.");}, {once: true});
-      }*/
+		HideVideoTitle_COMPLETELY();
 		if(window.location.href.match(/https\:\/\/www\.youtube\.com\/watch*/)) {
-			clearInterval(BlockVideo2Play);
 			ISE("ytd-app").focus();
 		}
-    console.log("YT Optional Function")
+    //console.log("YT Optional Function")
   } else {
     console.warn('BLOCKED TO LAUNCH MORE THAN ONCE.');
   }
+	while(BlockVideo2Play!=null){clearInterval(BlockVideo2Play);BlockVideo2Play=null;while(ISE("div#YT_OF__BlockAutoPlay")){ISE("div#YT_OF__BlockAutoPlay").remove();}}
 }
 
 
@@ -157,6 +146,7 @@ async function start_YTOptionalFunction() {
 window.addEventListener('locationchange', async function() {
   if(!ISE('div#LutleLoadingSpinIcon')) {
     // Put your code here
+		await waitFor(_ => document.readyState == 'complete');
 		await waitFor(_ => document.visibilityState == 'visible' || document.webkitVisibilityState == "visible");
     await LittleLoadingIcon(); //<-- well..
 		var BlockVideo2Play = setInterval(BLOCKAUTOPLAY, 100);
@@ -184,7 +174,7 @@ window.addEventListener('locationchange', async function() {
       });
     }
     await Theme_BasedTime();
-    await Startonlyonvideopage();
+    //await Startonlyonvideopage();
     /*if(window.location.href.match("https\:\/\/www\.youtube\.com\/watch*")) {
       // "true" to make it go to 0:00 Automatically
       // "[Insert any words to disable it(or just 'false')]" it's not gonna ask or automatically go to 0:00
@@ -200,32 +190,21 @@ window.addEventListener('locationchange', async function() {
       }
     }*/
     await waitFor(_ => document.visibilityState == 'visible' || document.webkitVisibilityState == "visible");
+		ModifyHTML_LBofW();
     while(ISE(".LoadingOverlayELEMENTS")) {
       ISE(".LoadingOverlayELEMENTS").remove();
     }
     while(document.getElementById("LutleLoadingSpinIcon")) {
       document.getElementById("LutleLoadingSpinIcon").remove();
     }
-    /*
-      let BlockVideo2Play_Modes = await GM.getValue("VideoBlockingModes_onlocationchange", "Auto");
-      if (BlockVideo2Play_Modes == "Auto" && BlockVideo2Play) {
-        await clearInterval(BlockVideo2Play);
-    		await sleep(500);
-    		console.log("BlockVideo2Play Interval has been cleared.");
-      } else if (BlockVideo2Play_Modes == "Manual" && BlockVideo2Play) {
-    		await sleep(600);
-        await waitFor(_ => document.getElementById("Optional-EventListener_CTXContainer"));
-        var Create_BlockVideo2PlayPreventElem = document.createElement("div");
-        Create_BlockVideo2PlayPreventElem.setAttribute("id", "BlockVideo2PlayButton");
-        Create_BlockVideo2PlayPreventElem.innerHTML = "Clear BlockVideo2Play Interval";
-        document.getElementById("Optional-EventListener_CTXContainer").appendChild(Create_BlockVideo2PlayPreventElem);
-        Create_BlockVideo2PlayPreventElem.addEventListener("click", function(){clearInterval(BlockVideo2Play);Create_BlockVideo2PlayPreventElem.remove();console.log("BlockVideo2Play Interval is cleared.");}, {once: true});
-      }*/
 		if(window.location.href.match(/https\:\/\/www\.youtube\.com\/watch*/)) {
 			clearInterval(BlockVideo2Play);
 			ISE("ytd-app").focus();
 		}
-		console.log("YT Optional Function");
+		//console.log("YT Optional Function");
+		if(ISE("h1.title yt-formatted-string.ytd-video-primary-info-renderer")){
+			ISE("h1.title yt-formatted-string.ytd-video-primary-info-renderer").removeAttribute("YTOF_HideTitleC");
+		}
     return;
   } else {
     console.warn('BLOCKED TO LAUNCH MORE THAN ONCE.');
@@ -235,15 +214,14 @@ window.addEventListener('locationchange', async function() {
 
 // START ONLY ON VIDEO PAGE
 async function Startonlyonvideopage() {
-  //var UsedURL = new RegExp(/https\:\/\/www\.youtube\.com\/watch*/);
-  var URLRequirements = window.location.href;
+	while (ISE('#AutoNav-ToggleBTN')) {ISE('#AutoNav-ToggleBTN').remove();}
   
-  if (sessionStorage.getItem("AlreadyRUN_YTOptionalFunction1") == "true") {
+  /*if (sessionStorage.getItem("AlreadyRUN_YTOptionalFunction1") == "true") {
     document.removeEventListener('keyup', YTAds_Shortcut, false);
 		await sleep(90);
     sessionStorage.setItem("AlreadyRUN_YTOptionalFunction1", false);
-  }
-  if (URLRequirements.match(/https\:\/\/www\.youtube\.com\/watch*/)) {
+  }*/
+  //if (window.location.href.match(/https\:\/\/www\.youtube\.com\/watch*/) && !ISE('#AutoNav-ToggleBTN')) {
 		await waitFor(_=> ISE('div#info-strings yt-formatted-string.ytd-video-primary-info-renderer'));
     await document.addEventListener('keyup', YTAds_Shortcut, false); // Skip Ads with shortcut (`/~)
     await document.addEventListener("keypress", EnterCommentKEYFunc); // Enter to submit comment
@@ -251,44 +229,26 @@ async function Startonlyonvideopage() {
 			ISE('.view-count.ytd-video-view-count-renderer').setAttribute('title', ISE('div#info-strings yt-formatted-string.ytd-video-primary-info-renderer').textContent);
 		}, {once: true});
 		ISE('.view-count.ytd-video-view-count-renderer').setAttribute('title', ISE('div#info-strings yt-formatted-string.ytd-video-primary-info-renderer').textContent);
-		if (document.location.href.match(/&list=/)) {
-			ISE('video').onplay = E => {
-				var thiz = E.path[0];
-				var getPrevTimestamp = thiz.duration - 0.15;
-				if (thiz.currentTime >= getPrevTimestamp) {
-					thiz.pause();
-					thiz.currentTime = getPrevTimestamp;
-					thiz.onplay = E1 => {
-						if (thiz.currentTime >= getPrevTimestamp) {
-							thiz.pause();
-							thiz.currentTime = getPrevTimestamp;console.error(E.path[0].currentTime);
-							console.warn('This video was about to end... Moreover, it seems that your video was shown in a playlist.\nSo... it\'s best to stop here to not proceed to the next video without your consent.');
-						}
-					}
-				}
-			}
-			console.log('This video is played in a playlist.. correct?');
-		}
-    sessionStorage.setItem("AlreadyRUN_YTOptionalFunction1", true);
-		console.log("DONE! that\'s script that's only run in video page!");
-  } else {
+		AutoNav_PlaylistManagerFunc();
+		const AutoNav_PlaylistManagerObsv = new MutationObserver(AutoNav_PlaylistManagerFunc);
+		AutoNav_PlaylistManagerObsv.observe(ISE('ytd-playlist-panel-renderer#playlist.ytd-watch-flexy'), {attributes:true, subtree:true,childList:true});
+		
+    //sessionStorage.setItem("AlreadyRUN_YTOptionalFunction1", true);
+		//console.log("DONE! that\'s script that's only run in video page!");
+  /*} else {
     console.log("This script is not working here =w=");
-  }
-	await sleep(50);
+  }*/
 	return;
 }
 //~ ``  ~ ``  ~ ``  ~ ``  ~ ``  ~ ``  ~ ``  ~ ``  ~ ``  ~ ``  ~ ``  ~ ``  ~ ~ ~\\
-//=================== Skip Ads with shortcut (`/~) ========================================
+//=================== Skip Ads with shortcut (`/~) ============================================================
 /**/
 async function YTAds_Shortcut (Event) {
-    
-    //VARIABLES//
     var Skipads = document.getElementsByClassName("ytp-ad-skip-button ytp-button");
     var HK1 = Event.which == 192; // <-- ` = 192
  // which == (unicodekey code) for not standalone hotkey
  // standalone hotkey list: "altKey", "MetaKey(winkey)", "CtrlKey", "shiftKey"
  // unicodekey code of hotkey can be found here -> https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_event_key_keycode2
-    
     
     if (HK1) {
       var ActiveElem = document.activeElement
@@ -297,7 +257,7 @@ async function YTAds_Shortcut (Event) {
         //Just to make sure the button exist:P
         if (Skipads.length == 1) { // If the ads showed was a skippable ads
           Skipads[0].click();
-          console.log("Skippable ads skipped.")
+          //console.log("Skippable ads skipped.")
 					await sleep(50);
 					return;
         } else if (ISE(".ytp-ad-text.ytp-ad-preview-text")) { // If the ads showed doesn't allow to skip, instead you can only wait for few secs
@@ -309,7 +269,7 @@ async function YTAds_Shortcut (Event) {
           return;
         } else if (ISE(".ytp-ad-text-overlay")) { // If the ads was just an overlay--Close with the shortcut instead of mouse!
           ISE(".ytp-ad-overlay-close-button").click();
-          console.log("Overlay ads is closed.");
+          //console.log("Overlay ads is closed.");
           await sleep(50);
           return;
         } else { // Else, there's no ads at all and you're just goofing around
@@ -323,12 +283,13 @@ async function YTAds_Shortcut (Event) {
 }
 
 ///
-//```````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````\\
+//```````````````````````````````````````````````````````````````````````````````````````````````````````````````\
 
-//=================== Change YouTube Website theme based on time ========================================
+//=================== Change YouTube Website theme based on time ==============================================
 /**/
 
 async function Theme_BasedTime() {
+	try {
   
   // we need a function that makes hours and minutes a two digit number
  /* Object.prototype.HOURMINDGIT = function() {
@@ -340,54 +301,57 @@ async function Theme_BasedTime() {
   };
   
   // compile the current hour and minutes in the format HH:MM
-  var timeOfDay = GetCurrentTIME.HOURS() + ':' + GetCurrentTIME.MINUTES();
+  const timeOfDay = GetCurrentTIME.HOURS() + ':' + GetCurrentTIME.MINUTES();
   
 // VARIABLES for the settings
   // --The times settings--
-  var time_DAY1 = '08:00';
-  var time_DAY2 = '16:59';
-  var time_NIGHT1 = '17:00';
-  var time_NIGHT2 = '07:59';
+  const time_DAY1 = await GM.getValue("theme_TIMEDay", "08:00");
+  const time_NIGHT1 = await GM.getValue("theme_TIMENight", "18:00");
+	const time_DAY2 = time_NIGHT1.split(':')[0]+':'+(time_NIGHT1.split(':')[1]-1);
+  const time_NIGHT2 = time_DAY1.split(':')[0]+':'+(time_DAY1.split(':')[1]-1);
   // --The selected theme settings--
   /* "Dark" for dark theme and "Light" for light theme. Be careful on the capital! It's important. */
   //NEW NOTE! The capital or cases is not really that important to look at anymore!~
-  var theme_SELECTIONONE = await GM.getValue("theme_SELECTION1", "Dark"); // NIGHT TIME
-  var theme_SELECTIONTWO = await GM.getValue("theme_SELECTION2", "Light"); // DAY TIME
+  const theme_SELECTIONONE = await GM.getValue("theme_SELECTIONNight", "Dark"); // NIGHT TIME
+  const theme_SELECTIONTWO = await GM.getValue("theme_SELECTIONDay", "Light"); // DAY TIME
+	const theme_TemporaryOption = await GM.getValue("theme_TEMPSelect", null);
   
   // <-- Use "||" because it's more to "or" than "and" and also because it's PM to AM combined.. not AM to PM:P
   var CurrentTheme;
-  if (timeOfDay >= time_NIGHT1 || timeOfDay <= time_NIGHT2) {  //<-- NIGHT TIME [Dark Theme]
-    var CurrentTheme = theme_SELECTIONONE;
-    console.log(theme_SELECTIONONE, "Theme");
-  } else if (timeOfDay >= time_DAY1 && timeOfDay <= time_DAY2) {  //<-- DAY TIME [Light Theme]
-    var CurrentTheme = theme_SELECTIONTWO;
-    console.log(theme_SELECTIONTWO, "Theme");
-  }
-  
-  
-// Code to Change theme based on the "CurrentTheme_time" variable
-  var CurrentTheme_time = CurrentTheme;
-  var Element_HTML = document.getElementsByTagName("html")[0]; // <-- Get the HTML element.
-  if (CurrentTheme_time.match(/Dark/i)) {
-    Element_HTML.setAttribute("dark", "true"); // Add "dark" attributes to change it to Dark Theme
-    console.log("Dark Theme applied."); // <-- Show sign of applied Theme on browser console
-    if (SE(".ToggleTHEME_NJ1n9")) {
-      await CheckEditToggleThemeBTN();
-    }
-  } else if (CurrentTheme_time.match(/Light/i)) {
-    Element_HTML.removeAttribute("dark"); // Delete "dark" attributes to change it to Light Theme
-    console.log("Light Theme applied."); // <-- Show sign of applied Theme on browser console
-    if (SE(".ToggleTHEME_NJ1n9")) {
-      await CheckEditToggleThemeBTN();
-    }
-  }
-	console.log("Theme Switcher thingy is done!");
-  return;
+	if (theme_TemporaryOption){
+		CurrentTheme = theme_TemporaryOption;
+	} else {
+		if (timeOfDay >= time_NIGHT1 || timeOfDay <= time_NIGHT2) {  //<-- NIGHT TIME [Dark Theme]
+			CurrentTheme = theme_SELECTIONONE;
+			//console.log(theme_SELECTIONONE, "Theme");
+		} else if (timeOfDay >= time_DAY1 && timeOfDay <= time_DAY2) {  //<-- DAY TIME [Light Theme]
+			CurrentTheme = theme_SELECTIONTWO;
+			//console.log(theme_SELECTIONTWO, "Theme");
+		}
+	}
+	
+	// Code to Change theme based on the "CurrentTheme" variable
+	if (CurrentTheme.match(/Dark/i)) {
+		ISE("html").setAttribute("dark", "true"); // Add "dark" attributes to change it to Dark Theme
+		//console.log("Dark Theme applied."); // <-- Show sign of applied Theme on browser console
+		if (SE(".ToggleTHEME_NJ1n9")) {
+			await CheckEditToggleThemeBTN();
+		}
+	} else if (CurrentTheme.match(/Light/i)) {
+		ISE("html").removeAttribute("dark"); // Delete "dark" attributes to change it to Light Theme
+		//console.log("Light Theme applied."); // <-- Show sign of applied Theme on browser console
+		if (SE(".ToggleTHEME_NJ1n9")) {
+			await CheckEditToggleThemeBTN();
+		}
+	}
+	//console.log("Theme Switcher thingy is done!");
+	} catch(E_D) {console.log(E_D);}
+		return;
 }
 
 //*/
-//```````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````\\
-//=================== Restore Subtitle Settings ========================================
+//```````````````````````````````````````````````````````````````````````````````````````````````````````````````\
+//=================== Restore Subtitle Settings ===============================================================
 // Enable this, when you want to start saving your caption preferred setting.
 // Because the setting that being set gonna be permanent, which mean next time you edit the settings
 // The changes not gonna stay there.
@@ -618,13 +582,15 @@ async function RestorePreferredOption_4YT(CurrentStateScript) {
 	return;
 }
 //*/
-//```````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````\\
-//=================== Toggle Theme Button ========================================
+//```````````````````````````````````````````````````````````````````````````````````````````````````````````````\
+//=================== Toggle Theme Button =====================================================================
 /**/
 //ToggleTHEMEBTN();
 async function ToggleTHEMEBTN() {
+	try {
   await sleep(70);
   //await waitFor(_ => document.getElementById("start"));
+	const CheckTemporarySelect_exist = await GM.getValue("theme_TEMPSelect", null);
 	var createThisDIV = document.createElement("div")
 	createThisDIV.setAttribute("class", "ToggleTHEME_NJ1n9 fas")
 	document.getElementById("start").appendChild(createThisDIV)
@@ -675,86 +641,111 @@ async function ToggleTHEMEBTN() {
 	;
 	createThisDIVCSS.innerHTML = ValueThisDIVCSS;
 	await document.head.appendChild(createThisDIVCSS);
+	const ToggleTheme_eventlistener = async function(evt) {
+			try {
+				//if (evt.detail == 1) { // Only fire if it clicked only once
+					//Check current theme
+					if (ISE("html").getAttribute("dark")) {
+						//Current Theme: dark || switch to light
+						ISE("html").removeAttribute("dark");
+						await GM.setValue("theme_TEMPSelect", "light");
+					} else {
+						//Current Theme: light || switch to dark
+						ISE("html").setAttribute("dark", "true");
+						await GM.setValue("theme_TEMPSelect", "dark");
+					}
+					CheckEditToggleThemeBTN();
+				//}
+			} catch(E_D) {console.error(E_D);}
+			return;
+	};
+	const ClearTEMPSelectTheme_evtlistener = async function() {
+			try {
+				await GM.deleteValue("theme_TEMPSelect");
+			} catch(E_D) {console.error(E_D);}
+	};
+	ISE("DIV.ToggleTHEME_NJ1n9").addEventListener("click", ToggleTheme_eventlistener);
+	ISE("div.ToggleTHEME_NJ1n9").addEventListener('contextmenu', ClearTEMPSelectTheme_evtlistener);
 	
 	await sleep(50);
 	CheckEditToggleThemeBTN();
 	await sleep(50);
+	} catch(E_D) {console.error(E_D);}
 	return;
 }
 async function CheckEditToggleThemeBTN() {
-	function TOdark() {
-		let USEELEMNT = document.getElementsByClassName("ToggleTHEME_NJ1n9")[1]
-		let Element_HTML = document.getElementsByTagName("html")[0]
-		Element_HTML.setAttribute("dark", "true")
-		CheckEditToggleThemeBTN()
-    USEELEMNT.removeEventListener("click", TOdark)
-  }
-	function TOLight() {
-		let USEELEMNT = document.getElementsByClassName("ToggleTHEME_NJ1n9")[1]
-    let Element_HTML = document.getElementsByTagName("html")[0]
-    Element_HTML.removeAttribute("dark")
-    CheckEditToggleThemeBTN()
-    USEELEMNT.removeEventListener("click", TOLight)
-  }
-	
-	var Element_HTML = document.getElementsByTagName("html")[0];
-	if (Element_HTML.getAttribute("dark") == "true") { // When Current theme is Dark and Action is set to switch to light theme
-		var USEELEMNT = document.getElementsByClassName("ToggleTHEME_NJ1n9")[1];
-		if (USEELEMNT.classList.contains("fa-sun")) {
-			USEELEMNT.classList.replace("fa-sun", "fa-moon");
-		} else {
-			USEELEMNT.classList.add("fa-moon");
+	try {
+		/*
+		function TOdark() {
+			let USEELEMNT = document.getElementsByClassName("ToggleTHEME_NJ1n9")[1];
+			ISE("html").setAttribute("dark", "true");
+			CheckEditToggleThemeBTN();
+			ISE("DIV.ToggleTHEME_NJ1n9").removeEventListener("click", TOdark);
 		}
-		USEELEMNT.setAttribute("THEME", "dark");
-		USEELEMNT.title = "Current Theme is Dark.\nClick to switch to Light Theme";
-		USEELEMNT.addEventListener("click", TOLight);
-	} else if (!(Element_HTML.getAttribute("dark") == "true")) { // When Current theme is Light and Action is set to switch to dark theme
-		var USEELEMNT = document.getElementsByClassName("ToggleTHEME_NJ1n9")[1];
-		if (USEELEMNT.classList.contains("fa-moon")) {
-			USEELEMNT.classList.replace("fa-moon", "fa-sun");
-		} else {
-			USEELEMNT.classList.add("fa-sun");
+		function TOLight() {
+			ISE("html").removeAttribute("dark")
+			CheckEditToggleThemeBTN()
+			ISE("DIV.ToggleTHEME_NJ1n9").removeEventListener("click", TOLight)
 		}
-		USEELEMNT.setAttribute("THEME", "light");
-		USEELEMNT.title = "Current Theme is Light.\nClick to switch to Dark Theme";
-		USEELEMNT.addEventListener("click", TOdark);
-	}
-	
-	console.log("Toggle Theme Button has been added.");
-	await sleep(50);
+		*/
+		
+		if (ISE("html").getAttribute("dark")) { // When Current theme is Dark and Action is set to switch to light theme
+			if (ISE("DIV.ToggleTHEME_NJ1n9").classList.contains("fa-sun")) {
+				ISE("DIV.ToggleTHEME_NJ1n9").classList.replace("fa-sun", "fa-moon");
+			} else {
+				ISE("DIV.ToggleTHEME_NJ1n9").classList.add("fa-moon");
+			}
+			ISE("DIV.ToggleTHEME_NJ1n9").setAttribute("THEME", "dark");
+			ISE("DIV.ToggleTHEME_NJ1n9").title = "Current Theme is Dark.\nClick to switch to Light Theme";
+		} else { // When Current theme is Light and Action is set to switch to dark theme
+			if (ISE("DIV.ToggleTHEME_NJ1n9").classList.contains("fa-moon")) {
+				ISE("DIV.ToggleTHEME_NJ1n9").classList.replace("fa-moon", "fa-sun");
+			} else {
+				ISE("DIV.ToggleTHEME_NJ1n9").classList.add("fa-sun");
+			}
+			ISE("DIV.ToggleTHEME_NJ1n9").setAttribute("THEME", "light");
+			ISE("DIV.ToggleTHEME_NJ1n9").title = "Current Theme is Light.\nClick to switch to Dark Theme";
+		}
+		//console.log("Toggle Theme Button has been added.");
+		await sleep(50);
+	} catch(E_D) {console.error(E_D);}
 	return;
 }
 //*/
-//```````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````\\
-//=================== Block Video Play on Loading ========================================
-/**/
-//let CRT_menuelem = document.createElement("div");
-//CRT_menuelem.setAttribute("id", "PlayPause_controlmenu");
-//document.body.appendChild(CRT_menuelem);
-//let 2Pmenuelem = document.getElementsByClassName("ytp-play-button")[0];
-//2Pmenuelem.addEventListener("contextmenu", (evt) => {evt.preventDefault();//Togglething})
-async function BLOCKAUTOPLAY() {
-  let vids = document.getElementsByClassName("video-stream");
-  if (vids.length) { // this is basically to make sure there are videos on the page, but it is probably unnecessary
-    document.querySelector("video.video-stream").pause(); // pause the vid. JUST THAT!
-  }
-	await sleep(30);
-  return;
+//```````````````````````````````````````````````````````````````````````````````````````````````````````````````\
+//=================== Block Video Play on Loading =============================================================
+/*
+let CRT_menuelem = document.createElement("div");
+CRT_menuelem.setAttribute("id", "PlayPause_controlmenu");
+document.body.appendChild(CRT_menuelem);
+let 2Pmenuelem = document.getElementsByClassName("ytp-play-button")[0];
+2Pmenuelem.addEventListener("contextmenu", (evt) => {evt.preventDefault();//Togglething})
+*/
+function BLOCKAUTOPLAY() {
+	if (ISE('div#LutleLoadingSpinIcon')||ISE(".LoadingOverlayELEMENTS")){
+		if (document.getElementsByClassName("video-stream").length) { // this is basically to make sure there are videos on the page, but it is probably unnecessary
+			document.querySelector("video.video-stream").pause(); // pause the vid. JUST THAT!
+		}
+	//await sleep(30);
+	}
+	if(ISE("div#YT_OF__BlockAutoPlay")){let a=document.createElement("div");a.setAttribute("id", "YT_OF__BlockAutoPlay");document.body.appendChild(a);}
+	return;
 }
 //*/
-//```````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````\\
-//=================== Press enter to Comment Instead of clicking + Shortcut to comment ========================================
+//```````````````````````````````````````````````````````````````````````````````````````````````````````````````\
+//=================== Press enter to Comment Instead of clicking + Shortcut to comment =========================
 // unicodekey code of hotkey can be found here -> https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_event_key_keycode2
 async function EnterCommentKEYFunc(E) {
+	 try {
 	var ConsoleERROR = "font-weight: bold;color: #b90000;";
   let ECKEYHk1 = E.which == 13; // <-- EnterKey
   let ECKEYHk2 = E.shiftKey;
   if (!ECKEYHk2 && ECKEYHk1) {
 		let TheCONTSParentsElement_SpecifiedElement = document.activeElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement;
-		let GET_SpecifiedElementID = TheCONTSParentsElement_SpecifiedElement.id.toUpperCase();
-		let GET_SpecifiedElementTagName = TheCONTSParentsElement_SpecifiedElement.tagName.toUpperCase();
-		let SpecifiedID = "commentbox".toUpperCase();
-		let SpecifiedTagName = "ytd-commentbox".toUpperCase();
+		let GET_SpecifiedElementID = TheCONTSParentsElement_SpecifiedElement.id.toLowerCase();
+		let GET_SpecifiedElementTagName = TheCONTSParentsElement_SpecifiedElement.tagName.toLowerCase();
+		let SpecifiedID = "commentbox";
+		let SpecifiedTagName = "ytd-commentbox";
 		if (GET_SpecifiedElementTagName == SpecifiedTagName && GET_SpecifiedElementID == SpecifiedID) {
 			E.preventDefault();
 			var ActiveCommentBoxCOUNT = 0;
@@ -781,7 +772,7 @@ async function EnterCommentKEYFunc(E) {
 				} else {
 					console.error("%cCannot comment/reply nothing, make sure there's a text there. PLEASE\nAlso if you're editing a comment, you cannot save edited comment that doesn\'t have changes too\n\nTY. -Love, some random YT Users", ConsoleERROR);
 					EventErrorCOUNT++;
-					GM.setValue("SubmitCommentEvent_ErrorCounter", EventErrorCOUNT);
+					await GM.setValue("SubmitCommentEvent_ErrorCounter", EventErrorCOUNT);
 					await sleep(50);
 					return;
 				}
@@ -791,6 +782,7 @@ async function EnterCommentKEYFunc(E) {
 		await sleep(50);
 		return;
 	}
+	 } catch(E_D) {console.error(E_D);}
 }
 
 async function gotoCommentIT(E) {
@@ -806,7 +798,7 @@ async function gotoCommentIT(E) {
       }
   }
 }
-//```````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````\\
+//```````````````````````````````````````````````````````````````````````````````````````````````````````````````\
 /*document.querySelector("video").addEventListener("timeupdate", function() {
     var VideoLength = Number(document.querySelector("video").duration.toFixed()) - 1;
     if (Number(document.querySelector("video").currentTime.toFixed()) == VideoLength) {
@@ -815,7 +807,7 @@ async function gotoCommentIT(E) {
         document.querySelector("video.video-stream").pause();
     }
 });*/
-//=================== Loading Icon on the header ========================================
+//=================== Loading Icon on the header ===============================================================
 async function LittleLoadingIcon() {
   await sleep(70);
   await waitFor(_ => document.querySelector("#masthead #container #end"));
@@ -870,8 +862,8 @@ async function LittleLoadingIcon() {
 	await sleep(50);
   return;
 }
-//```````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````\\
-//=================== Disable Auto-NextVid in playlist ========================================
+//```````````````````````````````````````````````````````````````````````````````````````````````````````````````\
+//=================== Disable Auto-NextVid in playlist =========================================================
 /*
 if (SE("#playlist.ytd-watch-flexy")) {
   document.querySelector("video").addEventListener("timeupdate", function() {
@@ -885,9 +877,10 @@ if (SE("#playlist.ytd-watch-flexy")) {
   });
 }
 */
-//```````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````\\
-////=================== Sidebar state opened/closed ========================================
-function SidebarPARENT() {
+//```````````````````````````````````````````````````````````````````````````````````````````````````````````````\
+////=================== Sidebar state opened/closed ============================================================
+async function SidebarPARENT() {
+	await waitFor(_=> ISE("yt-icon-button#guide-button.style-scope.ytd-masthead"));
   window.addEventListener("locationchange", Sidebar_StoreSTATE);
   window.addEventListener("resize", Sidebar_StoreSTATE);
   ISE("yt-icon-button#guide-button.style-scope.ytd-masthead").addEventListener("click", OpenCloseSTATE_Sidebar);
@@ -929,8 +922,8 @@ function Sidebar_StoreSTATE() {
   return;
 }
 
-//```````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````\\
-//////=================== Clear SearchBox by few act ================================================
+//```````````````````````````````````````````````````````````````````````````````````````````````````````````````\
+//////=================== Clear SearchBox by few act ===========================================================
 function MatchObjectKeyValue_inArray(getArray, KeyNames, getMatch) {
     var Matchreg = new RegExp(getMatch , "i");
     var ab = null;
@@ -971,4 +964,98 @@ async function ClearYTSearchBox_Byfewact(evy) {
     }*/
   }
 }
-//```````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````\\
+//```````````````````````````````````````````````````````````````````````````````````````````````````````````````\
+//====================== Set Autoplay state for playlist =======================================================
+async function AutoNav_PlaylistManagerFunc() {
+	let getToggleState_TglAutoNav = await GM.getValue('AutoNav-Playlistmanager', true);
+	if (SE('ytd-playlist-panel-renderer#playlist #items ytd-playlist-panel-video-renderer')&&!ISE('#AutoNav-ToggleBTN')) {
+		let aTgl_Autonav = document.createElement('style');
+		aTgl_Autonav.innerHTML = 'button#AutoNav-ToggleBTN {\n  text-align: center;\n  font-size: 19px;\n  color: #000;\n}\nbutton#AutoNav-ToggleBTN[checked="false"]:before {\n  content: "\\f28b";\n  font-family: "FontAwesome";\n  background: #ff0000;\n  padding: 4px;\n  border-radius: 5px;\n  mix-blend-mode: multiply;\n}\nbutton#AutoNav-ToggleBTN[checked="true"]:before {\n  content: "\\f144";\n  font-family: "FontAwesome";\n  background: #00ff10;\n  padding: 4px;\n  border-radius: 5px;\n}';
+		aTgl_Autonav.setAttribute('id', 'AutoNav-ToggleBTN');
+		document.head.appendChild(aTgl_Autonav);
+		aTgl_Autonav = document.createElement('button');
+		aTgl_Autonav.setAttribute('id', 'AutoNav-ToggleBTN'); aTgl_Autonav.setAttribute('class', 'ytp-button playerButton');
+		document.querySelector('.ytp-right-controls').insertBefore(aTgl_Autonav, document.querySelector('.ytp-right-controls .ytp-button[data-tooltip-target-id="ytp-autonav-toggle-button"]'));
+		document.querySelector('button#AutoNav-ToggleBTN').addEventListener('click', async function(){
+			const thiz = document.querySelector('button#AutoNav-ToggleBTN');
+			await GM.setValue('AutoNav-Playlistmanager', thiz.getAttribute('checked') == 'true'? false : true);
+			ISE('yt-playlist-manager').canAutoAdvance_ = thiz.getAttribute('checked') == 'true'? false : true;
+			thiz.setAttribute('title', thiz.getAttribute('checked') == 'false'? 'AutoPlay Next vid is enabled.' : 'AutoPlay Next vid is disabled.');
+			thiz.setAttribute('checked', thiz.getAttribute('checked') == 'true'? 'false' : 'true');
+		});
+		aTgl_Autonav.setAttribute('checked', getToggleState_TglAutoNav == true? 'true' : 'false');
+		aTgl_Autonav.setAttribute('title', getToggleState_TglAutoNav == true? 'AutoPlay Next vid is enabled.' : 'AutoPlay Next vid is disabled.');
+	} else if (!SE('ytd-playlist-panel-renderer#playlist #items ytd-playlist-panel-video-renderer')&&ISE('#AutoNav-ToggleBTN')){
+		while(ISE('#AutoNav-ToggleBTN')){ISE('#AutoNav-ToggleBTN').remove();}
+	}
+	ISE('yt-playlist-manager').canAutoAdvance_ = getToggleState_TglAutoNav == true? true : false;
+}
+//```````````````````````````````````````````````````````````````````````````````````````````````````````````````\
+//====================== Change/Hide Video Title COMPLETELY ====================================================
+function HideVideoTitle_COMPLETELY(){
+	let VideoTitle_Elm=ISE("h1.title yt-formatted-string.ytd-video-primary-info-renderer");
+	document.head.appendChild(CreateElm("style",null,`
+h1.title yt-formatted-string.ytd-video-primary-info-renderer[YTOF_HideTitleC]{
+	visibility: hidden;
+}
+h1.title yt-formatted-string.ytd-video-primary-info-renderer[YTOF_HideTitleC]:before {
+    content: attr(YTOF_HideTitleC);
+    visibility: visible;
+    position: absolute;
+}`));
+	const RMenuCmd_Func = {
+		"Unhide": function(){
+			GM.registerMenuCommand("Show original VTitle", function(){
+				const TextHCover=VideoTitle_Elm.getAttribute("YTOF_HideTitleC");
+				document.title = document.title.replaceAll(TextHCover, VideoTitle_Elm.textContent);
+				VideoTitle_Elm.removeAttribute("YTOF_HideTitleC");
+				GM_unregisterMenuCommand("Show original VTitle");
+				RMenuCmd_Func.Hide_from_submission();
+				RMenuCmd_Func.Hide_with_preset();
+			});
+			GM_unregisterMenuCommand("Hide VTitle by text of preset");
+			GM_unregisterMenuCommand("Hide VTitle by specified text");
+		},
+		"Hide_with_preset": function(){
+			GM.registerMenuCommand("Hide VTitle by text of preset", async function(){
+				//try {
+					let GetPreset=JSON.parse(await GM.getValue("TextPreset_HideVidTitle", "[\"Wahtevre.\"]"));
+					const Rdm_Text=GetPreset[Math.floor(Math.random()*GetPreset.length)];
+					VideoTitle_Elm.setAttribute("YTOF_HideTitleC", Rdm_Text);
+					document.title = document.title.replaceAll(VideoTitle_Elm.textContent, Rdm_Text);
+					RMenuCmd_Func.Unhide();
+				//}catch(ErrorData){console.error(ErrorData);}
+			});
+		},
+		"Hide_from_submission": function(){
+			GM.registerMenuCommand("Hide VTitle by specified text", function(){
+				let GetPreset=prompt("What text do you want to cover it with?");
+				if(GetPreset&&GetPreset.length>0){
+					VideoTitle_Elm.setAttribute("YTOF_HideTitleC", GetPreset);
+					document.title = document.title.replaceAll(VideoTitle_Elm.textContent, GetPreset);
+					RMenuCmd_Func.Unhide();
+				}else if(GetPreset&&GetPreset.length<=0){
+					alert("You didn\'t insert anything, it\'s canceled.");
+				}else{alert("You cancel it.");}
+			});
+		}
+	};
+	RMenuCmd_Func.Hide_from_submission();
+	RMenuCmd_Func.Hide_with_preset();
+	return;
+}
+//````````````````````````````````````````````````````````````````````````````````````````````````````````````````\
+//=================== Just modifying the HTML-UI to make it looks better =======================================
+async function ModifyHTML_LBofW(){
+	try {
+		await sleep(2000);
+		let getCheckElm=Object.values(SE("#top-level-buttons-computed ytd-toggle-button-renderer.ytd-menu-renderer.force-icon-button.style-text a"))
+		.filter((Elm)=>{return Elm.querySelector("#text").textContent
+			.match(/temporarily unavailable/i);})[0];
+		if(getCheckElm){
+			getCheckElm.querySelector("#text").textContent = "DISLIKE";
+		}
+	} catch(E_D){console.error(E_D);}
+	return;
+}
+//````````````````````````````````````````````````````````````````````````````````````````````````````````````````\
