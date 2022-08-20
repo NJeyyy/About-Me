@@ -266,9 +266,21 @@ function CreateElm(ElmTag, ElmAttrObj, ElmInnerHTML){
 	return ElmHdl;
 }
 
-//Source: https://www.educative.io/edpresso/how-to-escape-unescape-html-characters-in-string-in-javascript
+// Source: https://www.educative.io/edpresso/how-to-escape-unescape-html-characters-in-string-in-javascript
 // Bypass HTMLCharacter or unescape it!
 function unescape_HTMLchar(strInput){return strInput.replaceAll(/&lt;/g , "<").replaceAll(/&gt;/g , ">").replaceAll(/&quot;/g , "\"").replaceAll(/&#39;/g , "\'").replaceAll(/&amp;/g , "&");}
 function escape_HTMLchar(strInput){return strInput.replaceAll(/&/g, "&amp;").replaceAll(/</g, "&lt;").replaceAll(/>/g, "&gt;").replaceAll(/"/g, "&quot;").replaceAll(/'/g, "&#39;");}
 
+// Source: https://htmldom.dev/swap-two-nodes/
+// Switch HTML Element's position!!
+function HTMLElm_swap(nodeA, nodeB){
+	const parentA = nodeA.parentNode;
+	const siblingA = nodeA.nextSibling === nodeB ? nodeA : nodeA.nextSibling;
+	
+	// Move `nodeA` to before the `nodeB`
+	nodeB.parentNode.insertBefore(nodeA, nodeB);
+	
+	// Move `nodeB` to before the sibling of `nodeA`
+	parentA.insertBefore(nodeB, siblingA);
+}
 //=============================================================================      =====================================================================================
