@@ -315,4 +315,11 @@ function parseINIString(data){
 	});
 	return value;
 }
+
+//Source : https://coreui.io/blog/how-to-round-a-number-to-two-decimal-places-in-javascript/#3-dynamic-precision-with-mathround
+// round a decimal number
+function roundTo(num, precision) {
+  const factor = Math.pow(10, precision)
+  return Math.round(num * factor) / factor
+}
 //=============================================================================      =====================================================================================
